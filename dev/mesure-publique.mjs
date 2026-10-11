@@ -4,7 +4,8 @@
         [--profil desktop|mobile] [--cache froid|chaud] [--passages 3] [--sortie f.json]
 
    Par passage : chargement, 3 s d'observation, puis 2 s de défilement.
-   - FCP, LCP (et son élément), CLS (hors saisie) ;
+   - TTFB (réponse du serveur), FCP, FCP après la réponse, LCP (et son
+     élément), CLS (hors saisie) ;
    - longues tâches et long-animation-frames (si disponibles) ;
    - trames : nombre, lentes (> 50 ms), très lentes (> 100 ms), pire trame,
      pendant le chargement puis pendant le défilement ;
@@ -101,8 +102,16 @@ async function passage(context, warmup) {
   }
   await page.waitForTimeout(300);
   const m = await page.evaluate(() => window.__vtPerf);
+  // Temps de réponse du serveur : sépare la part serveur de la part navigateur.
+  const nav = await page.evaluate(() => {
+    const n = performance.getEntriesByType("navigation")[0];
+    return n ? { ttfb: Math.round(n.responseStart), dcl: Math.round(n.domContentLoadedEventEnd) } : {};
+  });
   await page.close();
   return {
+    ttfb: nav.ttfb,
+    fcpApresReponse: m.fcp == null || nav.ttfb == null ? null : m.fcp - nav.ttfb,
+    dcl: nav.dcl,
     fcp: m.fcp,
     lcp: m.lcp,
     lcpEl: m.lcpEl,
@@ -143,6 +152,8 @@ const median = (values) => {
   return s[Math.floor(s.length / 2)];
 };
 const resume = {
+  ttfb: median(passages.map((p) => p.ttfb)),
+  fcpApresReponse: median(passages.map((p) => p.fcpApresReponse)),
   fcp: median(passages.map((p) => p.fcp)),
   lcp: median(passages.map((p) => p.lcp)),
   lcpEl: passages[0].lcpEl,

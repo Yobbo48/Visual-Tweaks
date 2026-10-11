@@ -152,8 +152,8 @@ lines.push(
   "",
   "## Performances publiques (médianes de 3 passages)",
   "",
-  "| Profil | Cache | Tour | Version | FCP | LCP | CLS | longues tâches | LoAF (médiane ; par passage) | trames lentes chargement / défilement | pire trame | requêtes | Ko | modules VT |",
-  "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+  "| Profil | Cache | Tour | Version | TTFB | FCP après réponse | FCP | LCP | CLS | longues tâches | LoAF (médiane ; par passage) | trames lentes chargement / défilement | pire trame | requêtes | Ko | modules VT |",
+  "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
 );
 for (const run of PUBLIC) {
   const d = read(run.file);
@@ -164,7 +164,7 @@ for (const run of PUBLIC) {
   const r = d.resume;
   json.publiques.push({ ...run, ...r });
   lines.push(
-    `| ${run.profil} | ${run.cache} | ${run.tour} | ${run.version} | ${r.fcp} | ${r.lcp} | ${r.cls} | ${r.longues} | ${r.loafs} ; ${d.passages.map((p) => p.loafs).join(" ")} | ${r.lentesChargement} / ${r.lentesDefilement} | ${r.pireTrame} | ${r.requetes} | ${r.ko} | ${r.modulesVT.join(", ")} |`,
+    `| ${run.profil} | ${run.cache} | ${run.tour} | ${run.version} | ${r.ttfb ?? "—"} | ${r.fcpApresReponse ?? "—"} | ${r.fcp} | ${r.lcp} | ${r.cls} | ${r.longues} | ${r.loafs} ; ${d.passages.map((p) => p.loafs).join(" ")} | ${r.lentesChargement} / ${r.lentesDefilement} | ${r.pireTrame} | ${r.requetes} | ${r.ko} | ${r.modulesVT.join(", ")} |`,
   );
 }
 // Totaux par version : passages avec au moins un long animation frame.
@@ -173,16 +173,18 @@ for (const run of PUBLIC) {
   const d = read(run.file);
   if (!d) continue;
   const key = `${run.profil} ${run.cache} ${run.version}`;
-  totals[key] ||= { passages: 0, avecLoaf: 0, loafs: 0 };
+  totals[key] ||= { passages: 0, avecLoaf: 0, loafs: 0, ttfb: [], fcp: [], fcpApresReponse: [] };
   for (const p of d.passages) {
     totals[key].passages++;
+    for (const k of ["ttfb", "fcp", "fcpApresReponse"]) if (p[k] != null) totals[key][k].push(p[k]);
     totals[key].loafs += p.loafs;
     if (p.loafs) totals[key].avecLoaf++;
   }
 }
-lines.push("", "Long animation frames, tous tours confondus :", "");
+const med = (a) => (a.length ? [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)] : "—");
+lines.push("", "Tous tours confondus (médianes de tous les passages) :", "");
 for (const [k, t] of Object.entries(totals))
-  lines.push(`- ${k} : ${t.avecLoaf} passage(s) sur ${t.passages} avec au moins un LoAF (${t.loafs} au total)`);
+  lines.push(`- ${k} : TTFB ${med(t.ttfb)} ms, FCP ${med(t.fcp)} ms, FCP après réponse ${med(t.fcpApresReponse)} ms ; ${t.avecLoaf} passage(s) sur ${t.passages} avec au moins un LoAF (${t.loafs} au total)`);
 json.loafs = totals;
 writeFileSync(`${OUT}/resume.md`, lines.join("\n") + "\n");
 writeFileSync(`${OUT}/resume.json`, JSON.stringify(json, null, 2));

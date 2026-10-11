@@ -210,9 +210,25 @@ jobs:
           start 9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks
           { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
       # Exécution n° 4 : campagne complète (docs/validation-0.4.5/ci/mesures-run4.md).
-      # Ici : répétition de la seule mesure ambiguë (mobile, cache froid, LoAF).
-      - name: Répétition ciblée (mobile, cache froid)
-        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
+      # Ici : seule la mesure ambiguë (mobile, cache froid) est répétée, puis
+      # rejouée avec les sites inversés, pour séparer l'effet de la version de
+      # celui de l'instance de serveur.
+      - name: Répétition ciblée (mobile, cache froid), 0.4.5 sur 9410
+        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci/a --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
+      - name: Sites inversés, 0.4.4 sur 9410
+        run: |
+          pkill -f "dev/server.mjs" || true
+          pkill -f "cli.js server" || true
+          sleep 3
+          start() {
+            port=$1; shift
+            env "$@" VT_PORT=$port nohup node dev/server.mjs > mesures-ci/serveur-inverse-$port.log 2>&1 &
+            for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
+            if ! curl -sf -o /dev/null "http://127.0.0.1:$port/"; then tail -40 mesures-ci/serveur-inverse-$port.log; exit 1; fi
+          }
+          start 9410 VT_LOCAL=../local-044-b VT_PLUGIN_DIR=../reference/visual-tweaks
+          start 9412 VT_LOCAL=../local-045-b
+          node dev/campagne-mesures.mjs --reference http://127.0.0.1:9410 --candidate http://127.0.0.1:9412 --sortie mesures-ci/b --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
       - name: Arrêt des serveurs et navigateurs
         if: always()
         run: |
