@@ -17,7 +17,13 @@
 <section class="anim-hero" data-vt-id="anim-hero"><h1 class="anim-title" data-vt-id="anim-title">Énergie en mouvement</h1><p class="anim-shimmer" data-vt-id="anim-shimmer">Un thème vivant : boucle d’animation, effets CSS infinis, diaporama et bandeau.</p><a class="anim-cta anim-glow" data-vt-id="anim-cta" href="#">Réserver une séance</a><img class="anim-sceau" data-vt-id="anim-sceau" src="<?php echo $vt_phone; ?>" alt="Sceau animé"><?php for ($i = 0; $i < 6; $i++): ?><span class="anim-rune" data-vt-rune aria-hidden="true"></span><?php endfor; ?></section>
 <section class="anim-section" aria-label="Témoignages"><h2 data-vt-id="anim-temoignages">Témoignages</h2><div class="anim-slides"><?php for ($i = 1; $i <= 3; $i++): ?><blockquote class="anim-slide<?php echo $i === 1 ? ' is-active' : ''; ?>" data-vt-id="anim-slide-<?php echo $i; ?>">Témoignage <?php echo $i; ?> : une séance apaisante.</blockquote><?php endfor; ?></div></section>
 <section class="anim-section" aria-label="Bandeau"><div class="anim-ticker"><?php foreach (['Runes', 'Soins', 'Ateliers', 'Méditation', 'Tirages', 'Rencontres'] as $word): ?><span><?php echo $word; ?></span><?php endforeach; ?></div></section>
+<?php if (str_starts_with((string) $_GET['vt-test'], 'animated-media')): ?>
+<style>.anim-entree{animation:anim-entree 1.2s ease-out both}.anim-reveal-kf{opacity:0}.anim-reveal-kf.is-visible{animation:anim-entree .6s ease-out both}@keyframes anim-entree{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}.anim-video{display:block;width:320px;height:180px}</style>
+<p class="anim-entree" data-vt-id="anim-entree">Apparition à l’ouverture de la page.</p>
+<section class="anim-section" aria-label="Vidéo"><video class="anim-video" data-vt-id="anim-video" src="<?php echo esc_url(get_stylesheet_directory_uri() . '/boucle.webm'); ?>" autoplay muted loop playsinline width="320" height="180"></video></section>
+<?php endif; ?>
 <?php for ($i = 1; $i <= 4; $i++): ?><section class="anim-section anim-reveal" data-vt-id="anim-reveal-<?php echo $i; ?>"><h2>Section <?php echo $i; ?></h2><p>Contenu révélé au défilement.</p><img src="<?php echo $vt_phone; ?>" alt="Illustration <?php echo $i; ?>" width="160" height="200"></section><?php endfor; ?>
+<?php if (str_starts_with((string) $_GET['vt-test'], 'animated-media')): ?><section class="anim-section anim-reveal-kf" data-vt-id="anim-reveal-kf"><h2>Révélation par animation</h2><p>Animation d’entrée déclenchée au défilement.</p></section><?php endif; ?>
 <script src="<?php echo esc_url(get_stylesheet_directory_uri() . '/animated.js'); ?>" defer></script>
 <?php endif; ?>
 <?php if (isset($_GET['vt-test']) && str_starts_with((string) $_GET['vt-test'], 'viewport')): ?>

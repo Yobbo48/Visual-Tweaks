@@ -9,7 +9,10 @@
    - bandeau défilant qui déplace un élément du DOM toutes les 4 s
      (comme les carrousels « en boucle ») ;
    - hauteur recalculée au redimensionnement.
-   Les animations CSS infinies sont dans la feuille de la page. */
+   Les animations CSS infinies sont dans la feuille de la page. Variante
+   ?vt-test=animated-media : vidéo en boucle, animation d'entrée au chargement
+   et révélation par animation CSS au défilement. `__vtBenchTicks` compte les
+   passages de la boucle (deux boucles = deux fois plus de passages). */
 (() => {
   const hero = document.querySelector(".anim-hero");
   if (!hero) return;
@@ -17,6 +20,7 @@
   const header = document.querySelector(".anim-header");
   const start = performance.now();
   function tick(now) {
+    window.__vtBenchTicks = (window.__vtBenchTicks || 0) + 1;
     const rect = hero.getBoundingClientRect();
     const progress = Math.max(0, Math.min(1, -rect.top / rect.height));
     const width = hero.clientWidth;
@@ -45,7 +49,7 @@
     },
     { threshold: 0.15 },
   );
-  for (const node of document.querySelectorAll(".anim-reveal"))
+  for (const node of document.querySelectorAll(".anim-reveal, .anim-reveal-kf"))
     reveal.observe(node);
   const slides = [...document.querySelectorAll(".anim-slide")];
   let current = 0;
@@ -56,6 +60,10 @@
   }, 3000);
   const ticker = document.querySelector(".anim-ticker");
   setInterval(() => ticker.append(ticker.firstElementChild), 4000);
+  // Lecture explicite, comme beaucoup de thèmes : l'attribut autoplay seul
+  // n'est pas honoré par tous les navigateurs sans fenêtre.
+  for (const video of document.querySelectorAll("video[autoplay]"))
+    video.play().catch(() => {});
   const size = () => (hero.style.minHeight = `${Math.round(innerHeight * 0.5)}px`);
   addEventListener("resize", size);
   size();

@@ -1,0 +1,174 @@
+# Validation de Visual Tweaks : suite complète, séquentielle, sur Chromium,
+# WebKit et Firefox, avec la version de WordPress lue en production.
+# Rien n'est déployé : la production n'est que lue (2 requêtes, sans JavaScript,
+# donc sans envoi Analytics). Le thème réel n'est pas dans le dépôt : les suites
+# qui l'exigent sont consignées « non exécutées ».
+name: Validation
+
+on:
+  push:
+    branches: [claude/affectionate-hamilton-kofqfo]
+    paths:
+      - ".github/workflows/validation.yml"
+      - "visual-tweaks/**"
+      - "tests/**"
+      - "dev/**"
+      - "package.json"
+  workflow_dispatch:
+
+concurrency:
+  group: validation-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  REFERENCE: fbbf3811bd35f256f62c46bdb23ccc7131c3d8a0 # 0.4.4
+
+jobs:
+  prerequis:
+    name: Version de WordPress en production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      wp: ${{ steps.wp.outputs.wp }}
+    steps:
+      - id: wp
+        name: Lecture unique de l'accueil et du flux
+        shell: bash
+        run: |
+          set +e
+          UA="Mozilla/5.0 (validation Visual Tweaks; lecture unique)"
+          curl -sS -m 20 -A "$UA" -o feed.xml -w "flux HTTP %{http_code}\n" https://www.lenergiedesrunes.com/feed/
+          curl -sS -m 20 -A "$UA" -o home.html -w "accueil HTTP %{http_code}\n" https://www.lenergiedesrunes.com/
+          gen=$(grep -o '<generator>[^<]*</generator>' feed.xml | head -1)
+          meta=$(grep -oE 'content="WordPress [0-9.]+"' home.html | head -1)
+          vers=$(grep -oE 'wp-includes/[A-Za-z0-9/._-]+[?]ver=[0-9.]+' home.html | sed 's/.*ver=//' | sort | uniq -c | sort -rn | head -5 | tr '\n' ' ')
+          v=$(echo "$gen" | grep -oE 'v=[0-9]+[.][0-9]+([.][0-9]+)?' | cut -d= -f2)
+          [ -z "$v" ] && v=$(echo "$meta" | grep -oE '[0-9]+[.][0-9]+([.][0-9]+)?')
+          echo "générateur du flux : ${gen:-absent}"
+          echo "meta generator : ${meta:-absente}"
+          echo "versions wp-includes : ${vers:-aucune}"
+          echo "retenue : ${v:-non confirmée}"
+          echo "wp=$v" >> "$GITHUB_OUTPUT"
+          {
+            echo "### WordPress en production"
+            echo "- flux : \`${gen:-absent}\`"
+            echo "- meta generator : \`${meta:-absente}\`"
+            echo "- versions des fichiers wp-includes : \`${vers:-aucune}\`"
+            echo "- **retenue : ${v:-non confirmée (7.1.2 par défaut)}**"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  suite:
+    name: Suite complète (3 moteurs, séquentielle)
+    needs: prerequis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    env:
+      VT_WP_VERSION: ${{ needs.prerequis.outputs.wp || '7.1.2' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Dépendances
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium firefox webkit
+      - name: Serveur WordPress Playground (banc)
+        run: |
+          mkdir -p artifacts
+          nohup node dev/server.mjs > artifacts/serveur-ci.log 2>&1 &
+          for i in $(seq 1 180); do curl -sf -o /dev/null http://127.0.0.1:9410/ && break; sleep 2; done
+          echo "WordPress servi : $(curl -s 'http://127.0.0.1:9410/?feed=rss2' | grep -o '<generator>[^<]*</generator>')" | tee artifacts/environnement-ci.txt
+          { node --version; npx playwright --version; } | tee -a artifacts/environnement-ci.txt
+      - name: Suite complète
+        run: |
+          set -o pipefail
+          node dev/validate.mjs --continuer --sans-theme-reel 2>&1 | tee artifacts/validation-ci.log
+      - name: Arrêt des serveurs et navigateurs
+        if: always()
+        run: |
+          pkill -f "dev/server.mjs" || true
+          pkill -f "cli.js server" || true
+          pkill -f "chrome|firefox|WebKit" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-candidate
+          path: |
+            artifacts/validation-resume.json
+            artifacts/validation-ci.log
+            artifacts/environnement-ci.txt
+            artifacts/serveur-ci.log
+            artifacts/*-failure.png
+            artifacts/allege-*.json
+            artifacts/ressources-*.json
+            artifacts/conservation-*-test-report.json
+            artifacts/fidelite-*-test-report.json
+
+  reference:
+    name: Échecs rejoués sur la référence 0.4.4
+    needs: [prerequis, suite]
+    if: always() && needs.suite.result == 'failure'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      VT_WP_VERSION: ${{ needs.prerequis.outputs.wp || '7.1.2' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: candidate
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.REFERENCE }}
+          path: reference
+      - uses: actions/download-artifact@v4
+        with:
+          name: validation-candidate
+          path: candidate-results
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Dépendances (référence) ; même serveur de banc que la candidate
+        working-directory: reference
+        run: |
+          cp ../candidate/dev/server.mjs dev/server.mjs
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium firefox webkit
+      - name: Rejouer les suites en échec sur la 0.4.4
+        working-directory: reference
+        run: |
+          mkdir -p artifacts
+          nohup node dev/server.mjs > artifacts/serveur-reference.log 2>&1 &
+          for i in $(seq 1 180); do curl -sf -o /dev/null http://127.0.0.1:9410/ && break; sleep 2; done
+          node -e '
+            const fs = require("fs"), { spawnSync } = require("child_process");
+            const resume = JSON.parse(fs.readFileSync("../candidate-results/validation-resume.json", "utf8"));
+            const out = [];
+            for (const r of resume.filter((r) => r.status.startsWith("échec"))) {
+              const file = r.args[0] === "--test" ? r.args[1] : r.file;
+              if (!fs.existsSync(file)) { out.push({ ...r, reference: "absent de la 0.4.4 (nouveau test)" }); continue; }
+              console.log(`RUN (0.4.4) ${r.file} ${r.args.join(" ")} ${r.engine}`);
+              const res = spawnSync(process.execPath, [r.file, ...r.args], { stdio: "inherit", env: { ...process.env, ...(r.engine ? { VT_ENGINE: r.engine } : {}) } });
+              out.push({ ...r, reference: res.status === 0 ? "réussi en 0.4.4 : régression de la candidate" : `échec aussi en 0.4.4 (${res.status}) : préexistant` });
+            }
+            fs.writeFileSync("artifacts/reference-resume.json", JSON.stringify(out, null, 2));
+            console.log(JSON.stringify(out, null, 2));
+          ' 2>&1 | tee artifacts/reference-ci.log
+      - name: Arrêt des serveurs et navigateurs
+        if: always()
+        run: |
+          pkill -f "dev/server.mjs" || true
+          pkill -f "cli.js server" || true
+          pkill -f "chrome|firefox|WebKit" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-reference
+          path: |
+            reference/artifacts/reference-resume.json
+            reference/artifacts/reference-ci.log
+            reference/artifacts/serveur-reference.log
+            reference/artifacts/*-failure.png
