@@ -23,6 +23,7 @@ Compte rendu, mesures brutes et validations restantes : `docs/validation-0.4.5/C
   - Structure reconstruite par branche ;
   - rien n'est traité tant que la navigation est masquée (panneau fermé, onglet en arrière-plan) ; tout est rattrapé au retour.
 - `editor.js`, `contextual-toolbar.js` : aucune lecture de géométrie sans sélection ni survol ; barre contextuelle placée avec la géométrie déjà lue ; calques recherchés une fois.
+- `editor.js`, contour : replacé à la fin d'une transition ou d'une animation du thème qui déplace la sélection sans défilement (en-tête qui rétrécit, apparition). Défaut préexistant, aucune version antérieure n'écoutant ces événements : le contour restait décalé jusqu'au défilement suivant.
 - **Édition allégée** (`light-mode.js`, bouton dans la barre de l'aperçu, désactivée par défaut, choix conservé) :
   - dans l'aperçu seulement, les boucles d'animation du thème passent à 4 images/s, les animations infinies et les vidéos sont en pause ;
   - les apparitions et transitions ne sont pas touchées ;

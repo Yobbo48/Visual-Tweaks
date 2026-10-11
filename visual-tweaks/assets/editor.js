@@ -3288,6 +3288,23 @@ function start() {
         },
         capture,
       );
+      // 0.4.5 : une transition ou une animation du thème (en-tête qui rétrécit,
+      // apparition) peut déplacer la sélection sans défilement ni redimensionnement.
+      // Le contour est replacé quand elle se termine ou s'interrompt, une fois par
+      // image au plus ; les animations infinies ne déclenchent rien.
+      for (const type of [
+        "transitionend",
+        "transitioncancel",
+        "animationend",
+        "animationcancel",
+      ])
+        doc.addEventListener(
+          type,
+          () => {
+            if (selected) scheduleOutline();
+          },
+          capture,
+        );
       doc.defaultView.addEventListener("resize", scheduleOutline, {
         signal: frameController.signal,
       });

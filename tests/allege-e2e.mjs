@@ -279,9 +279,8 @@ try {
   assert.ok(revealed.transitions.length && revealed.transitions.every((o) => o === "1"));
   assert.equal(revealed.header, true);
   // Retour en haut : l'en-tête perd « is-scrolled » et sa marge intérieure passe
-  // de 8 à 14 px en 0,3 s, ce qui descend le titre. Le contour, placé sur
-  // événement (sélection, défilement, redimensionnement) en 0.4.4 comme en 0.4.5,
-  // ne suit pas une transition : sélection une fois les transitions terminées.
+  // de 8 à 14 px en 0,3 s, ce qui descend le titre. Sélection une fois les
+  // transitions terminées, à partir d'un état stable (transition vérifiée en 3).
   await body().evaluate(async () => {
     window.scrollTo(0, 0);
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -317,6 +316,28 @@ try {
     );
   };
   assert.ok(await outlineMatches(), "contour sur l'élément");
+  // L'en-tête rétrécit puis revient (transition de 0,3 s) et déplace le titre de
+  // 12 px sans défilement : le contour suit, replacé à la fin de la transition.
+  for (const scrolled of [true, false]) {
+    const moved = await body().evaluate(async (_, on) => {
+      const title = document.querySelector('[data-vt-id="anim-title"]');
+      const y = title.getBoundingClientRect().top;
+      document.querySelector(".anim-header").classList.toggle("is-scrolled", on);
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      await Promise.all(
+        document
+          .getAnimations()
+          .filter((a) => a.transitionProperty)
+          .map((a) => a.finished.catch(() => {})),
+      );
+      return Math.round(title.getBoundingClientRect().top - y);
+    }, scrolled);
+    assert.ok(Math.abs(moved) >= 10, `titre déplacé par l'en-tête (${moved} px)`);
+    assert.ok(
+      await outlineMatches(),
+      `contour replacé après la transition de l'en-tête (${moved} px)`,
+    );
+  }
   const translateOf = () => title.evaluate((n) => getComputedStyle(n).translate);
   const before = await translateOf();
   const handle = await ui(".outline.selected .drag").boundingBox();
@@ -336,7 +357,7 @@ try {
   await page.waitForFunction(() => VisualTweaksEditor.diagnostics().dirty === false);
   assert.equal(await translateOf(), before);
   record(
-    "Mode allégé : sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré",
+    "Mode allégé : sélection, contour exact (et replacé après une transition du thème qui déplace l'élément), déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré",
   );
 
   // 4. Navigation entre pages : préférence conservée, puis retirée.

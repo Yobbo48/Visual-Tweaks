@@ -50,7 +50,8 @@ l'aperçu, inchangé. Navigation : délai fixe au lieu d'un report à chaque mut
 continue ne bloque plus les mises à jour), panneau Assets reconstruit seulement si son contenu
 change, Structure reconstruite par branche, rien n'est traité tant que la navigation est masquée
 (panneau fermé, onglet en arrière-plan). Contour : aucune lecture de géométrie sans sélection,
-barre contextuelle placée sans mise en page forcée. Édition allégée (facultative, réversible d'un
+barre contextuelle placée sans mise en page forcée, replacé à la fin d'une transition ou d'une
+animation du thème qui déplace la sélection (en-tête qui rétrécit). Édition allégée (facultative, réversible d'un
 clic) : dans l'aperçu, boucles d'animation du thème ralenties, animations infinies et vidéos en
 pause. Site public, données, historique et brouillons inchangés.
 
