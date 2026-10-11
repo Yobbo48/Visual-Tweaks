@@ -4,21 +4,32 @@
 
 ## 0. Verdict
 
-**Non déployable en l'état : la recette sur le thème réel n'a pas pu être faite**, faute de copie du thème `lenergiedesrunes` (section 2).
+**Encore bloquée, pour deux contrôles demandés qui restent impossibles ici. Aucun défaut n'a été trouvé.**
 
-Tout ce qui a pu être testé est conforme, et aucun critère bloquant n'est atteint. Suite complète sur le code final (`7374be3`, exécution n° 9) : 42 suites réussies sur 42 sur Chromium, WebKit et Firefox, tests PHP 11/11 ; 10 suites non exécutées faute de thème réel.
+Recette faite sur le thème réel (section 11) : le thème de production `lenergiedesrunes` 1.9.77 et l'export des options ont été fournis le 11/10. Elle compare la 0.4.3 en production à la candidate 0.4.5 (`7374be3`), avec le même thème et les mêmes retouches, sous WordPress 7.1.3, sur Chromium.
 
-Critères bloquants :
-- **perte de modification** : aucune. Conservation 7/7 sur Chromium, WebKit et Firefox ; données enregistrées vérifiées par l'API ;
-- **rendu** : éditeur, éditeur allégé, publié et premier affichage identiques sur le banc, sur les trois moteurs ;
-- **mode allégé** : réversible sur les trois moteurs. Bascules répétées, une seule boucle, rien de figé, préférence suivie entre pages, retour d'onglet ;
-- **performances publiques** : aucune régression. HTML et modules publics identiques à la 0.4.4 hors numéro de version ; FCP, LCP, CLS, requêtes et volume identiques. Le léger écart mobile à froid des exécutions n° 5 et 7 venait de l'installation du banc : avec les deux extensions au même niveau, +0 ms puis −4 ms après la réponse (p = 0,81 et 0,16, exécutions n° 8 et 9), dans le bruit du témoin A/A (section 6).
+Tout y est conforme :
+- seconde copie du thème supprimée ;
+- mode allégé réversible ;
+- conservation, fidélité de la bande et du logo dès le premier affichage, sans double application ;
+- Structure, Assets, médiathèque ;
+- aucune régression des performances publiques.
 
-Une correction a été ajoutée pendant la validation : le contour de sélection est replacé à la fin d'une transition ou d'une animation du thème qui déplace la sélection. Le défaut était préexistant ; la correction est testée sur les trois moteurs (sections 4 et 7).
+Les deux contrôles qui manquent :
+1. **Mode allégé sur Firefox et WebKit avec le thème réel.** Ces navigateurs ne s'installent pas dans cet environnement : le CDN de Playwright est bloqué par sa politique réseau. Les fichiers privés ne peuvent pas passer par la CI publique, où ces deux moteurs sont validés sur le banc animé (exécution n° 9).
+2. **Pages équivalentes au site réel.** Le ZIP et l'export ne contiennent pas les contenus : sections de la page d'accueil, témoignages, menu, image réelle du logo, options `edr_*`, médias. L'accueil du banc s'arrête après le bandeau. Les deux retouches, dans l'en-tête et la bande, sont vérifiées ; la page entière n'est pas équivalente à celle de production (liste en section 11.2).
 
-Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3 : CPU au repos −28 %, au défilement −32 %, recalculs de style divisés par deux, plus aucune boucle du thème dans le document de l'éditeur. **Ils restent à confirmer sur le thème réel.**
+Critères bloquants, sur tout ce qui a pu être vérifié :
+- **perte de modification** : aucune. Banc animé : 7/7 sur les trois moteurs. Thème réel : enregistrer, changer de page, recharger, brouillon et annulation, en 0.4.3 comme en 0.4.5 ;
+- **rendu** : identique entre premier affichage, site publié et aperçu de l'éditeur, desktop et mobile. Sur le thème réel, boîtes identiques au demi-pixel entre la 0.4.3 et la 0.4.5 ;
+- **mode allégé** : réversible. Banc animé : trois moteurs. Thème réel : Chromium seul, pluie de runes de 33 à 4 images/s puis une seule boucle à pleine cadence ;
+- **performances publiques** : aucune régression. Banc : CI, exécutions n° 4 à 9. Thème réel : 0.4.3 contre 0.4.5, desktop et mobile, cache froid et chaud, tous les écarts dans le bruit (p ≥ 0,52, 6 passages par version et par cas).
 
-**Pour lever la réserve** : recette sur le thème réel avec l'archive candidate `visual-tweaks-0.4.5.zip` (section 9), en CI ou dans un environnement distant, jamais sur le Mac. Commandes en section 8. Si cette recette est conforme, la 0.4.5 est déployable sans autre changement, selon `PROCEDURE.md`.
+**Pour lever le blocage** (section 8) :
+- autoriser `cdn.playwright.dev` et `playwright.download.prss.microsoft.com` dans l'accès réseau de cet environnement, puis rejouer `recette/allege-theme-reel.mjs` sur Firefox et WebKit (quelques minutes) ;
+- fournir l'export en lecture seule des contenus listés en section 8, puis rejouer la recette sur des pages complètes.
+
+Si ces deux contrôles sont conformes, l'archive candidate (section 9) est déployable sans autre changement, selon `PROCEDURE.md`.
 
 ## 1. Commit et environnement
 
@@ -30,7 +41,7 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 **CI GitHub Actions** (`.github/workflows/validation.yml`)
 - Machine : ubuntu-24.04, 4 vCPU, 16 Go, sans GPU.
 - Outils : Node 24.21.0, Playwright 1.62.1 (Chromium 151, Firefox et WebKit de cette version).
-- WordPress Playground : **WordPress 7.1.3**, la version de production, avec PHP 8.3 et SQLite.
+- WordPress Playground : **WordPress 7.1.3**, la version de production, avec SQLite. PHP demandé : 8.3. La version effective n'a pas été relue en CI : sur le banc du thème réel, le même outil annonce 8.3 mais exécute les requêtes en PHP 8.5.10 (`PHP_VERSION`, section 11.1).
 - Version de production lue par 2 requêtes, sans JavaScript donc sans envoi Analytics (`www.lenergiedesrunes.com` redirige vers `lenergiedesrunes.fr`) :
   - flux : `<generator>https://wordpress.org/?v=7.1.3</generator>` ;
   - fichiers `wp-includes` : `?ver=7.1.3`.
@@ -51,13 +62,15 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 - Firefox et WebKit n'y sont pas installables (CDN de Playwright bloqué).
 
 **Différences d'environnement restantes**
-- PHP de production non exposé, donc inconnu (CI : PHP 8.3).
+- PHP de production non exposé, donc inconnu. L'export de contenus de la section 8 le relève. Banc : 8.5.10 effectif.
 - Base MySQL/MariaDB en production, SQLite en CI.
 - LiteSpeed et CDN Hostinger absents du banc.
 - Navigateurs Linux sans fenêtre, alors que Kevin utilise un Mac.
 - Thème réel absent.
 
 ## 2. Prérequis : thème réel et données
+
+**Mise à jour du 11/10 après-midi** : le thème et l'export des options ont été fournis. Recette en section 11 ; les contenus manquants sont listés en section 11.2. Ce qui suit décrit la recherche du matin.
 
 **Recherche du thème**, sans résultat utilisable :
 - dépôt Visual-Tweaks, branches `main` et de travail, historique complet : aucun thème de production.
@@ -250,18 +263,42 @@ Pendant la vérification locale de cette correction, deux autres constats, class
 
 Résumés : `ci/suite-complete-run4.txt` (ligne à ligne), `ci/repetition-run7.md`, `ci/mesures-run8.md`, `ci/mesures-run9.md`.
 
-## 8. Contrôles impossibles ici, à faire avant déploiement
+## 8. Contrôles restants avant déploiement
 
-1. **Recette sur le thème réel** (bloquante pour le déploiement), en CI ou dans un environnement distant, avec les archives de la section 2 :
-   - ressources 0.4.4 / 0.4.5, sans puis avec mode allégé :
-     `node dev/campagne-mesures.mjs --reference <site 0.4.4> --candidate <site 0.4.5> --sans-preparation --page / --autre <autre page> --cibles ".bande-lieu,img.logo__sceau,h1"` ;
-   - mode allégé sur les animations réelles de `main.js` : bascules, retour au rendu animé, vidéos si présentes ;
-   - recette historique « visiteur 390/900/1440 : bande et logo à leur place dès la première image, valeurs non doublées » (`recette-visual-tweaks.cjs`, sauvegardes locales) ;
-   - les 4 suites « thème réel » avec `kevin-legros`.
-2. **Onglet réellement masqué** : non reproductible dans un navigateur piloté. À constater une fois sur le Mac, quelques secondes :
+1. **Mode allégé sur Firefox et WebKit, thème réel** (bloquant).
+   - Blocage : ces navigateurs ne s'installent pas dans cet environnement. `cdn.playwright.dev` et `playwright.download.prss.microsoft.com` y sont refusés par la politique réseau, et les fichiers privés ne peuvent pas passer par la CI publique.
+   - Pour lever le blocage : dans les réglages de l'environnement cloud (menu de l'environnement dans la barre de titre de la session, puis Modifier, rubrique Accès réseau), ajouter ces deux domaines aux domaines autorisés, la case des gestionnaires de paquets restant cochée. Procédure : https://code.claude.com/docs/en/cloud-environments#network-access.
+   - Puis, dans le cloud :
+     ```
+     npx playwright install firefox webkit
+     node recette/banc.mjs --version 045 --port 9410
+     VT_ENGINE=firefox node recette/allege-theme-reel.mjs --base http://127.0.0.1:9410 --version 045
+     VT_ENGINE=webkit  node recette/allege-theme-reel.mjs --base http://127.0.0.1:9410 --version 045
+     ```
+   - Autre voie, avec votre accord seulement : un dépôt **privé** dédié à cette recette, dont la CI garderait journaux et artefacts privés.
+2. **Pages complètes** (bloquant pour l'équivalence avec le site réel, section 11.2).
+   - Export en lecture seule, depuis l'environnement qui a l'accès SSH à Hostinger. La sortie va directement sur le poste local : rien n'est écrit sur le serveur.
+     ```
+     ssh <compte> "cd <racine WordPress> && wp eval-file -" < recette/exporter-contenus.php > contenus-production.json
+     jq -r '.medias[]' contenus-production.json | while read -r p; do
+       curl -sf --create-dirs -o "medias/$p" "https://lenergiedesrunes.fr/wp-content/uploads/$p"; done
+     ```
+   - L'export contient :
+     - les versions effectives : WordPress, **PHP**, thème, Visual Tweaks ;
+     - les extensions actives ;
+     - les pages publiées, avec contenu et gabarit, et la page d'accueil ;
+     - les témoignages ;
+     - les menus et leurs emplacements ;
+     - les réglages du thème, dont le logo ;
+     - les 17 options `edr_*` qu'affiche le thème, chacune marquée absente, vide ou définie ;
+     - la liste des médias à télécharger.
+   - Il exclut les comptes, les commentaires, les commandes, les adresses collectées (`edr_inscrits`) et les jetons. Il a été essayé sur le banc, où il ne contient ni `edr_inscrits` ni Canva.
+   - Les médias se téléchargent en quelques requêtes HTTPS de fichiers publics, sans campagne.
+   - À fournir dans la session comme le ZIP du thème. L'import de ces contenus dans le banc reste à écrire à réception : il ne peut être vérifié qu'avec les vraies données. Ensuite, rejouer la recette de la section 11 sur les pages complètes.
+3. **Onglet réellement masqué** : non reproductible dans un navigateur piloté. À constater une fois sur le Mac, quelques secondes :
    - passer à un autre onglet, puis revenir ;
    - l'aperçu reprend, les panneaux sont à jour.
-3. **Environnement de production** : LiteSpeed, CDN Hostinger, MySQL et PHP de production. Contrôles prévus dans `PROCEDURE.md`, après installation.
+4. **Environnement de production** : LiteSpeed, CDN Hostinger, MySQL et PHP de production. Contrôles prévus dans `PROCEDURE.md`, après installation.
 
 ## 9. Archive, empreinte, retour arrière
 
@@ -271,13 +308,16 @@ Résumés : `ci/suite-complete-run4.txt` (ligne à ligne), `ci/repetition-run7.m
 | `artifacts/visual-tweaks-0.4.4.zip` (= commit `fbbf381`) | `a83100ad96ed4bfe27b05b68c3b0a5eed28e403f911588475dc9fd93e72569ff` |
 | `artifacts/visual-tweaks-0.4.3.zip` (production au 11/10) | `9ccc15d087f5b9eeb944255b8773fc7b79379b9eefcf668a17257246900fb8db` |
 
-**L'archive candidate sert à la recette sur le thème réel. Ne pas l'installer en production avant cette recette.**
+L'archive candidate est celle qu'a utilisée la recette sur le thème réel : copie vérifiée, identique à l'arbre de `7374be3`. Face à elle, l'archive 0.4.3, celle de la production.
+
+**Ne pas l'installer en production avant les deux contrôles restants (section 8).**
 
 Retour arrière : réinstaller la version relevée avant installation (0.4.3 au 11/10). Les données gardent leur format : aucune restauration de données n'est nécessaire. Le détail, avec l'export et la restauration des options en cas de besoin, est dans `PROCEDURE.md`.
 
 ## 10. Limites restantes
 
-- Thème réel non validé (section 8).
+- Thème réel : recette faite sur Chromium, sur des pages incomplètes (section 11). Restent Firefox, WebKit et les pages complètes (section 8).
+- Mesures du thème réel faites dans un conteneur sans GPU que la pluie de runes sature : le CPU ne s'y compare qu'à cadence égale (section 11.3). Sur un Mac, cadence plafonnée à 60 images/s, la suppression de la copie invisible doit se traduire en CPU économisé. Ce n'est pas mesuré : aucune campagne sur le Mac.
 - Mode allégé :
   - une boucle d'animation qui a gardé sa propre référence à `requestAnimationFrame` avant l'ouverture de l'éditeur (GSAP, par exemple) n'est pas ralentie ;
   - les animations Web infinies créées après l'activation ne sont pas mises en pause.
@@ -285,6 +325,153 @@ Retour arrière : réinstaller la version relevée avant installation (0.4.3 au 
 - Vidéo WebM non lue par WebKit Linux en CI : contrôle vidéo du mode allégé validé sur Chromium et Firefox seulement.
 - Contour : replacé à la fin d'une transition ou d'une animation qui déplace la sélection, pas pendant. Sur un en-tête de 0,3 s, il rejoint l'élément à la fin du mouvement. Une boucle JavaScript qui déplace l'élément (sans transition CSS) n'est suivie qu'au défilement ou au redimensionnement suivant, comme avant.
 - Les mesures de CI (navigateur sans fenêtre, sans GPU) n'ont pas la même échelle absolue que sur un Mac. Seules les comparaisons 0.4.4 / 0.4.5 dans un même environnement sont significatives.
+
+## 11. Recette sur le thème réel (11/10 après-midi, conteneur distant, Chromium)
+
+### 11.1 Fichiers fournis, versions, banc
+
+**Fichiers reçus**
+- `lenergiedesrunes-production.zip` : 328 fichiers, SHA-256 `da62f1ed5f5d1f4fae8c098c0625da5112ada0c919831d82e66053d5e9fdcd5c`, `js/main.js` compris.
+- `visual-tweaks-options-production.json` : export en lecture seule du 11/10 à 12:45 UTC, SHA-256 `25f4ad0b05c97affa45ca207ec4b70558ed559e4500ce0226e54fe88e39522fc`.
+- Les deux restent dans `.local/production/`, exclu de Git : jamais dans le dépôt, la CI ou ses artefacts. Le banc refuse de démarrer sous GitHub Actions.
+
+**Versions**
+- WordPress 7.1.3 : relevé de production du 11/10.
+- Thème « L'énergie des Runes » 1.9.77 : `style.css` du ZIP.
+- Visual Tweaks en production : 0.4.3, d'après le relevé du 11/10 et votre indication. L'export fourni ne porte pas ce numéro, et le domaine de production est inaccessible d'ici : **non relu**. L'export de contenus de la section 8 le relève.
+
+**Options de production**
+- `vt_enabled` : « 1 », autoload `off`.
+- Page `/` : révision 22, deux retouches :
+  - `div.bande-lieu` : desktop 0 / −18 px, mobile 0 / −7 px ;
+  - `img.logo__sceau` : desktop 60 × 60 px, max-width 60 px, −14 px, avec empreinte sur le `src` exact.
+- `vt_site_style` et `vt_desktop_width` sont absentes en production, et non vides. Elles le restent sur le banc.
+
+**Banc** : deux WordPress 7.1.3 isolés, même thème, mêmes options.
+- L'un avec la 0.4.3 (`artifacts/visual-tweaks-0.4.3.zip`), l'autre avec la 0.4.5 (`artifacts/visual-tweaks-0.4.5.zip`, = `7374be3`). Extensions copiées au même niveau.
+- Playground, SQLite. PHP annoncé 8.3, **8.5.10 effectif** (`PHP_VERSION`).
+- WordPress 7.1.3 vient du dépôt git officiel (`WordPress/WordPress`, étiquette 7.1.3) : wordpress.org est bloqué ici.
+- Outils : `recette/` (banc, import, isolation, contrôles), sans aucun contenu privé : tout est lu dans `.local/production/` à l'exécution.
+- Résultats détaillés et captures : `.local/production/resultats/`. Ils montrent le thème : privés, hors dépôt.
+
+**Import** octet pour octet, relu et comparé à chaque démarrage. Les sites sont remis à l'export entre les séries de contrôles.
+- Empreintes identiques à l'export sur les deux sites : page `0d214346d3ffe4787061a9a11982fdb523121024edb35ced573292af204aa1f6`, `vt_enabled` `6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b`.
+- Les deux options absentes restent absentes.
+- HTML visiteur 0.4.3 = 0.4.5, hors numéro de version, port et identifiant de page.
+
+**Isolation**
+- Côté serveur, toute requête HTTP sortante est refusée (`WP_HTTP_BLOCK_EXTERNAL` et un filtre), les emails sont abandonnés et le cron est coupé (`recette/mu-plugins/vt-banc-isolation.php`).
+- Côté navigateur, toute requête hors du banc est coupée et comptée : aucune constatée sur l'accueil.
+- Le thème ne charge pas Analytics lui-même : c'est Site Kit, extension absente du banc. Sa collecte d'adresses est fermée dans le thème.
+
+**Adaptations de la copie de test**, documentées :
+1. Page « accueil » au contenu vide en page d'accueil statique. Le thème ne sert `css/accueil.css` qu'à une page de ce nom ; c'est la feuille servie en production. S'y ajoutent des pages vides pour la navigation.
+2. Logo : substitut neutre marqué « SUBSTITUT », au chemin et aux dimensions de production (512 px, vignette 150 × 150 WebP). Le fichier réel n'est pas fourni.
+3. URL des médias imprimées avec l'origine de production. La retouche du logo enregistre le `src` exact : sans cela, elle ne s'appliquerait jamais sur la copie de test. Le navigateur de recette sert ces URL depuis la copie locale, et aucune requête n'atteint la production. Les options ne sont pas modifiées.
+4. Nom du site « L'énergie des Runes » : valeur de production non fournie.
+
+### 11.2 Ce qui manque : pages incomplètes, non équivalentes au site réel
+
+| Élément | Source en production | Sur le banc |
+|---|---|---|
+| Sections éditoriales de l'accueil | contenu de la page « accueil » | absentes : l'accueil s'arrête après le bandeau (1 073 px en desktop) |
+| Témoignages | articles `temoignage`, méta `_temo_service` | absents, section non affichée |
+| Autres pages (soins, guidances…) | contenus de page | article vide |
+| Logo | `custom_logo` et son média | substitut (11.1, point 2) |
+| Menu principal | menu `primary` | menu de repli du thème |
+| Textes du bandeau, avis Google, contacts | options `edr_*` | valeurs par défaut du thème |
+| Médias des contenus | `uploads/` | absents |
+| Extensions | WooCommerce (icône « Mon compte »), Site Kit, SEO… | absentes |
+
+Les deux retouches, dans l'en-tête et la bande au-dessus du contenu, sont rendues et vérifiées. La page entière n'est pas équivalente à celle de production. Mesures de défilement et animations des sections de contenu (révélations au défilement) : **non représentatives**.
+
+### 11.3 Ressources de l'éditeur, 0.4.3 contre 0.4.5
+
+`dev/mesure-ressources.mjs`, un scénario à la fois, fenêtres de 12 s, cibles réelles.
+
+| Scénario | Version | CPU moyen % (pic) | Fil principal % | Script ms/s | Thème ms/s | Boucle du thème : document de l'éditeur / aperçu (rappels/s) |
+|---|---|---|---|---|---|---|
+| Page publique seule | 0.4.3 / 0.4.5 | 131,5 (147) / 131,4 (145) | 15,9 / 16,4 | 22,7 / 23,1 | 18,1 / 19,1 | 28,3 / 29,5 (page) |
+| Éditeur au repos | 0.4.3 | 137,1 (225) | 22,5 | 25,5 | 19,4 | **14,7 / 14,7** |
+| | 0.4.5 | 140,2 (219) | 24,4 | 29,5 | 22,0 | **0 / 31,7** |
+| | 0.4.5 allégé | **37,0** (125) | **9,3** | 4,3 | 2,6 | 0 / 4 au repos (mesuré en 11.4) |
+| Repos, bande sélectionnée | 0.4.3 | 141,5 (234) | 25,8 | 27,5 | 22,4 | 17,0 / 17,0 |
+| | 0.4.5 | 143,7 (204) | 27,8 | 36,0 | 27,1 | 0 / 41,1 |
+| | 0.4.5 allégé | 33,9 (102) | 8,0 | 4,6 | 2,6 | 0 / ralentie (sonde aveugle, 11.4) |
+| Défilement, bande sélectionnée | 0.4.3 | 147,7 (259) | 30,4 | 32,7 | 26,0 | 19,8 / 19,9 |
+| | 0.4.5 | 151,3 (261) | 32,4 | 36,3 | 30,0 | 0 / 41,3 |
+| | 0.4.5 allégé | 60,1 (168) | 15,5 | 5,6 | 3,2 | 0 / ralentie (sonde aveugle, 11.4) |
+
+**Lecture**
+- **Seconde copie invisible : supprimée.** En 0.4.3, la pluie de runes de `main.js` tourne aussi dans le document de l'éditeur, autant que dans l'aperçu. En 0.4.5, plus du tout.
+- **Le conteneur, sans GPU, est saturé par le thème seul** : 131 % de CPU pour la page publique, à 28–30 images/s. Le CPU ne baisse donc pas : la 0.4.5 rend l'aperçu deux fois plus fluide au lieu de dépenser la moitié de l'effort sur la copie invisible.
+- **À cadence égale, le coût baisse de moitié.** CPU par image d'aperçu au repos : 9,3 → 4,4 (−52 %). Avec sélection : 8,3 → 3,5. Au défilement : 7,4 → 3,7.
+- **L'éditeur 0.4.5 coûte à peine plus que la page publique seule** : 4,4 contre 4,5 à 4,6 par image.
+- **Mode allégé** : CPU au repos −74 % (140 → 37 %), fil principal 24 → 9 %.
+- **Document de l'éditeur plus léger** : 3 532 → 2 859 nœuds au repos. Tas JS équivalent, environ 4 Mo.
+- **Page incomplète et courte** (11.2) : le défilement n'y parcourt que le haut de page.
+- **En mode allégé, la sonde ne compte plus les rappels du thème** : ils passent par le mode allégé. Leur cadence est mesurée directement en 11.4.
+
+### 11.4 Mode allégé (`recette/allege-theme-reel.mjs`, 0.4.5, Chromium) : 5/5
+
+Cadence mesurée dans la page : redessins du canvas `#pluie` rapportés aux images natives.
+
+1. **Quatre bascules**
+   - Pluie de runes : 33 images/s, puis **4** en mode allégé à chaque bascule.
+   - Retour : 29, 35, 35 puis 37 images/s, **une seule boucle** (passages / images = 1,0) ; la pluie bouge de nouveau.
+   - Aucune animation finie figée, aucune trace laissée.
+   - La portion rendue de l'accueil n'a pas d'animation CSS infinie.
+2. **Retouches en mode allégé**
+   - Sélection de la bande et du logo, contours exacts.
+   - Déplacement au clavier, puis annulation jusqu'à l'état enregistré (0 / −18 px).
+3. **Navigation** vers une autre page puis retour : préférence conservée, mode appliqué.
+4. **Onglet masqué (simulé), puis en arrière-plan**
+   - Le mode est conservé.
+   - Désactivé : rendu animé rétabli sans boucle doublée, et préférence retirée sur toutes les pages.
+5. **Isolation**
+   - Données inchangées : révision 22, retouches identiques à l'export.
+   - Visiteur : 4 modules publics, aucune trace du mode allégé.
+
+**Firefox et WebKit : non exécutés** (section 8, point 1).
+
+### 11.5 Conservation, fidélité, panneaux (0.4.3 et 0.4.5, Chromium)
+
+**Conservation** (`recette/conservation-theme-reel.mjs`) : **4/4 dans les deux versions**.
+- Bande déplacée de 2 px puis enregistrée : révision 22 → 23, desktop −18 → −16 px, mobile et logo inchangés (API).
+- Retour sur l'accueil après une autre page, puis rechargement : état « Enregistré ». Site public à −16 px, en CSS serveur comme au rendu.
+- Brouillon non enregistré (−15 px) restauré après un changement de page, révision inchangée.
+- Annulation jusqu'à l'état enregistré.
+- Comportement identique en 0.4.3 et en 0.4.5. Copies de test remises ensuite à l'export, empreintes vérifiées.
+
+**Fidélité** (`recette/fidelite-theme-reel.mjs`) : **4/4 dans les deux versions**.
+- Desktop 1440 et mobile 390 : premier affichage (CSS serveur seul, JavaScript coupé) = site publié après runtime = aperçu de l'éditeur (écrans Desktop et Mobile).
+- Valeurs exactes, **sans double application** : bande 0 / −18 px en desktop, 0 / −7 px en mobile ; logo 60 × 60 px et −14 px.
+- Boîtes identiques au demi-pixel entre les trois vues et entre la 0.4.3 et la 0.4.5 :
+  - desktop : bande `[0, 103, 1440, 48]`, logo `[154, 13.5, 60, 60]` ;
+  - mobile : bande `[0, 114, 390, 81.5]`, logo `[6, 16, 60, 60]`.
+
+**Panneaux** (`recette/panneaux-theme-reel.mjs`) : **3/3 dans les deux versions**.
+- Structure (185 lignes) : la bande sélectionnée dans l'aperçu s'ouvre et se marque dans l'arbre ; un clic sur la ligne du bandeau le sélectionne.
+- Assets : 26 cartes, dont le logo.
+- Médiathèque ouverte depuis le logo (« Remplacer cette image »), fermée sans choix : aucune modification.
+
+### 11.6 Performances publiques, 0.4.3 contre 0.4.5
+
+`dev/campagne-mesures.mjs` : visiteur anonyme, page d'accueil du banc, toute requête externe coupée, 2 tours de 3 passages en ordre alterné. Médianes de tous les passages, test de rang.
+
+| Cas | FCP après réponse 0.4.3 → 0.4.5 | FCP | TTFB |
+|---|---|---|---|
+| Desktop, froid | 327 → 281 ms (p = 1) | 1 824 → 1 612 (p = 0,75) | 1 426 → 1 270 (p = 0,52) |
+| Desktop, chaud | 338 → 308 ms (p = 0,81) | 1 620 → 1 592 (p = 1) | 1 286 → 1 229 (p = 0,75) |
+| Mobile, froid | 363 → 385 ms (p = 0,87) | 1 740 → 1 772 (p = 1) | 1 377 → 1 372 (p = 1) |
+| Mobile, chaud | 352 → 332 ms (p = 0,75) | 1 628 → 1 708 (p = 0,63) | 1 281 → 1 312 (p = 0,69) |
+
+- Requêtes et volume identiques : 15 et 550 Ko en desktop, 16 et 541 Ko en mobile. Mêmes 4 modules publics.
+- CLS 0 ; longues tâches de 2 à 5 par chargement dans les deux versions.
+- Long animation frames sur tous les passages des deux versions, dus à la pluie de runes.
+- Trames lentes : 3 à 6 au chargement, 0 à 2 au défilement, dans les deux versions.
+- **Aucun écart significatif, aucune régression.**
+- Valeurs absolues élevées, dues au conteneur saturé ; seule la comparaison compte. Six passages par version et par cas : la puissance du test est faible, mais rien ne suggère d'écart.
 
 ---
 

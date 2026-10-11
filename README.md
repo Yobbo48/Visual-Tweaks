@@ -48,7 +48,18 @@ Mémoire stable d'une ouverture à l'autre ; document hôte plus léger (−283 
 - mêmes données et mêmes conditions que la 0.4.4 : éditeur au repos 32,3 → 23,1 % de CPU (allégé : 7,1 %), plus aucune boucle du thème dans le document de l'éditeur ;
 - site public : aucune régression ; témoin A/A et test de rang pour départager le bruit du banc.
 
-**Verdict : non déployable en l'état.** La recette sur le thème réel n'a pas pu être faite, faute de copie du thème `lenergiedesrunes`. Archive candidate, empreinte et procédure de retour arrière : `docs/validation-0.4.5/`.
+**Recette sur le thème réel** (thème de production 1.9.77 et options fournis le 11/10 ; 0.4.3 contre 0.4.5, WordPress 7.1.3, Chromium, banc privé hors dépôt) :
+- seconde copie du thème supprimée ;
+- à cadence égale, coût de l'aperçu divisé par deux ;
+- mode allégé : −74 % de CPU, réversible ;
+- conservation, fidélité de la bande et du logo dès le premier affichage, Structure, Assets et médiathèque : conformes ;
+- performances publiques : aucune régression.
+
+**Verdict : encore bloquée**, pour deux contrôles impossibles dans cet environnement ; aucun défaut trouvé :
+- mode allégé sur Firefox et WebKit avec le thème réel : navigateurs non installables ici ;
+- pages complètes : contenus de l'accueil, témoignages, menu et médias absents des fichiers fournis.
+
+Levée du blocage, archive candidate, empreinte et retour arrière : `docs/validation-0.4.5/` (CONTROLE.md, sections 0, 8, 9 et 11 ; PROCEDURE.md).
 
 Détail et commandes dans le compte rendu.
 
