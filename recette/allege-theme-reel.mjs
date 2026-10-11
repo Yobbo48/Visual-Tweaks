@@ -136,6 +136,37 @@ try {
   }
   reussi(`4 bascules : pluie de runes ${mesures.depart.boucle.passages}/s → ≤ 6/s → une seule boucle à pleine cadence (passages/images ${mesures.bascules.map((b) => b.plein.boucles).join(", ")}) ; ${mesures.depart.infinies.length} animation(s) CSS infinie(s) en pause puis relancée(s) ; aucune animation finie figée ; aucune trace laissée`);
 
+  // 1 bis. Page complète parcourue en mode allégé : apparitions au défilement
+  // (.rv → .in) et compteurs (data-count) menés à leur terme, rien de figé.
+  await basculer(true);
+  mesures.parcours = await body().evaluate(async () => {
+    const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+    const hauteur = document.documentElement.scrollHeight;
+    for (let y = 0; y <= hauteur; y += Math.round(innerHeight * 0.6)) {
+      window.scrollTo(0, y);
+      await pause(350);
+    }
+    await pause(2500);
+    const rv = [...document.querySelectorAll(".rv")];
+    const compteurs = [...document.querySelectorAll("[data-count],[data-n]")];
+    const cible = (el) => String(parseInt(el.dataset.count ?? el.dataset.n, 10));
+    const resultat = {
+      hauteur,
+      apparitions: rv.length,
+      nonApparues: rv.filter((n) => !n.classList.contains("in")).map((n) => n.className.slice(0, 40)),
+      compteurs: compteurs.length,
+      compteursInacheves: compteurs.filter((n) => n.textContent.trim() !== cible(n)).map((n) => `${n.textContent.trim()}≠${cible(n)}`),
+    };
+    window.scrollTo(0, 0);
+    await pause(600);
+    return resultat;
+  });
+  assert.ok(mesures.parcours.apparitions > 0, "apparitions présentes sur la page complète");
+  assert.deepEqual(mesures.parcours.nonApparues, [], "apparitions terminées en mode allégé");
+  assert.deepEqual(mesures.parcours.compteursInacheves, [], "compteurs terminés en mode allégé");
+  await basculer(false);
+  reussi(`Mode allégé, page complète parcourue (${mesures.parcours.hauteur} px) : ${mesures.parcours.apparitions} apparitions au défilement et ${mesures.parcours.compteurs} compteur(s) menés à leur terme, rien de figé`);
+
   // 2. Sélection, contours, déplacement et annulation en mode allégé.
   await basculer(true);
   for (const cible of ["div.bande-lieu", "img.logo__sceau"]) {

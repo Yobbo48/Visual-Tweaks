@@ -47,3 +47,10 @@ if ( defined( 'VT_BANC_ORIGINE_MEDIAS' ) ) {
 		}
 	);
 }
+
+// Version de PHP réellement utilisée par les requêtes du banc (pas celle
+// demandée au lanceur) : /?vt-banc-php=1.
+if ( isset( $_GET['vt-banc-php'] ) ) {
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	die( PHP_VERSION );
+}

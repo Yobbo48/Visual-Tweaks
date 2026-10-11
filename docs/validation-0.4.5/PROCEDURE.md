@@ -1,6 +1,6 @@
 # Visual Tweaks 0.4.5 — installation et retour arrière
 
-**Rien n'est déployé.** Cette procédure ne doit être suivie qu'après la recette sur le thème réel (voir `CONTROLE.md`, section « Verdict ») et l'accord de Kevin.
+**Rien n'est déployé.** Cette procédure ne doit être suivie qu'après le contrôle restant (mode allégé sur Firefox et WebKit avec le thème réel, `CONTROLE.md`, sections 0 et 8) et l'accord de Kevin.
 
 ## Ce qui change pour les données
 
@@ -36,6 +36,10 @@ Outils de données (inchangés depuis la 0.4.4) : `docs/validation-0.4.4/outils/
 2. Exporter les données : `wp eval-file exporter-options-vt.php > options-avant-045.json`. Noter la révision de `/` (22 au 11/10).
 3. Brouillons non enregistrés : ils sont dans le navigateur de Kevin, pas sur le serveur. Ouvrir l'éditeur sur chaque page travaillée, puis enregistrer, ou cliquer « Exporter le brouillon JSON ».
 4. Vérifier l'empreinte de l'archive : `sha256sum -c visual-tweaks-0.4.5.zip.sha256`.
+5. **Logo, avant toute purge de cache.** L'export du 11/10 indique que `custom_logo` est absent de la base. Sans lui, le thème n'affiche aucun logo : celui qu'on voit aujourd'hui viendrait du cache, et la purge de l'étape « Installation » le ferait disparaître du site, quelle que soit la version de Visual Tweaks.
+   - Vérifier : `wp theme mod get custom_logo`.
+   - S'il est vide, décider avant d'installer : rétablir le logo dans le Personnalisateur (le média existe, ID 22, déjà utilisé comme icône du site), ou accepter son absence. La retouche du logo n'aurait alors plus de cible, ce qui est sans effet sur le reste.
+   - Cette vérification ne modifie rien ; la décision appartient à Kevin.
 
 ## Installation
 

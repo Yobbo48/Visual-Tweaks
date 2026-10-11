@@ -48,16 +48,16 @@ Mémoire stable d'une ouverture à l'autre ; document hôte plus léger (−283 
 - mêmes données et mêmes conditions que la 0.4.4 : éditeur au repos 32,3 → 23,1 % de CPU (allégé : 7,1 %), plus aucune boucle du thème dans le document de l'éditeur ;
 - site public : aucune régression ; témoin A/A et test de rang pour départager le bruit du banc.
 
-**Recette sur le thème réel** (thème de production 1.9.77 et options fournis le 11/10 ; 0.4.3 contre 0.4.5, WordPress 7.1.3, Chromium, banc privé hors dépôt) :
+**Recette sur le site réel complet** (thème 1.9.77, 14 pages, témoignages, médias et retouches de production ; 0.4.3 contre 0.4.5, WordPress 7.1.3, PHP 8.3.33 ; banc privé hors dépôt) :
 - seconde copie du thème supprimée ;
 - à cadence égale, coût de l'aperçu divisé par deux ;
-- mode allégé : −74 % de CPU, réversible ;
-- conservation, fidélité de la bande et du logo dès le premier affichage, Structure, Assets et médiathèque : conformes ;
-- performances publiques : aucune régression.
+- mode allégé : −80 % de CPU au repos, réversible sur Chromium ;
+- conservation, fidélité de la bande et du logo dès le premier affichage, panneaux : conformes ;
+- performances publiques : aucune régression reproductible.
 
-**Verdict : encore bloquée**, pour deux contrôles impossibles dans cet environnement ; aucun défaut trouvé :
-- mode allégé sur Firefox et WebKit avec le thème réel : navigateurs non installables ici ;
-- pages complètes : contenus de l'accueil, témoignages, menu et médias absents des fichiers fournis.
+**Verdict : encore bloquée, pour une seule raison** : le mode allégé n'a pas pu être vérifié sur Firefox et WebKit avec le thème réel, faute de pouvoir installer ces navigateurs ici. Aucun défaut trouvé.
+
+Avant tout déploiement, vérifier le logo de production (`custom_logo` absent de la base selon l'export) avant de purger les caches : `PROCEDURE.md`.
 
 Levée du blocage, archive candidate, empreinte et retour arrière : `docs/validation-0.4.5/` (CONTROLE.md, sections 0, 8, 9 et 11 ; PROCEDURE.md).
 

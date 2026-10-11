@@ -8,7 +8,9 @@
    - theme/lenergiedesrunes/            thème complet, tel qu'en ligne ;
    - recu/visual-tweaks-options-production.json   export des options vt_* ;
    - ext/<version>/visual-tweaks/       extension testée (archive vérifiée) ;
-   - substituts/                        fichiers de substitution documentés.
+   - substituts/                        fichiers de substitution documentés ;
+   - contenus/                          contenus et médias de production
+                                        (contenus-production.json, wp-content/uploads/).
    Chaque site a ses données dans .local/production/site-<version>/.
 
    Ces fichiers ne doivent jamais passer par une CI publique : le banc refuse
@@ -43,7 +45,15 @@ for (const requis of [theme, extension, exportOptions])
 
 for (const d of ["database", "uploads", "entrees"]) mkdirSync(path.join(site, d), { recursive: true });
 cpSync(exportOptions, path.join(entrees, "visual-tweaks-options-production.json"));
-cpSync(path.join(prive, "substituts"), path.join(entrees, "substituts"), { recursive: true });
+if (existsSync(path.join(prive, "substituts")))
+  cpSync(path.join(prive, "substituts"), path.join(entrees, "substituts"), { recursive: true });
+// Contenus et médias de production (archive vérifiée par son manifeste) :
+// export JSON pour l'import, fichiers uploads/ à leur place, sans régénération.
+const contenus = path.join(prive, "contenus");
+if (existsSync(path.join(contenus, "contenus-production.json"))) {
+  cpSync(path.join(contenus, "contenus-production.json"), path.join(entrees, "contenus-production.json"));
+  cpSync(path.join(contenus, "wp-content/uploads"), path.join(site, "uploads"), { recursive: true });
+}
 
 // Origine de production lue dans l'export (rien de propre au site dans le dépôt).
 const origine = new URL(JSON.parse(readFileSync(exportOptions, "utf8")).site).origin;
@@ -51,6 +61,9 @@ const blueprint = {
   $schema: "https://playground.wordpress.net/blueprint-schema.json",
   landingPage: "/",
   login: false,
+  // PHP de production (8.3.x) : l'option --php seule ne suffit pas, les
+  // requêtes du banc tournaient en 8.5 (PHP_VERSION relevé).
+  preferredVersions: { php: "8.3", wp },
   steps: [
     {
       step: "defineWpConfigConsts",
