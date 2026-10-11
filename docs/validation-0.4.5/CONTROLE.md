@@ -6,11 +6,13 @@
 
 **Non déployable en l'état : la recette sur le thème réel n'a pas pu être faite**, faute de copie du thème `lenergiedesrunes` (section 2).
 
-Tout ce qui a pu être testé est conforme, et aucun critère bloquant n'est atteint :
+Tout ce qui a pu être testé est conforme, et aucun critère bloquant n'est atteint. Suite complète sur le code final (`7374be3`, exécution n° 9) : 42 suites réussies sur 42 sur Chromium, WebKit et Firefox, tests PHP 11/11 ; 10 suites non exécutées faute de thème réel.
+
+Critères bloquants :
 - **perte de modification** : aucune. Conservation 7/7 sur Chromium, WebKit et Firefox ; données enregistrées vérifiées par l'API ;
 - **rendu** : éditeur, éditeur allégé, publié et premier affichage identiques sur le banc, sur les trois moteurs ;
 - **mode allégé** : réversible sur les trois moteurs. Bascules répétées, une seule boucle, rien de figé, préférence suivie entre pages, retour d'onglet ;
-- **performances publiques** : aucune régression. HTML et modules publics identiques à la 0.4.4 hors numéro de version ; FCP, LCP, CLS, requêtes et volume identiques. Le léger écart mobile à froid des exécutions n° 5 et 7 venait de l'installation du banc : avec les deux extensions au même niveau, +0 ms (p = 0,81), comme le témoin A/A (section 6).
+- **performances publiques** : aucune régression. HTML et modules publics identiques à la 0.4.4 hors numéro de version ; FCP, LCP, CLS, requêtes et volume identiques. Le léger écart mobile à froid des exécutions n° 5 et 7 venait de l'installation du banc : avec les deux extensions au même niveau, +0 ms puis −4 ms après la réponse (p = 0,81 et 0,16, exécutions n° 8 et 9), dans le bruit du témoin A/A (section 6).
 
 Une correction a été ajoutée pendant la validation : le contour de sélection est replacé à la fin d'une transition ou d'une animation du thème qui déplace la sélection. Le défaut était préexistant ; la correction est testée sur les trois moteurs (sections 4 et 7).
 
@@ -41,7 +43,7 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 | n° 6 | `30f06ae` | annulée de même ; job de mesures seul, seconde répétition dans la même configuration | écart non reproduit (0.4.5 tantôt plus rapide, tantôt plus lente) |
 | n° 7 | `adf7f35` | suite complète, tests PHP compris ; répétitions mesurant le TTFB, puis sites inversés | 41 réussies, 1 en échec : `ressources-e2e` WebKit, défaut de connexion du test (section 7) ; 0.4.5 plus lente de 4 et 7 ms après la réponse |
 | n° 8 | `d54c91c` | suite après correction des tests ; témoin A/A ; 0.4.4 / 0.4.5 avec les extensions au même niveau, test de rang | **42 réussies sur 42**, tests PHP 11/11 ; témoin +0 ms, versions +0 ms (section 6) |
-| n° 9 | `7374be3` | code final (contour) : suite complète, témoin A/A, 0.4.4 / 0.4.5 | ⏳ RÉSULTAT N° 9 |
+| n° 9 | `7374be3` | code final (contour) : suite complète, témoin A/A, 0.4.4 / 0.4.5 | **42 réussies sur 42**, tests PHP 11/11, contour après transition réussi sur les trois moteurs ; témoin et versions en section 6 |
 
 **Conteneur distant** (premier passage et contrôles ciblés)
 - Linux, 4 cœurs, Chromium 141, Node 22.22.
@@ -146,14 +148,14 @@ Fichiers : `ci/mesures-run4.md` (synthèse), `ci/mesures-run4-brut.txt` (sorties
 | Animations infinies en pause puis relancées ; vidéo en pause puis relancée | ✔ | ✔ (vidéo WebM non lue par WebKit Linux : contrôle vidéo non applicable) | ✔ |
 | Mode allégé : animation d'entrée et révélations terminées (rien de figé), en-tête qui suit le défilement | ✔ | ✔ | ✔ |
 | Sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré | ✔ | ✔ | ✔ |
-| Contour replacé après une transition du thème qui déplace la sélection sans défilement : en-tête collant qui rétrécit puis revient, titre déplacé de 12 px (`7374be3`) | ⏳ N° 9 | ⏳ N° 9 | ⏳ N° 9 |
+| Contour replacé après une transition du thème qui déplace la sélection sans défilement : en-tête collant qui rétrécit puis revient, titre déplacé de 12 px (`7374be3`) | ✔ | ✔ | ✔ |
 | Navigation entre pages : préférence conservée, puis retirée partout | ✔ | ✔ | ✔ |
 | Onglet masqué (simulé), puis en arrière-plan, puis retour : mode conservé, rendu animé rétabli sans boucle doublée | ✔ | ✔ | ✔ |
 | Données enregistrées inchangées ; visiteur : 4 modules publics seulement, ni règle ni attribut du mode allégé ; 24 éléments × 14 styles identiques entre éditeur, éditeur allégé et public | ✔ | ✔ | ✔ |
 
 Dans le conteneur distant : 6 cycles, rapport passages / images natives de 1,0 à chaque retour. Pendant le mode allégé, 3 passages par seconde.
 
-**Contour après une transition** : contrôle ajouté avec la correction `7374be3`. Dans le conteneur distant (Chromium), il échoue sur l'éditeur d'avant la correction (contour resté 12 px trop haut) et réussit avec elle.
+**Contour après une transition** : contrôle ajouté avec la correction `7374be3`. Dans le conteneur distant (Chromium), il échoue sur l'éditeur d'avant la correction (contour resté 12 px trop haut) et réussit avec elle. En CI (exécution n° 9), il réussit sur les trois moteurs.
 
 ## 5. Conservation, fidélité, médiathèque, Structure et Assets (trois moteurs)
 
@@ -197,12 +199,13 @@ Les suites sans moteur indiqué tournent sur Chromium seul, comme dans `dev/vali
 | n° 7 B | sites inversés, nouvelles données | +16 ms | +7 ms | 0.4.4 : 11 ; 0.4.5 : 13 |
 | n° 8 témoin | deux copies de la 0.4.5 | +0 ms (p = 0,557) | +0 ms (p = 0,85) | 1 et 0 |
 | n° 8 | extensions au même niveau | −8 ms (p = 0,277) | +0 ms (p = 0,807) | 0.4.4 : 1 ; 0.4.5 : 0 |
-| n° 9 témoin | deux copies de la 0.4.5 | ⏳ N° 9 TÉMOIN FCP | ⏳ N° 9 TÉMOIN APRÈS | ⏳ |
-| n° 9 | extensions au même niveau | ⏳ N° 9 VERSIONS FCP | ⏳ N° 9 VERSIONS APRÈS | ⏳ |
+| n° 9 témoin | deux copies de la 0.4.5 | −32 ms (**p = 0,023**) | +2 ms (p = 0,645) | 11 et 7 |
+| n° 9 | extensions au même niveau | −8 ms (p = 0,363) | −4 ms (p = 0,159) | 0.4.4 : 5 ; 0.4.5 : 6 |
 
 - **LoAF** : le nombre de passages concernés varie d'une exécution à l'autre pour le même code (de 3 à 19 sur 20 pour la 0.4.4), et l'écart change de sens. Ce n'est pas un signal.
 - **Écart de quelques ms en n° 7** : il résiste à l'inversion des ports et des données, alors que le visiteur reçoit les mêmes octets. Vérifié dans le conteneur distant : retouches publiées par l'éditeur de chaque version avec l'outil de mesure, HTML visiteur identique hors numéro de version.
 - **Une seule différence restait entre les sites** : la 0.4.5 était servie depuis le dossier du dépôt, la 0.4.4 depuis un dossier voisin. Avec les deux extensions copiées au même niveau, l'écart disparaît (+0 ms, p = 0,81), comme dans le témoin A/A (+0 ms, p = 0,85). Le témoin montre aussi que deux copies du même code s'écartent jusqu'à 16 ms d'un tour à l'autre.
+- **Exécution n° 9, seconde réplique** : 0.4.5 − 0.4.4 = −4 ms après la réponse (p = 0,16). Dans le témoin A/A, le FCP de deux copies identiques diffère de 32 ms avec p = 0,023, porté par le temps de réponse du serveur (−27 ms, p = 0,018), alors que le FCP après réponse ne bouge pas (p = 0,645). Chaque instance du banc a sa propre vitesse : c'est le FCP après réponse qui départage le code livré au navigateur.
 
 **Conclusion : aucune régression reproductible des performances publiques.**
 
@@ -237,7 +240,7 @@ Pendant la vérification locale de cette correction, deux autres constats, class
 
 **Exécution n° 8** : **42 réussies, 0 en échec, 10 non exécutées** ; cœur 18/18, PHP 11/11.
 
-**Exécution n° 9** (code final) : ⏳ RÉSUMÉ N° 9
+**Exécution n° 9** (code final, `7374be3`) : **42 réussies, 0 en échec, 10 non exécutées** ; cœur 18/18, PHP 11/11, 334 contrôles navigateur réussis. Le nouveau contrôle du contour réussit sur Chromium, WebKit et Firefox.
 
 **Non exécutées** (thème `kevin-legros` absent) :
 - `real-theme` × 3 ;
@@ -245,7 +248,7 @@ Pendant la vérification locale de cette correction, deux autres constats, class
 - `guard-visibility` × 3 ;
 - `stabilisation` × 3.
 
-Résumé ligne à ligne : `ci/suite-complete-run4.txt`.
+Résumés : `ci/suite-complete-run4.txt` (ligne à ligne), `ci/repetition-run7.md`, `ci/mesures-run8.md`, `ci/mesures-run9.md`.
 
 ## 8. Contrôles impossibles ici, à faire avant déploiement
 

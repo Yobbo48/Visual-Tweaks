@@ -43,14 +43,12 @@ Mémoire stable d'une ouverture à l'autre ; document hôte plus léger (−283 
 
 **Inchangés** : le site public (HTML visiteur identique octet pour octet, runtime et modules publics identiques hors numéro de version), le format des données, la REST/CAS, l'historique, les brouillons.
 
-**Validation** (Chromium seul, WordPress 6.5.5 : wordpress.org est inaccessible depuis l'environnement de mesure) :
-- nouveau `tests/ressources-e2e.mjs` 5/5 ;
-- `conservation` 7/7, `fidelite` 6/6, `speed` 5/5, `foundations` 16/16 (médiathèque comprise).
+**Validation** (CI GitHub Actions, WordPress 7.1.3 comme la production, Chromium, WebKit et Firefox) :
+- suite complète sur le code final : 42 suites réussies sur 42, tests PHP 11/11 ; nouveaux `tests/ressources-e2e.mjs` et `tests/allege-e2e.mjs` sur les trois moteurs ;
+- mêmes données et mêmes conditions que la 0.4.4 : éditeur au repos 32,3 → 23,1 % de CPU (allégé : 7,1 %), plus aucune boucle du thème dans le document de l'éditeur ;
+- site public : aucune régression ; témoin A/A et test de rang pour départager le bruit du banc.
 
-**Non réalisé** :
-- suite complète sur trois moteurs ;
-- recette et mesure sur le thème réel ;
-- performances publiques sur relais.
+**Verdict : non déployable en l'état.** La recette sur le thème réel n'a pas pu être faite, faute de copie du thème `lenergiedesrunes`. Archive candidate, empreinte et procédure de retour arrière : `docs/validation-0.4.5/`.
 
 Détail et commandes dans le compte rendu.
 
