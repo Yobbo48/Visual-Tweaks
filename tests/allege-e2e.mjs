@@ -168,7 +168,12 @@ const staticStyles = (locatorRoot) =>
 
 await mkdir("artifacts", { recursive: true });
 try {
-  await page.goto(base + "/wp-login.php");
+  // Connexion vers l'accueil, pas le tableau de bord : quitter celui-ci aussitôt
+  // interrompt ses requêtes (test de compression, actualités), que WebKit sous
+  // Linux signale comme erreurs de page, en 0.4.4 comme en 0.4.5 (0.4.5, CI).
+  await page.goto(
+    base + "/wp-login.php?redirect_to=" + encodeURIComponent(base + "/"),
+  );
   await page.locator("#user_login").fill("vt-admin");
   await page.locator("#user_pass").fill("vt-local-only-9410");
   await Promise.all([

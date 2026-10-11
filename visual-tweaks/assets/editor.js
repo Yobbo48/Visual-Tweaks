@@ -120,7 +120,12 @@ function start() {
     diagnostics: () => viewport.diagnostics(selected),
   };
   $("#viewport-diagnostic").addEventListener("click", () => {
-    $("#canvas-diagnostic").hidden = !$("#canvas-diagnostic").hidden;
+    const box = $("#canvas-diagnostic");
+    box.hidden = !box.hidden;
+    // 0.4.5 : sous son propre bouton, même si la barre est plus haute (polices,
+    // retour à la ligne) : le panneau ne recouvre jamais le bouton qui le ferme.
+    if (!box.hidden)
+      box.style.top = `${Math.max(110, $("#viewport-diagnostic").getBoundingClientRect().bottom + 6)}px`;
     showDiagnostic();
   });
   for (const [id, display] of [
