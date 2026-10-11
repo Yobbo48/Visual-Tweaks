@@ -174,8 +174,24 @@ try {
   await page.goto(
     base + "/wp-login.php?redirect_to=" + encodeURIComponent(base + "/"),
   );
-  await page.locator("#user_login").fill("vt-admin");
-  await page.locator("#user_pass").fill("vt-local-only-9410");
+  // WordPress donne le focus à l'identifiant 200 ms après l'affichage, en
+  // sélectionnant son texte : s'il survient pendant la saisie du mot de passe,
+  // celui-ci remplace l'identifiant, le champ requis reste vide et le formulaire
+  // n'est pas envoyé (WebKit, CI n° 7). Saisie après ce focus, puis vérifiée.
+  await page
+    .waitForFunction(() => document.activeElement?.id === "user_login", null, {
+      timeout: 2000,
+    })
+    .catch(() => {});
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.locator("#user_login").fill("vt-admin");
+    await page.locator("#user_pass").fill("vt-local-only-9410");
+    if (
+      (await page.locator("#user_login").inputValue()) === "vt-admin" &&
+      (await page.locator("#user_pass").inputValue()) === "vt-local-only-9410"
+    )
+      break;
+  }
   await Promise.all([
     page.waitForURL((u) => !u.pathname.includes("wp-login")),
     page.locator("#wp-submit").click(),
@@ -262,7 +278,20 @@ try {
   assert.equal(revealed.keyframes, "1");
   assert.ok(revealed.transitions.length && revealed.transitions.every((o) => o === "1"));
   assert.equal(revealed.header, true);
-  await body().evaluate(() => window.scrollTo(0, 0));
+  // Retour en haut : l'en-tête perd « is-scrolled » et sa marge intérieure passe
+  // de 8 à 14 px en 0,3 s, ce qui descend le titre. Le contour, placé sur
+  // événement (sélection, défilement, redimensionnement) en 0.4.4 comme en 0.4.5,
+  // ne suit pas une transition : sélection une fois les transitions terminées.
+  await body().evaluate(async () => {
+    window.scrollTo(0, 0);
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((a) => a.transitionProperty)
+        .map((a) => a.finished.catch(() => {})),
+    );
+  });
   record(
     "Mode allégé : animation d'entrée et révélations (animation et transition) terminées, en-tête suit le défilement : rien n'est figé",
   );

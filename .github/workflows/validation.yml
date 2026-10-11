@@ -113,7 +113,7 @@ jobs:
   reference:
     name: Échecs rejoués sur la référence 0.4.4
     needs: [prerequis, suite]
-    if: always() && needs.suite.result == 'failure'
+    if: ${{ !cancelled() && needs.suite.result == 'failure' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
@@ -178,7 +178,7 @@ jobs:
   mesures:
     name: Mesures 0.4.4 / 0.4.5 (Chromium, un scénario à la fois)
     needs: [prerequis, suite, reference]
-    if: always() && needs.prerequis.result == 'success'
+    if: ${{ !cancelled() && needs.prerequis.result == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     env:
@@ -194,41 +194,49 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
-      - name: Deux sites identiques, extension 0.4.4 et 0.4.5
+      # Exécution n° 4 : campagne complète (docs/validation-0.4.5/ci/mesures-run4.md).
+      # Exécutions n° 5 à 7 : seule la mesure ambiguë (mobile, cache froid) est
+      # répétée ; en n° 7, 0.4.5 reste un peu plus lente après la réponse sur les
+      # deux instances, alors que le visiteur reçoit les mêmes octets (hors numéro
+      # de version). Ici : témoin A/A (deux copies de la 0.4.5) pour mesurer le
+      # bruit du banc, puis 0.4.4 / 0.4.5 avec les deux extensions copiées au même
+      # niveau (plus de différence d'emplacement entre les deux sites).
+      - name: Extensions copiées côte à côte
         run: |
-          mkdir -p ../reference mesures-ci
+          mkdir -p ../reference ../ext/044 ../ext/045 ../ext/045-copie mesures-ci
           git archive "$REFERENCE" visual-tweaks | tar -x -C ../reference
+          cp -r ../reference/visual-tweaks ../ext/044/
+          cp -r visual-tweaks ../ext/045/
+          cp -r visual-tweaks ../ext/045-copie/
+          diff -r ../ext/045/visual-tweaks ../ext/045-copie/visual-tweaks
+          { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
+      - name: Témoin A/A, deux copies de la 0.4.5
+        run: |
           # L'un après l'autre : le second réutilise WordPress déjà téléchargé.
+          start() {
+            port=$1; shift
+            env "$@" VT_PORT=$port nohup node dev/server.mjs > mesures-ci/serveur-temoin-$port.log 2>&1 &
+            for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
+            if ! curl -sf -o /dev/null "http://127.0.0.1:$port/"; then tail -40 mesures-ci/serveur-temoin-$port.log; exit 1; fi
+            echo "$port : $(curl -s "http://127.0.0.1:$port/?feed=rss2" | grep -o '<generator>[^<]*</generator>')" | tee -a mesures-ci/environnement.txt
+          }
+          start 9410 VT_LOCAL=../local-temoin-1 VT_PLUGIN_DIR=../ext/045/visual-tweaks
+          start 9412 VT_LOCAL=../local-temoin-2 VT_PLUGIN_DIR=../ext/045-copie/visual-tweaks
+          node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --libelles "copie 9412,copie 9410" --sortie mesures-ci/temoin --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
+          pkill -f "dev/server.mjs" || true
+          pkill -f "cli.js server" || true
+          sleep 3
+      - name: 0.4.4 / 0.4.5, extensions au même niveau
+        run: |
           start() {
             port=$1; shift
             env "$@" VT_PORT=$port nohup node dev/server.mjs > mesures-ci/serveur-$port.log 2>&1 &
             for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
             if ! curl -sf -o /dev/null "http://127.0.0.1:$port/"; then tail -40 mesures-ci/serveur-$port.log; exit 1; fi
-            echo "$port : $(curl -s "http://127.0.0.1:$port/?feed=rss2" | grep -o '<generator>[^<]*</generator>')" | tee -a mesures-ci/environnement.txt
           }
-          start 9410 VT_LOCAL=../local-045
-          start 9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks
-          { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
-      # Exécution n° 4 : campagne complète (docs/validation-0.4.5/ci/mesures-run4.md).
-      # Ici : seule la mesure ambiguë (mobile, cache froid) est répétée, puis
-      # rejouée avec les sites inversés, pour séparer l'effet de la version de
-      # celui de l'instance de serveur.
-      - name: Répétition ciblée (mobile, cache froid), 0.4.5 sur 9410
-        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci/a --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
-      - name: Sites inversés, 0.4.4 sur 9410
-        run: |
-          pkill -f "dev/server.mjs" || true
-          pkill -f "cli.js server" || true
-          sleep 3
-          start() {
-            port=$1; shift
-            env "$@" VT_PORT=$port nohup node dev/server.mjs > mesures-ci/serveur-inverse-$port.log 2>&1 &
-            for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
-            if ! curl -sf -o /dev/null "http://127.0.0.1:$port/"; then tail -40 mesures-ci/serveur-inverse-$port.log; exit 1; fi
-          }
-          start 9410 VT_LOCAL=../local-044-b VT_PLUGIN_DIR=../reference/visual-tweaks
-          start 9412 VT_LOCAL=../local-045-b
-          node dev/campagne-mesures.mjs --reference http://127.0.0.1:9410 --candidate http://127.0.0.1:9412 --sortie mesures-ci/b --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
+          start 9410 VT_LOCAL=../local-045 VT_PLUGIN_DIR=../ext/045/visual-tweaks
+          start 9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../ext/044/visual-tweaks
+          node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci/versions --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
       - name: Arrêt des serveurs et navigateurs
         if: always()
         run: |

@@ -154,8 +154,24 @@ const frame = () => page.frameLocator("#vt-editor-host iframe");
 
 async function login() {
   await page.goto(`${BASE}/wp-login.php`);
-  await page.locator("#user_login").fill("vt-admin");
-  await page.locator("#user_pass").fill("vt-local-only-9410");
+  // WordPress donne le focus à l'identifiant 200 ms après l'affichage, en
+  // sélectionnant son texte : s'il survient pendant la saisie du mot de passe,
+  // celui-ci remplace l'identifiant, le champ requis reste vide et le formulaire
+  // n'est pas envoyé (WebKit, CI n° 7). Saisie après ce focus, puis vérifiée.
+  await page
+    .waitForFunction(() => document.activeElement?.id === "user_login", null, {
+      timeout: 2000,
+    })
+    .catch(() => {});
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.locator("#user_login").fill("vt-admin");
+    await page.locator("#user_pass").fill("vt-local-only-9410");
+    if (
+      (await page.locator("#user_login").inputValue()) === "vt-admin" &&
+      (await page.locator("#user_pass").inputValue()) === "vt-local-only-9410"
+    )
+      break;
+  }
   await Promise.all([
     page.waitForURL((u) => !u.pathname.includes("wp-login")),
     page.locator("#wp-submit").click(),
