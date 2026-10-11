@@ -19,8 +19,8 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 ## 1. Commit et environnement
 
 **Code testé**
-- Extension (`visual-tweaks/`) : dernière modification au commit `c350cf7`, inchangée jusqu'à `30f06ae` (fin de validation).
-- Archive `artifacts/visual-tweaks-0.4.5.zip` : identique à l'arbre de `30f06ae` (`diff -r`), 49 fichiers.
+- Extension (`visual-tweaks/`) : dernière modification au commit `c350cf7`, inchangée jusqu'à `adf7f35`, commit de la dernière exécution de CI (n° 7).
+- Archive `artifacts/visual-tweaks-0.4.5.zip` : identique à l'arbre de `adf7f35` (`diff -r`), 49 fichiers.
 - Référence 0.4.4 : commit `fbbf381`, identique à `artifacts/visual-tweaks-0.4.4.zip`.
 
 **CI GitHub Actions** (`.github/workflows/validation.yml`)
@@ -210,7 +210,7 @@ Résumé ligne à ligne : `ci/suite-complete-run4.txt`.
 
 | Fichier | Empreinte SHA-256 |
 |---|---|
-| `artifacts/visual-tweaks-0.4.5.zip` (candidate, 49 fichiers, = commit `30f06ae`) | `d0180c25a2d022abad358e560f3d4ba49a1d3408eb6a70e37da19c34de3af75a` |
+| `artifacts/visual-tweaks-0.4.5.zip` (candidate, 49 fichiers, = extension des commits `c350cf7` à `adf7f35`) | `d0180c25a2d022abad358e560f3d4ba49a1d3408eb6a70e37da19c34de3af75a` |
 | `artifacts/visual-tweaks-0.4.4.zip` (= commit `fbbf381`) | `a83100ad96ed4bfe27b05b68c3b0a5eed28e403f911588475dc9fd93e72569ff` |
 | `artifacts/visual-tweaks-0.4.3.zip` (production au 11/10) | `9ccc15d087f5b9eeb944255b8773fc7b79379b9eefcf668a17257246900fb8db` |
 
