@@ -196,12 +196,16 @@ jobs:
         run: |
           mkdir -p ../reference mesures-ci
           git archive "$REFERENCE" visual-tweaks | tar -x -C ../reference
-          nohup node dev/server.mjs > mesures-ci/serveur-045.log 2>&1 &
-          VT_PORT=9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks nohup node dev/server.mjs > mesures-ci/serveur-044.log 2>&1 &
-          for port in 9410 9412; do
+          # L'un après l'autre : le second réutilise WordPress déjà téléchargé.
+          start() {
+            port=$1; shift
+            env "$@" VT_PORT=$port nohup node dev/server.mjs > mesures-ci/serveur-$port.log 2>&1 &
             for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
-            echo "$port : $(curl -s "http://127.0.0.1:$port/?feed=rss2" | grep -o '<generator>[^<]*</generator>') $(curl -s "http://127.0.0.1:$port/?vt-test=animated" | grep -o 'runtime.js?ver=[0-9.]*' | head -1)" | tee -a mesures-ci/environnement.txt
-          done
+            if ! curl -sf -o /dev/null "http://127.0.0.1:$port/"; then tail -40 mesures-ci/serveur-$port.log; exit 1; fi
+            echo "$port : $(curl -s "http://127.0.0.1:$port/?feed=rss2" | grep -o '<generator>[^<]*</generator>')" | tee -a mesures-ci/environnement.txt
+          }
+          start 9410 VT_LOCAL=../local-045
+          start 9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks
           { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
       - name: Campagne
         run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci
