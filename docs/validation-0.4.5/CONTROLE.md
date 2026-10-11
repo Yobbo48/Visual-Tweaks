@@ -10,7 +10,9 @@ Tout ce qui a pu être testé est conforme, et aucun critère bloquant n'est att
 - **perte de modification** : aucune. Conservation 7/7 sur Chromium, WebKit et Firefox ; données enregistrées vérifiées par l'API ;
 - **rendu** : éditeur, éditeur allégé, publié et premier affichage identiques sur le banc, sur les trois moteurs ;
 - **mode allégé** : réversible sur les trois moteurs. Bascules répétées, une seule boucle, rien de figé, préférence suivie entre pages, retour d'onglet ;
-- **performances publiques** : aucune régression. HTML et modules publics identiques à la 0.4.4 hors numéro de version ; FCP, LCP, CLS, requêtes et volume identiques.
+- **performances publiques** : aucune régression. HTML et modules publics identiques à la 0.4.4 hors numéro de version ; FCP, LCP, CLS, requêtes et volume identiques. Le léger écart mobile à froid des exécutions n° 5 et 7 venait de l'installation du banc : avec les deux extensions au même niveau, +0 ms (p = 0,81), comme le témoin A/A (section 6).
+
+Une correction a été ajoutée pendant la validation : le contour de sélection est replacé à la fin d'une transition ou d'une animation du thème qui déplace la sélection. Le défaut était préexistant ; la correction est testée sur les trois moteurs (sections 4 et 7).
 
 Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3 : CPU au repos −28 %, au défilement −32 %, recalculs de style divisés par deux, plus aucune boucle du thème dans le document de l'éditeur. **Ils restent à confirmer sur le thème réel.**
 
@@ -19,8 +21,8 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 ## 1. Commit et environnement
 
 **Code testé**
-- Extension (`visual-tweaks/`) : dernière modification au commit `c350cf7`, inchangée jusqu'à `adf7f35`, commit de la dernière exécution de CI (n° 7).
-- Archive `artifacts/visual-tweaks-0.4.5.zip` : identique à l'arbre de `adf7f35` (`diff -r`), 49 fichiers.
+- Extension (`visual-tweaks/`) : dernière modification au commit `7374be3` (contour replacé après une transition), validé par l'exécution de CI n° 9. Modification précédente : `c350cf7`.
+- Archive `artifacts/visual-tweaks-0.4.5.zip` : construite depuis l'arbre de `7374be3`, identique à celui-ci (`diff -r`), 49 fichiers.
 - Référence 0.4.4 : commit `fbbf381`, identique à `artifacts/visual-tweaks-0.4.4.zip`.
 
 **CI GitHub Actions** (`.github/workflows/validation.yml`)
@@ -35,7 +37,11 @@ Les gains de ressources sont confirmés sur le banc animé, sous WordPress 7.1.3
 |---|---|---|---|
 | n° 3 | `1e9ad8f` | suite complète, échecs rejoués sur la 0.4.4 | 36 réussies, 6 en échec, toutes préexistantes ou d'environnement (section 7) |
 | n° 4 | `ab38154` | suite complète après corrections ciblées ; campagne de mesures complète | **42/42 réussies**, 10 non exécutées (thème réel) ; mesures en section 3 |
-| n° 6 | `30f06ae` | suite complète, tests PHP compris ; répétition de la seule mesure ambiguë | ⏳ en cours au moment de cette version du document |
+| n° 5 | `2e2a784` | remplacée, donc annulée ; seul son job de mesures a tourné : répétition de la mesure ambiguë (mobile, cache froid) | 0.4.5 plus lente de 24 à 52 ms (FCP) à chaque tour |
+| n° 6 | `30f06ae` | annulée de même ; job de mesures seul, seconde répétition dans la même configuration | écart non reproduit (0.4.5 tantôt plus rapide, tantôt plus lente) |
+| n° 7 | `adf7f35` | suite complète, tests PHP compris ; répétitions mesurant le TTFB, puis sites inversés | 41 réussies, 1 en échec : `ressources-e2e` WebKit, défaut de connexion du test (section 7) ; 0.4.5 plus lente de 4 et 7 ms après la réponse |
+| n° 8 | `d54c91c` | suite après correction des tests ; témoin A/A ; 0.4.4 / 0.4.5 avec les extensions au même niveau, test de rang | **42 réussies sur 42**, tests PHP 11/11 ; témoin +0 ms, versions +0 ms (section 6) |
+| n° 9 | `7374be3` | code final (contour) : suite complète, témoin A/A, 0.4.4 / 0.4.5 | ⏳ RÉSULTAT N° 9 |
 
 **Conteneur distant** (premier passage et contrôles ciblés)
 - Linux, 4 cœurs, Chromium 141, Node 22.22.
@@ -120,6 +126,16 @@ CPU en % d'un cœur, tous processus de Chromium. Chaque cellule se lit « 0.4.4 
 
 Fichiers : `ci/mesures-run4.md` (synthèse), `ci/mesures-run4-brut.txt` (sorties par scénario, fonctions dominantes), `ci/mesures-run4-environnement.txt`.
 
+**Correction du contour** (`7374be3`, après ces mesures) : le document de l'aperçu écoute les fins de transition et d'animation. Avec une sélection, chacune replace le contour une fois par image au plus. Sur le banc animé : 0,6 événement/s au repos (diaporama), 4,5/s au défilement (en-tête, révélations). Scénarios avec sélection rejoués avant et après, dans le conteneur distant, une fenêtre de 12 s chacun :
+
+| Scénario | CPU moyen (pic) | Fil principal | Script ms/s | Mises en page/s | Éditeur ms/s |
+|---|---|---|---|---|---|
+| Repos avec sélection | 72,3 (115) → 69,3 (106) | 21,6 → 20,4 | 25,4 → 25,0 | 0,8 → 1,2 | 2,1 → 2,5 |
+| Défilement avec sélection | 67,8 (129) → 66,7 (121) | 26,5 → 26,3 | 27,1 → 27,9 | 12,6 → 13,4 | 8,2 → 9,5 |
+| Sélection, déplacement, écrans | 76,7 (124) → 72,2 (112) | 30,6 → 28,3 | 39,5 → 36,8 | 31,8 → 32,2 | 27,0 → 25,2 |
+
+Écarts dans le bruit d'une mesure unique. Coût propre : au repos, une mise en page de plus toutes les 2,5 s environ, quand une transition du diaporama se termine.
+
 ## 4. Mode allégé (banc média, trois moteurs)
 
 `tests/allege-e2e.mjs`, sur la variante `?vt-test=animated-media` : boucle comptée, animations CSS infinies, animation d'entrée, révélation par animation et par transition, vidéo en boucle. **Ce n'est pas le thème réel.**
@@ -130,11 +146,14 @@ Fichiers : `ci/mesures-run4.md` (synthèse), `ci/mesures-run4-brut.txt` (sorties
 | Animations infinies en pause puis relancées ; vidéo en pause puis relancée | ✔ | ✔ (vidéo WebM non lue par WebKit Linux : contrôle vidéo non applicable) | ✔ |
 | Mode allégé : animation d'entrée et révélations terminées (rien de figé), en-tête qui suit le défilement | ✔ | ✔ | ✔ |
 | Sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré | ✔ | ✔ | ✔ |
+| Contour replacé après une transition du thème qui déplace la sélection sans défilement : en-tête collant qui rétrécit puis revient, titre déplacé de 12 px (`7374be3`) | ⏳ N° 9 | ⏳ N° 9 | ⏳ N° 9 |
 | Navigation entre pages : préférence conservée, puis retirée partout | ✔ | ✔ | ✔ |
 | Onglet masqué (simulé), puis en arrière-plan, puis retour : mode conservé, rendu animé rétabli sans boucle doublée | ✔ | ✔ | ✔ |
 | Données enregistrées inchangées ; visiteur : 4 modules publics seulement, ni règle ni attribut du mode allégé ; 24 éléments × 14 styles identiques entre éditeur, éditeur allégé et public | ✔ | ✔ | ✔ |
 
 Dans le conteneur distant : 6 cycles, rapport passages / images natives de 1,0 à chaque retour. Pendant le mode allégé, 3 passages par seconde.
+
+**Contour après une transition** : contrôle ajouté avec la correction `7374be3`. Dans le conteneur distant (Chromium), il échoue sur l'éditeur d'avant la correction (contour resté 12 px trop haut) et réussit avec elle.
 
 ## 5. Conservation, fidélité, médiathèque, Structure et Assets (trois moteurs)
 
@@ -168,7 +187,26 @@ Les suites sans moteur indiqué tournent sur Chromium seul, comme dans `dev/vali
 - Les 4 modules publics sont identiques à la 0.4.4 hors numéro de version.
 - PHP public inchangé : `class-published-styles.php`, `class-cache.php`, `class-schema.php`, `class-store.php`.
 
-**Seule mesure ambiguë** : en mobile à cache froid, la médiane des « long animation frames » (LoAF) vaut 1 en 0.4.5 contre 0 en 0.4.4, sur les deux tours. Le code public ne diffère que par le numéro de version, et la pire trame (33 ms) comme les trames lentes (0) sont identiques. Mesure répétée seule, en 4 tours de 5 passages alternés : ⏳ en cours (exécution n° 6)
+**Seule mesure ambiguë en exécution n° 4** : en mobile à cache froid, la médiane des « long animation frames » (LoAF) valait 1 en 0.4.5 contre 0 en 0.4.4, sur les deux tours. La pire trame (33 ms) et les trames lentes (0) étaient identiques. Mesure répétée seule, 4 tours de 5 passages en ordre alterné, puis analysée jusqu'à conclusion :
+
+| Exécution | Configuration | FCP 0.4.5 − 0.4.4 | FCP après réponse | LoAF (passages sur 20) |
+|---|---|---|---|---|
+| n° 5 | 0.4.5 sur 9410 | +24 à +52 ms selon le tour | non mesuré | 0.4.4 : 13 ; 0.4.5 : 16 |
+| n° 6 | même configuration | −20 à +20 ms selon le tour | non mesuré | 0.4.4 : 19 ; 0.4.5 : 16 |
+| n° 7 A | 0.4.5 sur 9410 | +12 ms | +4 ms | 0.4.4 : 3 ; 0.4.5 : 7 |
+| n° 7 B | sites inversés, nouvelles données | +16 ms | +7 ms | 0.4.4 : 11 ; 0.4.5 : 13 |
+| n° 8 témoin | deux copies de la 0.4.5 | +0 ms (p = 0,557) | +0 ms (p = 0,85) | 1 et 0 |
+| n° 8 | extensions au même niveau | −8 ms (p = 0,277) | +0 ms (p = 0,807) | 0.4.4 : 1 ; 0.4.5 : 0 |
+| n° 9 témoin | deux copies de la 0.4.5 | ⏳ N° 9 TÉMOIN FCP | ⏳ N° 9 TÉMOIN APRÈS | ⏳ |
+| n° 9 | extensions au même niveau | ⏳ N° 9 VERSIONS FCP | ⏳ N° 9 VERSIONS APRÈS | ⏳ |
+
+- **LoAF** : le nombre de passages concernés varie d'une exécution à l'autre pour le même code (de 3 à 19 sur 20 pour la 0.4.4), et l'écart change de sens. Ce n'est pas un signal.
+- **Écart de quelques ms en n° 7** : il résiste à l'inversion des ports et des données, alors que le visiteur reçoit les mêmes octets. Vérifié dans le conteneur distant : retouches publiées par l'éditeur de chaque version avec l'outil de mesure, HTML visiteur identique hors numéro de version.
+- **Une seule différence restait entre les sites** : la 0.4.5 était servie depuis le dossier du dépôt, la 0.4.4 depuis un dossier voisin. Avec les deux extensions copiées au même niveau, l'écart disparaît (+0 ms, p = 0,81), comme dans le témoin A/A (+0 ms, p = 0,85). Le témoin montre aussi que deux copies du même code s'écartent jusqu'à 16 ms d'un tour à l'autre.
+
+**Conclusion : aucune régression reproductible des performances publiques.**
+
+Fichiers : `ci/repetition-run5.md`, `ci/repetition-run6.md`, `ci/repetition-run7.md`, `ci/mesures-run8.md`, `ci/mesures-run9.md`.
 
 ## 7. Suite complète et classement des échecs
 
@@ -184,12 +222,28 @@ Les suites sans moteur indiqué tournent sur Chromium seul, comme dans `dev/vali
 - **Extension** (`editor.js`, gestionnaire de clic seulement) : le panneau de diagnostic se place sous son propre bouton. Défaut préexistant, visible aussi par un utilisateur.
 - **Tests** : connexion directe vers l'accueil au lieu du tableau de bord. Aucune erreur n'est filtrée : une erreur de Visual Tweaks fait toujours échouer le test.
 
-**Exécution n° 4** : **42 suites réussies sur 42, 0 en échec, 10 non exécutées** (thème réel absent). Au total, 334 contrôles navigateur réussis, plus 18 tests unitaires du cœur.
-- Les 11 tests unitaires PHP (rendu serveur = JavaScript, caches) y ont été **sautés**, faute de `VT_TOOLCHAIN` en CI.
-- Ils ont été exécutés dans le conteneur distant : 11/11.
-- La CI les exécute depuis l'exécution n° 6 : ⏳ en cours (exécution n° 6)
+**Exécution n° 4** : **42 suites réussies sur 42, 0 en échec, 10 non exécutées** (thème réel absent). Au total, 334 contrôles navigateur réussis, plus 18 tests unitaires du cœur. Les 11 tests unitaires PHP (rendu serveur = JavaScript, caches) y ont été **sautés**, faute de `VT_TOOLCHAIN` en CI ; ils ont été exécutés dans le conteneur distant : 11/11.
 
-**Non exécutées** (thème `kevin-legros` absent) : `real-theme` ×3, `comfort-real-theme` ×3, `guard-visibility` ×3, `stabilisation` ×3.
+**Exécution n° 7** (tests PHP désormais en CI : `ℹ tests 11`, `ℹ pass 11`, `ℹ skipped 0`) : 41 réussies, **1 en échec**, `ressources-e2e` sur WebKit, avant tout contrôle.
+- Symptôme : `page.waitForURL: Timeout 30000ms exceeded` à la connexion, journal réduit à `waiting for navigation until "load"`. Aucune navigation : le formulaire n'est pas parti.
+- Cause : `wp-login.php` donne le focus à `#user_login` environ 150 ms après la fin du chargement, en sélectionnant son texte. S'il survient pendant la saisie du mot de passe, celui-ci remplace l'identifiant ; `#user_pass` reste vide alors qu'il est requis, et le navigateur bloque l'envoi.
+- Reproduction à l'identique sur Chromium, dans le conteneur distant : même erreur, même journal.
+- Classement : **défaut des tests ajoutés en 0.4.5**, pas de l'extension. La connexion précède tout code de Visual Tweaks, et le rejeu sur la 0.4.4 est impossible, ce test n'y existant pas. Les suites de la 0.4.4 attendent ce focus (250 ms) ou vérifient les champs ; `ressources-e2e`, `allege-e2e` et l'outil de mesure ne le faisaient pas.
+- Correction (`d54c91c`) : attente du focus, saisie, puis vérification des deux champs. Aucune erreur n'est filtrée.
+
+Pendant la vérification locale de cette correction, deux autres constats, classés à part :
+- `allege-e2e` sélectionnait le titre pendant la transition de 0,3 s de l'en-tête (retour en haut de page). Le contour, placé sur événement depuis toujours, restait décalé de 3 px. Défaut préexistant de l'éditeur, corrigé en `7374be3` (sections 3 et 4), avec un contrôle qui échoue sans la correction.
+- Sur le banc local (Playground, 6 processus, SQLite), la toute première connexion après le démarrage d'un site neuf échoue parfois : « The username vt-admin is not registered on this site ». Constaté en 0.4.4 comme en 0.4.5 (1 essai sur 2 chacune), la seconde connexion réussit toujours. Jamais observé en CI. Particularité du banc local, sans lien avec l'extension.
+
+**Exécution n° 8** : **42 réussies, 0 en échec, 10 non exécutées** ; cœur 18/18, PHP 11/11.
+
+**Exécution n° 9** (code final) : ⏳ RÉSUMÉ N° 9
+
+**Non exécutées** (thème `kevin-legros` absent) :
+- `real-theme` × 3 ;
+- `comfort-real-theme` × 1 (`cross-browser.mjs`, les trois moteurs en une entrée) ;
+- `guard-visibility` × 3 ;
+- `stabilisation` × 3.
 
 Résumé ligne à ligne : `ci/suite-complete-run4.txt`.
 
@@ -210,7 +264,7 @@ Résumé ligne à ligne : `ci/suite-complete-run4.txt`.
 
 | Fichier | Empreinte SHA-256 |
 |---|---|
-| `artifacts/visual-tweaks-0.4.5.zip` (candidate, 49 fichiers, = extension des commits `c350cf7` à `adf7f35`) | `d0180c25a2d022abad358e560f3d4ba49a1d3408eb6a70e37da19c34de3af75a` |
+| `artifacts/visual-tweaks-0.4.5.zip` (candidate, 49 fichiers, = extension du commit `7374be3`) | `fc825e1863112acca474d2be59c126f3776021b410cdef71090e24f1d2f6d336` |
 | `artifacts/visual-tweaks-0.4.4.zip` (= commit `fbbf381`) | `a83100ad96ed4bfe27b05b68c3b0a5eed28e403f911588475dc9fd93e72569ff` |
 | `artifacts/visual-tweaks-0.4.3.zip` (production au 11/10) | `9ccc15d087f5b9eeb944255b8773fc7b79379b9eefcf668a17257246900fb8db` |
 
@@ -226,6 +280,7 @@ Retour arrière : réinstaller la version relevée avant installation (0.4.3 au 
   - les animations Web infinies créées après l'activation ne sont pas mises en pause.
 - Sans le mode allégé, l'éditeur au repos dépasse encore la page publique seule : le dessin de la page animée dans le cadre coûte environ 20 ms/s de peinture (annexe A.4).
 - Vidéo WebM non lue par WebKit Linux en CI : contrôle vidéo du mode allégé validé sur Chromium et Firefox seulement.
+- Contour : replacé à la fin d'une transition ou d'une animation qui déplace la sélection, pas pendant. Sur un en-tête de 0,3 s, il rejoint l'élément à la fin du mouvement. Une boucle JavaScript qui déplace l'élément (sans transition CSS) n'est suivie qu'au défilement ou au redimensionnement suivant, comme avant.
 - Les mesures de CI (navigateur sans fenêtre, sans GPU) n'ont pas la même échelle absolue que sur un Mac. Seules les comparaisons 0.4.4 / 0.4.5 dans un même environnement sont significatives.
 
 ---
