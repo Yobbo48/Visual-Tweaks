@@ -21,6 +21,13 @@ const option = (name, fallback) => {
 const REF = option("reference", "http://127.0.0.1:9412");
 const CAND = option("candidate", "http://127.0.0.1:9410");
 const OUT = option("sortie", "mesures-ci");
+// Répétition ciblée d'une mesure ambiguë : --sans-ressources, --profils mobile,
+// --caches froid, --tours 4, --passages 5 (défauts : tout, 2 tours de 3).
+const SANS_RESSOURCES = args.includes("--sans-ressources");
+const PROFILS = option("profils", "desktop,mobile").split(",");
+const CACHES = option("caches", "froid,chaud").split(",");
+const TOURS = Number(option("tours", 2));
+const PASSAGES = option("passages", "3");
 mkdirSync(OUT, { recursive: true });
 const node = (file, list) => {
   console.log(`\n$ node ${file} ${list.join(" ")}`);
@@ -42,7 +49,7 @@ const SCENARIOS = [
   ["masque-retour", 10, true],
 ];
 const runs = [];
-for (const [scenario, duree, editor] of SCENARIOS) {
+for (const [scenario, duree, editor] of SANS_RESSOURCES ? [] : SCENARIOS) {
   const variants = [
     ["0.4.4", REF, []],
     ["0.4.5", CAND, []],
@@ -64,10 +71,10 @@ for (const [scenario, duree, editor] of SCENARIOS) {
   }
 }
 const PUBLIC = [];
-for (const profil of ["desktop", "mobile"])
-  for (const cache of ["froid", "chaud"])
-    for (const tour of [1, 2]) {
-      const order = tour === 1 ? [["0.4.4", REF], ["0.4.5", CAND]] : [["0.4.5", CAND], ["0.4.4", REF]];
+for (const profil of PROFILS)
+  for (const cache of CACHES)
+    for (let tour = 1; tour <= TOURS; tour++) {
+      const order = tour % 2 ? [["0.4.4", REF], ["0.4.5", CAND]] : [["0.4.5", CAND], ["0.4.4", REF]];
       for (const [version, base] of order) {
         const file = `${OUT}/public-${profil}-${cache}-${version}-t${tour}.json`;
         const ok = node("dev/mesure-publique.mjs", [
@@ -78,7 +85,7 @@ for (const profil of ["desktop", "mobile"])
           "--cache",
           cache,
           "--passages",
-          "3",
+          PASSAGES,
           "--sortie",
           file,
         ]);
@@ -137,7 +144,7 @@ lines.push(
   "",
   "## Performances publiques (médianes de 3 passages)",
   "",
-  "| Profil | Cache | Tour | Version | FCP | LCP | CLS | longues tâches | LoAF | trames lentes chargement / défilement | pire trame | requêtes | Ko | modules VT |",
+  "| Profil | Cache | Tour | Version | FCP | LCP | CLS | longues tâches | LoAF (médiane ; par passage) | trames lentes chargement / défilement | pire trame | requêtes | Ko | modules VT |",
   "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
 );
 for (const run of PUBLIC) {
@@ -149,9 +156,26 @@ for (const run of PUBLIC) {
   const r = d.resume;
   json.publiques.push({ ...run, ...r });
   lines.push(
-    `| ${run.profil} | ${run.cache} | ${run.tour} | ${run.version} | ${r.fcp} | ${r.lcp} | ${r.cls} | ${r.longues} | ${r.loafs} | ${r.lentesChargement} / ${r.lentesDefilement} | ${r.pireTrame} | ${r.requetes} | ${r.ko} | ${r.modulesVT.join(", ")} |`,
+    `| ${run.profil} | ${run.cache} | ${run.tour} | ${run.version} | ${r.fcp} | ${r.lcp} | ${r.cls} | ${r.longues} | ${r.loafs} ; ${d.passages.map((p) => p.loafs).join(" ")} | ${r.lentesChargement} / ${r.lentesDefilement} | ${r.pireTrame} | ${r.requetes} | ${r.ko} | ${r.modulesVT.join(", ")} |`,
   );
 }
+// Totaux par version : passages avec au moins un long animation frame.
+const totals = {};
+for (const run of PUBLIC) {
+  const d = read(run.file);
+  if (!d) continue;
+  const key = `${run.profil} ${run.cache} ${run.version}`;
+  totals[key] ||= { passages: 0, avecLoaf: 0, loafs: 0 };
+  for (const p of d.passages) {
+    totals[key].passages++;
+    totals[key].loafs += p.loafs;
+    if (p.loafs) totals[key].avecLoaf++;
+  }
+}
+lines.push("", "Long animation frames, tous tours confondus :", "");
+for (const [k, t] of Object.entries(totals))
+  lines.push(`- ${k} : ${t.avecLoaf} passage(s) sur ${t.passages} avec au moins un LoAF (${t.loafs} au total)`);
+json.loafs = totals;
 writeFileSync(`${OUT}/resume.md`, lines.join("\n") + "\n");
 writeFileSync(`${OUT}/resume.json`, JSON.stringify(json, null, 2));
 console.log(lines.join("\n"));

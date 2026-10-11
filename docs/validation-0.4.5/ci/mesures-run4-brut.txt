@@ -1,0 +1,426 @@
+$ node dev/mesure-ressources.mjs preparer --base http://127.0.0.1:9412
+$ node dev/mesure-ressources.mjs preparer --base http://127.0.0.1:9410
+$ node dev/mesure-ressources.mjs public --base http://127.0.0.1:9412 --duree 12 --sortie mesures-ci/public-0-4-4.json
+public — 12 s | CPU moyen 23.2 % (rendu 13.7, GPU 9.5, navigateur 0.1) | pic 28 %
+fil principal occupé 3.8 % | script 5.3 ms/s | style 120.3/s (9.8 ms/s) | mise en page 0.8/s (0.1 ms/s)
+profil (ms) : {"rendu natif":399.5,"inactif":11481,"thème":87.2,"sonde de mesure":31.7,"ramasse-miettes":2.2}
+     50.4 ms  thème · getBoundingClientRect :0
+     24.6 ms  thème · (anonyme) animated.js:27
+      7.1 ms  thème · setProperty :0
+      4.4 ms  thème · tick animated.js:22
+      0.6 ms  thème · (anonyme) animated.js:56
+récurrent /s : {"haut":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":null}
+mémoire : {"tasJSMo":1,"noeuds":202,"ecouteurs":3,"documents":2,"cadres":2}
+$ node dev/mesure-ressources.mjs public --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/public-0-4-5.json
+public — 12 s | CPU moyen 23 % (rendu 13.5, GPU 9.4, navigateur 0.1) | pic 27 %
+fil principal occupé 3.7 % | script 5.3 ms/s | style 120.2/s (9.8 ms/s) | mise en page 0.8/s (0.1 ms/s)
+profil (ms) : {"rendu natif":377.3,"inactif":11493.2,"thème":95.2,"sonde de mesure":34.8,"ramasse-miettes":1.7}
+     60.4 ms  thème · getBoundingClientRect :0
+     26.0 ms  thème · (anonyme) animated.js:27
+      5.8 ms  thème · tick animated.js:22
+      3.1 ms  thème · setProperty :0
+récurrent /s : {"haut":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":null}
+mémoire : {"tasJSMo":1,"noeuds":202,"ecouteurs":3,"documents":2,"cadres":2}
+$ node dev/mesure-ressources.mjs public-defilement --base http://127.0.0.1:9412 --duree 12 --sortie mesures-ci/public-defilement-0-4-4.json
+public-defilement — 12 s (90 crans) | CPU moyen 16.7 % (rendu 11.9, GPU 4.3, navigateur 0.5) | pic 33 %
+fil principal occupé 4.3 % | script 4.9 ms/s | style 120.9/s (9.8 ms/s) | mise en page 4.5/s (0.3 ms/s)
+profil (ms) : {"rendu natif":398.6,"inactif":11481.8,"autre":2.3,"thème":96.5,"sonde de mesure":22.1,"ramasse-miettes":6.2,"WordPress":0.6}
+     60.7 ms  thème · getBoundingClientRect :0
+     15.7 ms  thème · (anonyme) animated.js:27
+     10.5 ms  thème · addEventListener.passive animated.js:39
+      5.8 ms  thème · tick animated.js:22
+      3.9 ms  thème · setProperty :0
+récurrent /s : {"haut":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":null}
+mémoire : {"tasJSMo":1.66,"noeuds":202,"ecouteurs":16,"documents":2,"cadres":2}
+$ node dev/mesure-ressources.mjs public-defilement --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/public-defilement-0-4-5.json
+public-defilement — 12 s (90 crans) | CPU moyen 17.1 % (rendu 12.1, GPU 4.5, navigateur 0.6) | pic 34 %
+fil principal occupé 4.2 % | script 4.8 ms/s | style 120.5/s (9.6 ms/s) | mise en page 4.5/s (0.3 ms/s)
+profil (ms) : {"rendu natif":407.6,"inactif":11508.7,"autre":2.8,"thème":84.9,"sonde de mesure":22.4,"ramasse-miettes":7.4}
+     49.5 ms  thème · getBoundingClientRect :0
+     18.6 ms  thème · (anonyme) animated.js:27
+     11.6 ms  thème · addEventListener.passive animated.js:39
+      2.9 ms  thème · tick animated.js:22
+      1.8 ms  thème · setProperty :0
+      0.6 ms  thème · append :0
+récurrent /s : {"haut":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":null}
+mémoire : {"tasJSMo":1.66,"noeuds":202,"ecouteurs":16,"documents":2,"cadres":2}
+$ node dev/mesure-ressources.mjs repos --base http://127.0.0.1:9412 --duree 15 --sortie mesures-ci/repos-0-4-4.json
+repos — 15 s | CPU moyen 32.3 % (rendu 23.1, GPU 9.1, navigateur 0.1) | pic 69.9 %
+fil principal occupé 9.6 % | script 10.7 ms/s | style 240.8/s (16.9 ms/s) | mise en page 1.8/s (0.2 ms/s)
+profil (ms) : {"rendu natif":827.7,"thème":268.8,"inactif":13819,"sonde de mesure":74.8,"éditeur":6.9,"ramasse-miettes":5.3}
+    208.5 ms  thème · getBoundingClientRect :0
+     44.8 ms  thème · (anonyme) animated.js:27
+     10.9 ms  thème · tick animated.js:22
+      4.6 ms  éditeur · (anonyme) navigation.js:42
+      3.5 ms  thème · setProperty :0
+      2.3 ms  éditeur · clearTimeout :0
+      0.6 ms  thème · append :0
+      0.6 ms  thème · (anonyme) animated.js:56
+récurrent /s : {"haut":{"raf":{"theme":60.2},"timers":{"theme":0.7},"mutations":{"wordpress":0.3},"records":{"wordpress":0.5},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":60.8,"wordpress":0.3},"records":{"editeur":362.4,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":3.81,"noeuds":1696,"ecouteurs":416,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs repos --base http://127.0.0.1:9410 --duree 15 --sortie mesures-ci/repos-0-4-5.json
+repos — 15 s | CPU moyen 23.1 % (rendu 16.4, GPU 6.7, navigateur 0) | pic 54.9 %
+fil principal occupé 7.2 % | script 6.3 ms/s | style 120.5/s (9.4 ms/s) | mise en page 0.9/s (0.1 ms/s)
+profil (ms) : {"rendu natif":634.1,"éditeur":3.6,"inactif":14230.6,"sonde de mesure":35.6,"thème":98.7,"autre":0.6}
+     63.7 ms  thème · getBoundingClientRect :0
+     26.9 ms  thème · (anonyme) animated.js:27
+      4.6 ms  thème · tick animated.js:22
+      2.9 ms  thème · setProperty :0
+      1.9 ms  éditeur · (anonyme) navigation.js:74
+      0.6 ms  éditeur · updateMutations navigation.js:149
+      0.6 ms  éditeur · replaceChildren :0
+      0.6 ms  éditeur · addRow navigation.js:402
+      0.6 ms  thème · (anonyme) animated.js:56
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":60.8,"wordpress":0.3},"records":{"editeur":362.4,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":3.77,"noeuds":1402,"ecouteurs":374,"documents":8,"cadres":8}
+$ node dev/mesure-ressources.mjs repos --base http://127.0.0.1:9410 --duree 15 --sortie mesures-ci/repos-0-4-5-all-g-.json --leger
+repos (allégé) — 15 s | CPU moyen 7.1 % (rendu 6.1, GPU 1.1, navigateur 0) | pic 38.9 %
+fil principal occupé 2.6 % | script 0.9 ms/s | style 7.9/s (0.5 ms/s) | mise en page 0.9/s (0.1 ms/s)
+profil (ms) : {"rendu natif":44,"sonde de mesure":4.5,"inactif":14945.1,"éditeur":3.9,"thème":4.5,"WordPress":0.6}
+      2.8 ms  thème · (anonyme) animated.js:27
+      0.6 ms  éditeur · readVisibility navigation.js:483
+      0.6 ms  éditeur · updateMutations navigation.js:149
+      0.6 ms  thème · tick animated.js:22
+      0.6 ms  éditeur · updateBranches navigation.js:206
+      0.6 ms  éditeur · requestAnimationFrame light-mode.js:55
+      0.6 ms  thème · remove :0
+      0.6 ms  éditeur · visible navigation.js:130
+      0.6 ms  thème · getBoundingClientRect :0
+      0.5 ms  éditeur · flush light-mode.js:48
+      0.5 ms  éditeur · structureInventory assets.js:189
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.9},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":3.9},"timers":{"editeur":3.9,"theme":0.6},"mutations":{"editeur":4.5,"wordpress":0.3},"records":{"editeur":24.8,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":4.35,"noeuds":1407,"ecouteurs":388,"documents":8,"cadres":8}
+$ node dev/mesure-ressources.mjs repos-selection --base http://127.0.0.1:9412 --duree 12 --sortie mesures-ci/repos-selection-0-4-4.json
+repos-selection — 12 s | CPU moyen 33.6 % (rendu 24.2, GPU 9.4, navigateur 0) | pic 69.9 %
+fil principal occupé 11.1 % | script 11.1 ms/s | style 241/s (17.3 ms/s) | mise en page 1.7/s (0.2 ms/s)
+profil (ms) : {"rendu natif":737.4,"thème":233.4,"inactif":10975.5,"sonde de mesure":52.1,"éditeur":4,"WordPress":0.6}
+    178.9 ms  thème · getBoundingClientRect :0
+     39.5 ms  thème · (anonyme) animated.js:27
+      7.5 ms  thème · tick animated.js:22
+      7.4 ms  thème · setProperty :0
+      4.0 ms  éditeur · (anonyme) navigation.js:42
+récurrent /s : {"haut":{"raf":{"theme":60.2},"timers":{"theme":0.7},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":60.8,"wordpress":0.2},"records":{"editeur":362.6,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.19,"noeuds":3153,"ecouteurs":638,"documents":10,"cadres":10}
+$ node dev/mesure-ressources.mjs repos-selection --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/repos-selection-0-4-5.json
+repos-selection — 12 s | CPU moyen 24.3 % (rendu 18, GPU 6.2, navigateur 0.2) | pic 60 %
+fil principal occupé 9 % | script 7 ms/s | style 120.5/s (9.6 ms/s) | mise en page 0.8/s (0.1 ms/s)
+profil (ms) : {"rendu natif":599.8,"thème":84.9,"inactif":11276.6,"sonde de mesure":27.6,"éditeur":9.3,"WordPress":0.6,"runtime public":3.4}
+     48.1 ms  thème · getBoundingClientRect :0
+     29.3 ms  thème · (anonyme) animated.js:27
+      4.6 ms  thème · tick animated.js:22
+      4.2 ms  éditeur · (anonyme) navigation.js:74
+      2.9 ms  thème · setProperty :0
+      2.9 ms  éditeur · assetInventory assets.js:109
+      1.2 ms  éditeur · updateMutations navigation.js:149
+      1.1 ms  éditeur · rebuildBranch navigation.js:225
+      1.1 ms  runtime public · backgroundSource selection.js:49
+      0.6 ms  runtime public · closest :0
+      0.6 ms  runtime public · selectionTarget selection.js:40
+      0.6 ms  runtime public · hasAttribute :0
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":60.8,"wordpress":0.2},"records":{"editeur":362.6,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.15,"noeuds":2859,"ecouteurs":596,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs repos-selection --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/repos-selection-0-4-5-all-g-.json --leger
+repos-selection (allégé) — 12 s | CPU moyen 8.2 % (rendu 7.1, GPU 1, navigateur 0.1) | pic 38.9 %
+fil principal occupé 3.3 % | script 1.6 ms/s | style 11.3/s (0.6 ms/s) | mise en page 0.8/s (0.1 ms/s)
+profil (ms) : {"rendu natif":42.2,"inactif":11942.1,"runtime public":6.9,"éditeur":3.4,"thème":3.4,"sonde de mesure":4}
+      2.8 ms  runtime public · backgroundSource selection.js:49
+      2.3 ms  thème · (anonyme) animated.js:27
+      1.2 ms  runtime public · hasAttribute :0
+      1.2 ms  runtime public · getComputedStyle :0
+      1.1 ms  runtime public · closest :0
+      0.6 ms  éditeur · (anonyme) navigation.js:74
+      0.6 ms  éditeur · assetInventory assets.js:109
+      0.6 ms  éditeur · el navigation.js:275
+      0.6 ms  thème · tick animated.js:22
+      0.6 ms  éditeur · updateMutations navigation.js:149
+      0.6 ms  éditeur · (anonyme) navigation.js:125
+      0.6 ms  éditeur · getComputedStyle :0
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":4},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":4},"timers":{"editeur":4,"theme":0.6},"mutations":{"editeur":4.6,"wordpress":0.2},"records":{"editeur":25.2,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.16,"noeuds":2864,"ecouteurs":597,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs defilement --base http://127.0.0.1:9412 --duree 12 --sortie mesures-ci/defilement-0-4-4.json
+defilement — 12 s (90 crans) | CPU moyen 33.3 % (rendu 25.7, GPU 6.9, navigateur 0.7) | pic 78 %
+fil principal occupé 13 % | script 12.7 ms/s | style 262.6/s (17.7 ms/s) | mise en page 19.6/s (1.3 ms/s)
+profil (ms) : {"rendu natif":916.8,"thème":202.1,"autre":3,"inactif":10791,"sonde de mesure":67.7,"éditeur":41}
+    146.1 ms  thème · getBoundingClientRect :0
+     30.8 ms  thème · (anonyme) animated.js:27
+     17.7 ms  éditeur · getBoundingClientRect :0
+     14.9 ms  thème · addEventListener.passive animated.js:39
+      6.9 ms  thème · tick animated.js:22
+      5.7 ms  éditeur · updateOutline editor.js:629
+      3.4 ms  éditeur · matrixFor geometry.js:31
+      2.9 ms  thème · setProperty :0
+      2.3 ms  éditeur · dimension geometry.js:4
+      2.3 ms  éditeur · position contextual-toolbar.js:59
+      1.7 ms  éditeur · (anonyme) navigation.js:42
+      1.7 ms  éditeur · multiply :0
+récurrent /s : {"haut":{"raf":{"theme":60.2,"editeur":9},"timers":{"theme":0.7},"mutations":{"wordpress":0.2},"records":{"wordpress":0.5},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":61.4,"wordpress":0.2},"records":{"editeur":365.3,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.14,"noeuds":2879,"ecouteurs":618,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs defilement --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/defilement-0-4-5.json
+defilement — 12 s (90 crans) | CPU moyen 22.5 % (rendu 18.2, GPU 3.7, navigateur 0.7) | pic 69.9 %
+fil principal occupé 10.7 % | script 8.1 ms/s | style 145.5/s (11 ms/s) | mise en page 13.2/s (1.1 ms/s)
+profil (ms) : {"rendu natif":780,"autre":3.6,"sonde de mesure":31.7,"inactif":11085.6,"thème":85.8,"éditeur":38.3}
+     48.5 ms  thème · getBoundingClientRect :0
+     16.9 ms  thème · (anonyme) animated.js:27
+     14.2 ms  thème · addEventListener.passive animated.js:39
+     13.7 ms  éditeur · getBoundingClientRect :0
+      7.4 ms  éditeur · matrixFor geometry.js:31
+      4.5 ms  thème · tick animated.js:22
+      3.4 ms  éditeur · updateOutline editor.js:669
+      2.8 ms  éditeur · dimension geometry.js:4
+      2.3 ms  éditeur · dimensionsOf geometry.js:1
+      1.7 ms  éditeur · visualQuad geometry.js:89
+      1.7 ms  thème · setProperty :0
+      1.3 ms  éditeur · (anonyme) navigation.js:74
+récurrent /s : {"haut":{"raf":{"editeur":8.2},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"editeur":61.4,"wordpress":0.2},"records":{"editeur":365.2,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.07,"noeuds":2585,"ecouteurs":576,"documents":8,"cadres":8}
+$ node dev/mesure-ressources.mjs defilement --base http://127.0.0.1:9410 --duree 12 --sortie mesures-ci/defilement-0-4-5-all-g-.json --leger
+defilement (allégé) — 12 s (109 crans) | CPU moyen 17.6 % (rendu 12.7, GPU 4.2, navigateur 0.7) | pic 60 %
+fil principal occupé 5.9 % | script 3.8 ms/s | style 69.8/s (2.7 ms/s) | mise en page 16.8/s (1.3 ms/s)
+profil (ms) : {"rendu natif":319.5,"sonde de mesure":12,"autre":1.7,"inactif":11637.5,"thème":11.6,"éditeur":25.8,"runtime public":1.1}
+      6.3 ms  thème · addEventListener.passive animated.js:39
+      5.2 ms  éditeur · matrixFor geometry.js:31
+      4.0 ms  éditeur · updateOutline editor.js:669
+      3.5 ms  éditeur · getBoundingClientRect :0
+      1.8 ms  thème · getBoundingClientRect :0
+      1.7 ms  éditeur · dimension geometry.js:4
+      1.2 ms  éditeur · querySelector :0
+      1.1 ms  éditeur · position contextual-toolbar.js:63
+      1.1 ms  éditeur · (anonyme) geometry.js:99
+      1.1 ms  thème · (anonyme) animated.js:27
+      1.1 ms  éditeur · multiply :0
+      1.1 ms  runtime public · canEditText selection.js:64
+récurrent /s : {"haut":{"raf":{"editeur":10.1},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":3.8},"timers":{"editeur":3.8,"theme":0.6},"mutations":{"editeur":5.2,"wordpress":0.2},"records":{"editeur":26.1,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.1,"noeuds":2590,"ecouteurs":577,"documents":8,"cadres":8}
+$ node dev/mesure-ressources.mjs interactions --base http://127.0.0.1:9412 --duree 15 --sortie mesures-ci/interactions-0-4-4.json
+interactions — 15 s (38 crans) | CPU moyen 33.9 % (rendu 26.1, GPU 7.1, navigateur 0.8) | pic 73 %
+fil principal occupé 13 % | script 16.1 ms/s | style 271.3/s (20.2 ms/s) | mise en page 28.2/s (2.5 ms/s)
+profil (ms) : {"rendu natif":1148.9,"sonde de mesure":76.7,"thème":266.8,"inactif":13332.3,"autre":33.4,"éditeur":126.8,"ramasse-miettes":7,"runtime public":8.7,"WordPress":1.2}
+    193.8 ms  thème · getBoundingClientRect :0
+     49.2 ms  thème · (anonyme) animated.js:27
+     31.9 ms  éditeur · getBoundingClientRect :0
+     13.5 ms  thème · addEventListener.passive animated.js:39
+     11.4 ms  éditeur · getPropertyValue :0
+      8.2 ms  runtime public · backgroundSource selection.js:49
+      6.3 ms  éditeur · show navigation.js:122
+      6.2 ms  thème · tick animated.js:22
+      6.2 ms  éditeur · (anonyme) navigation.js:42
+      6.2 ms  éditeur · append :0
+      4.6 ms  éditeur · updateOutline editor.js:629
+      4.5 ms  éditeur · clearTimeout :0
+récurrent /s : {"haut":{"raf":{"theme":60.1,"editeur":5.6},"timers":{"theme":0.7},"mutations":{"wordpress":0.3},"records":{"wordpress":0.5},"longTasks":0},"cadre":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"editeur":61.2,"wordpress":0.3},"records":{"editeur":363.9,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.59,"noeuds":3171,"ecouteurs":638,"documents":10,"cadres":10}
+$ node dev/mesure-ressources.mjs interactions --base http://127.0.0.1:9410 --duree 15 --sortie mesures-ci/interactions-0-4-5.json
+interactions — 15 s (38 crans) | CPU moyen 21.9 % (rendu 17.8, GPU 3.3, navigateur 0.8) | pic 64 %
+fil principal occupé 10.3 % | script 10.9 ms/s | style 149.1/s (11.9 ms/s) | mise en page 22.1/s (2.2 ms/s)
+profil (ms) : {"rendu natif":937.2,"inactif":13754.9,"autre":30.7,"thème":112.4,"sonde de mesure":41.2,"éditeur":108.3,"runtime public":11.6,"WordPress":0.6,"ramasse-miettes":4.6}
+     71.5 ms  thème · getBoundingClientRect :0
+     26.5 ms  thème · (anonyme) animated.js:27
+     19.3 ms  éditeur · getBoundingClientRect :0
+     14.1 ms  éditeur · getPropertyValue :0
+      9.3 ms  thème · addEventListener.passive animated.js:39
+      8.8 ms  runtime public · backgroundSource selection.js:49
+      5.8 ms  éditeur · show navigation.js:259
+      4.6 ms  éditeur · dimension geometry.js:4
+      4.5 ms  éditeur · createElement :0
+      4.3 ms  éditeur · (anonyme) navigation.js:74
+      4.0 ms  éditeur · updateOutline editor.js:669
+      3.4 ms  éditeur · getClientRects :0
+récurrent /s : {"haut":{"raf":{"editeur":3.3},"timers":{"editeur":3.7},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.1},"timers":{"theme":0.6},"mutations":{"editeur":61.2,"wordpress":0.3},"records":{"editeur":363.6,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.55,"noeuds":2877,"ecouteurs":596,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs interactions --base http://127.0.0.1:9410 --duree 15 --sortie mesures-ci/interactions-0-4-5-all-g-.json --leger
+interactions (allégé) — 15 s (45 crans) | CPU moyen 14.6 % (rendu 11.2, GPU 2.7, navigateur 0.7) | pic 51.9 %
+fil principal occupé 5.3 % | script 6 ms/s | style 58.2/s (3.5 ms/s) | mise en page 22.9/s (2.2 ms/s)
+profil (ms) : {"rendu natif":307.4,"sonde de mesure":10.3,"inactif":14531.9,"autre":24.4,"éditeur":105.2,"runtime public":16.9,"WordPress":0.6,"thème":4.5}
+     17.7 ms  éditeur · getBoundingClientRect :0
+     13.0 ms  éditeur · getPropertyValue :0
+     11.7 ms  runtime public · backgroundSource selection.js:49
+      5.7 ms  éditeur · getClientRects :0
+      5.1 ms  éditeur · show navigation.js:259
+      5.1 ms  éditeur · matrixFor geometry.js:31
+      4.0 ms  éditeur · control editor.js:896
+      3.2 ms  éditeur · dimension geometry.js:4
+      2.3 ms  éditeur · createElement :0
+      2.3 ms  éditeur · fontControl editor.js:1040
+      2.3 ms  éditeur · placeOverlay editor.js:631
+      2.3 ms  éditeur · updateOutline editor.js:669
+récurrent /s : {"haut":{"raf":{"editeur":3.5},"timers":{"editeur":3.7},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":3.9},"timers":{"editeur":3.9,"theme":0.6},"mutations":{"editeur":4.9,"wordpress":0.3},"records":{"editeur":25.3,"wordpress":0.5},"longTasks":0}}
+mémoire : {"tasJSMo":5.57,"noeuds":2883,"ecouteurs":597,"documents":9,"cadres":9}
+$ node dev/mesure-ressources.mjs navigations --base http://127.0.0.1:9412 --duree 10 --sortie mesures-ci/navigations-0-4-4.json
+navigations — 10 s | CPU moyen 35.2 % (rendu 25.1, GPU 10, navigateur 0.1) | pic 44 %
+fil principal occupé 10.4 % | script 11 ms/s | style 242.4/s (16.7 ms/s) | mise en page 1.8/s (0.2 ms/s)
+profil (ms) : {"rendu natif":818.9,"thème":172.2,"inactif":8932.5,"sonde de mesure":44.3,"éditeur":5.1,"ramasse-miettes":29,"WordPress":1.1}
+    122.8 ms  thème · getBoundingClientRect :0
+     37.4 ms  thème · (anonyme) animated.js:27
+      8.6 ms  thème · tick animated.js:22
+      2.9 ms  thème · setProperty :0
+      2.8 ms  éditeur · (anonyme) navigation.js:42
+      2.3 ms  éditeur · clearTimeout :0
+      0.6 ms  thème · (anonyme) animated.js:56
+récurrent /s : {"haut":{"raf":{"theme":60.3},"timers":{"theme":0.7},"mutations":{"wordpress":0.3},"records":{"wordpress":0.6},"longTasks":0},"cadre":{"raf":{"theme":60.3},"timers":{"theme":0.7},"mutations":{"editeur":61,"wordpress":0.3},"records":{"editeur":363.2,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.02,"noeuds":2878,"ecouteurs":618,"documents":9,"cadres":9}
+mémoire après ouverture puis navigations : [3.71,4.78,4.82,4.79,4.82]
+$ node dev/mesure-ressources.mjs navigations --base http://127.0.0.1:9410 --duree 10 --sortie mesures-ci/navigations-0-4-5.json
+navigations — 10 s | CPU moyen 23.2 % (rendu 17.1, GPU 5.9, navigateur 0.2) | pic 27 %
+fil principal occupé 7.6 % | script 6.6 ms/s | style 121.2/s (9.7 ms/s) | mise en page 0.9/s (0.1 ms/s)
+profil (ms) : {"rendu natif":606,"inactif":9285.1,"thème":68.2,"sonde de mesure":23.9,"ramasse-miettes":14.5,"éditeur":5}
+     41.3 ms  thème · getBoundingClientRect :0
+     19.4 ms  thème · (anonyme) animated.js:27
+      5.2 ms  thème · tick animated.js:22
+      2.2 ms  éditeur · (anonyme) navigation.js:74
+      1.7 ms  thème · setProperty :0
+      0.6 ms  éditeur · readVisibility navigation.js:483
+      0.6 ms  éditeur · createElement :0
+      0.6 ms  éditeur · updateBranches navigation.js:206
+      0.6 ms  éditeur · paintRows navigation.js:458
+      0.6 ms  éditeur · (anonyme) navigation.js:125
+      0.6 ms  thème · remove :0
+      0.1 ms  thème · append :0
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.3},"timers":{"theme":0.7},"mutations":{"editeur":61,"wordpress":0.3},"records":{"editeur":363.2,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.03,"noeuds":2584,"ecouteurs":576,"documents":8,"cadres":8}
+mémoire après ouverture puis navigations : [3.74,4.82,4.85,4.84,4.85]
+$ node dev/mesure-ressources.mjs navigations --base http://127.0.0.1:9410 --duree 10 --sortie mesures-ci/navigations-0-4-5-all-g-.json --leger
+navigations (allégé) — 10 s | CPU moyen 5.9 % (rendu 4.8, GPU 1, navigateur 0.1) | pic 8 %
+fil principal occupé 1 % | script 1.3 ms/s | style 10.2/s (0.8 ms/s) | mise en page 1/s (0.1 ms/s)
+profil (ms) : {"rendu natif":53.6,"inactif":9936.2,"sonde de mesure":5.6,"thème":3.9,"éditeur":1.7}
+      2.8 ms  thème · (anonyme) animated.js:27
+      1.1 ms  thème · tick animated.js:22
+      0.6 ms  éditeur · updateMutations navigation.js:149
+      0.6 ms  éditeur · addRow navigation.js:402
+      0.6 ms  éditeur · rebuildBranch navigation.js:225
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.9},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":3.9},"timers":{"editeur":3.9,"theme":0.7},"mutations":{"editeur":4.6,"wordpress":0.3},"records":{"editeur":24.8,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":4.99,"noeuds":2589,"ecouteurs":577,"documents":8,"cadres":8}
+mémoire après ouverture puis navigations : [4.24,4.78,4.83,4.78,4.83]
+$ node dev/mesure-ressources.mjs masque-retour --base http://127.0.0.1:9412 --duree 10 --sortie mesures-ci/masque-retour-0-4-4.json
+masque-retour — 10 s | CPU moyen 34.9 % (rendu 25.2, GPU 9.7, navigateur 0) | pic 71 %
+fil principal occupé 11.6 % | script 10.8 ms/s | style 240.8/s (17 ms/s) | mise en page 1.9/s (0.2 ms/s)
+profil (ms) : {"rendu natif":634.8,"sonde de mesure":49.4,"inactif":9136.7,"thème":175.4,"éditeur":5.1,"autre":0.6}
+    138.0 ms  thème · getBoundingClientRect :0
+     27.6 ms  thème · (anonyme) animated.js:27
+      6.4 ms  thème · tick animated.js:22
+      2.9 ms  thème · setProperty :0
+      2.9 ms  éditeur · (anonyme) navigation.js:42
+      2.3 ms  éditeur · clearTimeout :0
+      0.6 ms  thème · append :0
+récurrent /s : {"haut":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"wordpress":0.3},"records":{"wordpress":0.6},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.7},"mutations":{"editeur":60.9,"wordpress":0.3},"records":{"editeur":362.6,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.19,"noeuds":3153,"ecouteurs":638,"documents":10,"cadres":10}
+masque-retour (retour) — 10 s | CPU moyen 38.2 % (rendu 28.1, GPU 10.1, navigateur 0) | pic 45 %
+fil principal occupé 8.9 % | script 11.1 ms/s | style 240.4/s (16.7 ms/s) | mise en page 1.8/s (0.2 ms/s)
+profil (ms) : {"rendu natif":710.4,"inactif":9044.6,"thème":175.8,"sonde de mesure":36.2,"éditeur":6.9,"ramasse-miettes":28.3}
+    123.0 ms  thème · getBoundingClientRect :0
+     36.2 ms  thème · (anonyme) animated.js:27
+      9.2 ms  thème · tick animated.js:22
+      4.6 ms  thème · requestAnimationFrame :0
+      2.9 ms  éditeur · setTimeout :0
+      2.9 ms  éditeur · (anonyme) navigation.js:42
+      2.3 ms  thème · setProperty :0
+      1.2 ms  éditeur · clearTimeout :0
+      0.6 ms  thème · add :0
+récurrent /s : {"haut":{"raf":{"theme":60.2},"timers":{"theme":0.6},"mutations":{"wordpress":0.3},"records":{"wordpress":0.6},"longTasks":0},"cadre":{"raf":{"theme":60.2},"timers":{"theme":0.7},"mutations":{"editeur":60.9,"wordpress":0.3},"records":{"editeur":362.6,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.2,"noeuds":3153,"ecouteurs":638,"documents":10,"cadres":10}
+visibilité : visible puis visible
+navigation : {"structureBuilds":1,"assetScans":1,"assetUpdates":0}
+$ node dev/mesure-ressources.mjs masque-retour --base http://127.0.0.1:9410 --duree 10 --sortie mesures-ci/masque-retour-0-4-5.json
+masque-retour — 10 s | CPU moyen 25.1 % (rendu 18.6, GPU 6.3, navigateur 0.2) | pic 60.9 %
+fil principal occupé 9.5 % | script 7.1 ms/s | style 120.6/s (10 ms/s) | mise en page 1/s (0.1 ms/s)
+profil (ms) : {"rendu natif":492.9,"éditeur":5.4,"thème":67.4,"inactif":9410.4,"sonde de mesure":24.4,"runtime public":2.3,"WordPress":0.1}
+     37.2 ms  thème · getBoundingClientRect :0
+     22.2 ms  thème · (anonyme) animated.js:27
+      5.1 ms  thème · tick animated.js:22
+      2.8 ms  thème · setProperty :0
+      2.0 ms  éditeur · (anonyme) navigation.js:74
+      1.2 ms  éditeur · addRow navigation.js:402
+      1.1 ms  runtime public · closest :0
+      0.6 ms  éditeur · getElementsByTagName :0
+      0.6 ms  éditeur · updateBranches navigation.js:206
+      0.6 ms  runtime public · selectionTarget selection.js:40
+      0.6 ms  éditeur · assetInventory assets.js:109
+      0.6 ms  runtime public · backgroundSource selection.js:49
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.3},"timers":{"theme":0.7},"mutations":{"editeur":61,"wordpress":0.3},"records":{"editeur":363.1,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.23,"noeuds":2859,"ecouteurs":596,"documents":9,"cadres":9}
+masque-retour (retour) — 10 s | CPU moyen 23.2 % (rendu 17, GPU 6.1, navigateur 0.1) | pic 25.9 %
+fil principal occupé 6.3 % | script 6.9 ms/s | style 120.2/s (10 ms/s) | mise en page 0.9/s (0.1 ms/s)
+profil (ms) : {"rendu natif":499.4,"inactif":9391.4,"thème":64.2,"ramasse-miettes":17.5,"éditeur":9,"sonde de mesure":17.7,"runtime public":2.3}
+     37.8 ms  thème · getBoundingClientRect :0
+     17.2 ms  thème · (anonyme) animated.js:27
+      4.6 ms  thème · tick animated.js:22
+      2.9 ms  thème · setProperty :0
+      2.7 ms  éditeur · el navigation.js:275
+      1.7 ms  éditeur · updateMutations navigation.js:149
+      1.7 ms  éditeur · (anonyme) navigation.js:74
+      1.1 ms  runtime public · backgroundSource selection.js:49
+      1.1 ms  thème · requestAnimationFrame :0
+      0.6 ms  éditeur · document editor.js:2393
+      0.6 ms  éditeur · schedule navigation.js:123
+      0.6 ms  thème · w.requestAnimationFrame :21
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.8},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"theme":60.1},"timers":{"theme":0.7},"mutations":{"editeur":60.8,"wordpress":0.3},"records":{"editeur":362,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.26,"noeuds":2859,"ecouteurs":596,"documents":9,"cadres":9}
+visibilité : visible puis visible
+navigation : {"structureBuilds":1,"structureBranches":6,"assetScans":1,"assetUpdates":556,"viewRebuilds":0}
+$ node dev/mesure-ressources.mjs masque-retour --base http://127.0.0.1:9410 --duree 10 --sortie mesures-ci/masque-retour-0-4-5-all-g-.json --leger
+masque-retour (allégé) — 10 s | CPU moyen 9.6 % (rendu 8.3, GPU 1.3, navigateur 0) | pic 45 %
+fil principal occupé 4.3 % | script 2 ms/s | style 11.8/s (0.8 ms/s) | mise en page 1/s (0.1 ms/s)
+profil (ms) : {"rendu natif":50.2,"inactif":9932.2,"runtime public":4.5,"éditeur":5.7,"sonde de mesure":4.5,"thème":6.2}
+      4.0 ms  runtime public · backgroundSource selection.js:49
+      3.9 ms  thème · (anonyme) animated.js:27
+      3.4 ms  éditeur · assetInventory assets.js:109
+      1.1 ms  thème · tick animated.js:22
+      0.6 ms  thème · getBoundingClientRect :0
+      0.6 ms  runtime public · closest :0
+      0.6 ms  thème · setProperty :0
+      0.6 ms  éditeur · closest :0
+      0.6 ms  éditeur · requestAnimationFrame light-mode.js:55
+      0.6 ms  éditeur · addRow navigation.js:402
+      0.6 ms  éditeur · updateMutations navigation.js:149
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":4},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":4},"timers":{"editeur":4,"theme":0.7},"mutations":{"editeur":4.7,"wordpress":0.3},"records":{"editeur":25.4,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.24,"noeuds":2864,"ecouteurs":597,"documents":9,"cadres":9}
+masque-retour (retour) (allégé) — 10 s | CPU moyen 5.8 % (rendu 4.6, GPU 1.2, navigateur 0) | pic 9 %
+fil principal occupé 0.8 % | script 2 ms/s | style 11.1/s (0.7 ms/s) | mise en page 0.9/s (0.1 ms/s)
+profil (ms) : {"rendu natif":42.9,"inactif":9939.1,"éditeur":9.6,"runtime public":5.7,"sonde de mesure":4,"thème":1.1}
+      4.0 ms  runtime public · backgroundSource selection.js:49
+      1.7 ms  éditeur · assetInventory assets.js:109
+      1.6 ms  éditeur · updateMutations navigation.js:149
+      1.2 ms  éditeur · (anonyme) navigation.js:74
+      1.1 ms  éditeur · closest :0
+      1.1 ms  runtime public · getComputedStyle :0
+      1.0 ms  éditeur · flush light-mode.js:48
+      0.6 ms  éditeur · rebuildBranch navigation.js:225
+      0.6 ms  thème · (anonyme) animated.js:27
+      0.6 ms  éditeur · visible navigation.js:130
+      0.6 ms  éditeur · getElementsByTagName :0
+      0.6 ms  thème · append :0
+récurrent /s : {"haut":{"raf":{},"timers":{"editeur":3.9},"mutations":{},"records":{},"longTasks":0},"cadre":{"raf":{"editeur":3.9},"timers":{"editeur":3.9,"theme":0.7},"mutations":{"editeur":4.6,"wordpress":0.3},"records":{"editeur":24.8,"wordpress":0.6},"longTasks":0}}
+mémoire : {"tasJSMo":5.25,"noeuds":2864,"ecouteurs":597,"documents":9,"cadres":9}
+visibilité : visible puis visible
+navigation : {"structureBuilds":1,"structureBranches":6,"assetScans":1,"assetUpdates":574,"viewRebuilds":0}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil desktop --cache froid --passages 3 --sortie mesures-ci/public-desktop-froid-0.4.4-t1.json
+http://127.0.0.1:9412 desktop froid : {"fcp":648,"lcp":648,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil desktop --cache froid --passages 3 --sortie mesures-ci/public-desktop-froid-0.4.5-t1.json
+http://127.0.0.1:9410 desktop froid : {"fcp":648,"lcp":648,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil desktop --cache froid --passages 3 --sortie mesures-ci/public-desktop-froid-0.4.5-t2.json
+http://127.0.0.1:9410 desktop froid : {"fcp":624,"lcp":624,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil desktop --cache froid --passages 3 --sortie mesures-ci/public-desktop-froid-0.4.4-t2.json
+http://127.0.0.1:9412 desktop froid : {"fcp":652,"lcp":652,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil desktop --cache chaud --passages 3 --sortie mesures-ci/public-desktop-chaud-0.4.4-t1.json
+http://127.0.0.1:9412 desktop chaud : {"fcp":636,"lcp":636,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil desktop --cache chaud --passages 3 --sortie mesures-ci/public-desktop-chaud-0.4.5-t1.json
+http://127.0.0.1:9410 desktop chaud : {"fcp":632,"lcp":632,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil desktop --cache chaud --passages 3 --sortie mesures-ci/public-desktop-chaud-0.4.5-t2.json
+http://127.0.0.1:9410 desktop chaud : {"fcp":624,"lcp":624,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil desktop --cache chaud --passages 3 --sortie mesures-ci/public-desktop-chaud-0.4.4-t2.json
+http://127.0.0.1:9412 desktop chaud : {"fcp":608,"lcp":608,"lcpEl":"h1.anim-title","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":17,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil mobile --cache froid --passages 3 --sortie mesures-ci/public-mobile-froid-0.4.4-t1.json
+http://127.0.0.1:9412 mobile froid : {"fcp":748,"lcp":748,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil mobile --cache froid --passages 3 --sortie mesures-ci/public-mobile-froid-0.4.5-t1.json
+http://127.0.0.1:9410 mobile froid : {"fcp":720,"lcp":720,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":1,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil mobile --cache froid --passages 3 --sortie mesures-ci/public-mobile-froid-0.4.5-t2.json
+http://127.0.0.1:9410 mobile froid : {"fcp":732,"lcp":732,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":1,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil mobile --cache froid --passages 3 --sortie mesures-ci/public-mobile-froid-0.4.4-t2.json
+http://127.0.0.1:9412 mobile froid : {"fcp":716,"lcp":716,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil mobile --cache chaud --passages 3 --sortie mesures-ci/public-mobile-chaud-0.4.4-t1.json
+http://127.0.0.1:9412 mobile chaud : {"fcp":748,"lcp":748,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil mobile --cache chaud --passages 3 --sortie mesures-ci/public-mobile-chaud-0.4.5-t1.json
+http://127.0.0.1:9410 mobile chaud : {"fcp":724,"lcp":724,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9410 --profil mobile --cache chaud --passages 3 --sortie mesures-ci/public-mobile-chaud-0.4.5-t2.json
+http://127.0.0.1:9410 mobile chaud : {"fcp":720,"lcp":720,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":33,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}
+$ node dev/mesure-publique.mjs --base http://127.0.0.1:9412 --profil mobile --cache chaud --passages 3 --sortie mesures-ci/public-mobile-chaud-0.4.4-t2.json
+http://127.0.0.1:9412 mobile chaud : {"fcp":724,"lcp":724,"lcpEl":"img.anim-sceau","cls":0,"longues":0,"loafs":0,"lentesChargement":0,"lentesDefilement":0,"pireTrame":50,"requetes":9,"ko":76,"modulesVT":["assets/background-layers.js","assets/runtime.js","assets/selection.js","assets/styles.js"]}

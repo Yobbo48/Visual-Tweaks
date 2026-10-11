@@ -1,0 +1,6 @@
+9410 : <generator>https://wordpress.org/?v=7.1.3</generator>
+9412 : <generator>https://wordpress.org/?v=7.1.3</generator>
+4
+Mem:           15988        5640        5531          45        5207       10348
+v24.21.0
+Version 1.62.1

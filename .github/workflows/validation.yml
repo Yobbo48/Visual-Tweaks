@@ -67,6 +67,8 @@ jobs:
     timeout-minutes: 330
     env:
       VT_WP_VERSION: ${{ needs.prerequis.outputs.wp || '7.1.2' }}
+      # PHP WebAssembly pour les tests unitaires de rendu serveur et de caches.
+      VT_TOOLCHAIN: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -207,8 +209,10 @@ jobs:
           start 9410 VT_LOCAL=../local-045
           start 9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks
           { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
-      - name: Campagne
-        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci
+      # Exécution n° 4 : campagne complète (docs/validation-0.4.5/ci/mesures-run4.md).
+      # Ici : répétition de la seule mesure ambiguë (mobile, cache froid, LoAF).
+      - name: Répétition ciblée (mobile, cache froid)
+        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci --sans-ressources --profils mobile --caches froid --tours 4 --passages 5
       - name: Arrêt des serveurs et navigateurs
         if: always()
         run: |
