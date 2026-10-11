@@ -15,6 +15,7 @@
      interactions       éditeur : défilement, sélections, déplacement, écrans
      navigations        éditeur rouvert sur 4 pages successives, puis repos
      masque             éditeur ouvert dans un onglet passé à l'arrière-plan
+     masque-retour      onglet masqué (avec --fenetre : réellement hidden), puis réaffiché
 
    Mesures sur la fenêtre (après 1,5 s de stabilisation) :
      - CPU par processus (SystemInfo.getProcessInfo, toutes les secondes) :
@@ -48,6 +49,9 @@ const AUTRE = option("autre", "/?second=1&vt-test=animated");
 const DUREE = Number(option("duree", SCENARIO === "repos" ? 30 : 15));
 const SORTIE = option("sortie", null);
 const LEGER = args.includes("--leger");
+// --fenetre : navigateur avec fenêtre (sous Xvfb en CI), seul moyen d'obtenir
+// un onglet réellement « hidden » quand un autre passe au premier plan.
+const FENETRE = args.includes("--fenetre");
 const withQuery = (path, query) =>
   path + (path.includes("?") ? "&" : "?") + query;
 
@@ -90,7 +94,7 @@ const SONDE = `(() => {
 //# sourceURL=vt-sonde.js`;
 
 const browser = await chromium.launch({
-  headless: true,
+  headless: !FENETRE,
   ...(process.env.VT_CHROMIUM_PATH
     ? { executablePath: process.env.VT_CHROMIUM_PATH }
     : {}),
@@ -99,7 +103,7 @@ const browser = await chromium.launch({
     // Aucune limitation propre au mode sans fenêtre : l'onglet reste « visible ».
     "--disable-background-timer-throttling",
     "--disable-renderer-backgrounding",
-  ].filter((a) => SCENARIO !== "masque" || !a.includes("background")),
+  ].filter((a) => !SCENARIO.startsWith("masque") || !a.includes("background")),
 });
 const systeme = await browser.newBrowserCDPSession();
 const context = await browser.newContext({
@@ -415,6 +419,28 @@ try {
       resultat.visibilite = await page.evaluate(() => document.visibilityState);
       resultat.mesure = await fenetre();
       await other.close();
+    } else if (SCENARIO === "masque-retour") {
+      // Onglet masqué (autre onglet au premier plan), puis réaffiché : la
+      // seconde fenêtre doit retrouver le niveau du repos, sans rattrapage
+      // qui s'accumule.
+      await openEditor(PAGE);
+      await select('[data-vt-id="anim-title"]');
+      await ui("#assets-tab").click();
+      const other = await context.newPage();
+      await other.goto("about:blank");
+      await other.bringToFront();
+      await page.waitForTimeout(500);
+      resultat.visibilite = await page.evaluate(() => document.visibilityState);
+      resultat.mesure = await fenetre();
+      await page.bringToFront();
+      await other.close();
+      resultat.visibiliteRetour = await page.evaluate(
+        () => document.visibilityState,
+      );
+      resultat.retour = await fenetre();
+      resultat.navigation = await page.evaluate(
+        () => VisualTweaksEditor.diagnostics().navigation,
+      );
     } else throw new Error(`Scénario inconnu : ${SCENARIO}`);
   }
 } finally {
@@ -422,10 +448,9 @@ try {
   await browser.close();
 }
 if (SORTIE) writeFileSync(SORTIE, JSON.stringify(resultat, null, 2));
-const m = resultat.mesure;
-if (m) {
+const print = (m, label = "") => {
   console.log(
-    `${SCENARIO}${LEGER ? " (allégé)" : ""} — ${m.dureeS} s${m.crans ? ` (${m.crans} crans)` : ""} | CPU moyen ${m.cpu.moyennePct} % (rendu ${m.cpu.rendererPct}, GPU ${m.cpu.gpuPct}, navigateur ${m.cpu.navigateurPct}) | pic ${m.cpu.picPct} %`,
+    `${SCENARIO}${label}${LEGER ? " (allégé)" : ""} — ${m.dureeS} s${m.crans ? ` (${m.crans} crans)` : ""} | CPU moyen ${m.cpu.moyennePct} % (rendu ${m.cpu.rendererPct}, GPU ${m.cpu.gpuPct}, navigateur ${m.cpu.navigateurPct}) | pic ${m.cpu.picPct} %`,
   );
   console.log(
     `fil principal occupé ${m.filPrincipal.occupePct} % | script ${m.filPrincipal.scriptMsParS} ms/s | style ${m.filPrincipal.recalculsStyleParS}/s (${m.filPrincipal.recalculsStyleMsParS} ms/s) | mise en page ${m.filPrincipal.misesEnPageParS}/s (${m.filPrincipal.misesEnPageMsParS} ms/s)`,
@@ -434,12 +459,21 @@ if (m) {
   for (const line of m.profil.fonctions) console.log("  " + line);
   console.log("récurrent /s :", JSON.stringify(m.recurrentParS));
   console.log("mémoire :", JSON.stringify(m.memoire));
-}
+};
+if (resultat.mesure) print(resultat.mesure);
+if (resultat.retour) print(resultat.retour, " (retour)");
 if (resultat.memoireParNavigation)
   console.log(
     "mémoire après ouverture puis navigations :",
     JSON.stringify([resultat.memoireApresOuverture, ...resultat.memoireParNavigation].map((x) => x.tasJSMo)),
   );
-if (resultat.visibilite) console.log("visibilité :", resultat.visibilite);
+if (resultat.visibilite)
+  console.log(
+    "visibilité :",
+    resultat.visibilite,
+    resultat.visibiliteRetour ? `puis ${resultat.visibiliteRetour}` : "",
+  );
+if (resultat.navigation)
+  console.log("navigation :", JSON.stringify(resultat.navigation));
 if (resultat.publie) console.log("révision publiée :", resultat.publie);
 if (errors.length) console.log("ERREURS :", errors.join(" | "));

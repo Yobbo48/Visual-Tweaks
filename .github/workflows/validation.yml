@@ -172,3 +172,47 @@ jobs:
             reference/artifacts/reference-ci.log
             reference/artifacts/serveur-reference.log
             reference/artifacts/*-failure.png
+
+  mesures:
+    name: Mesures 0.4.4 / 0.4.5 (Chromium, un scénario à la fois)
+    needs: [prerequis, suite, reference]
+    if: always() && needs.prerequis.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      VT_WP_VERSION: ${{ needs.prerequis.outputs.wp || '7.1.2' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Dépendances
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Deux sites identiques, extension 0.4.4 et 0.4.5
+        run: |
+          mkdir -p ../reference mesures-ci
+          git archive "$REFERENCE" visual-tweaks | tar -x -C ../reference
+          nohup node dev/server.mjs > mesures-ci/serveur-045.log 2>&1 &
+          VT_PORT=9412 VT_LOCAL=../local-044 VT_PLUGIN_DIR=../reference/visual-tweaks nohup node dev/server.mjs > mesures-ci/serveur-044.log 2>&1 &
+          for port in 9410 9412; do
+            for i in $(seq 1 180); do curl -sf -o /dev/null "http://127.0.0.1:$port/" && break; sleep 2; done
+            echo "$port : $(curl -s "http://127.0.0.1:$port/?feed=rss2" | grep -o '<generator>[^<]*</generator>') $(curl -s "http://127.0.0.1:$port/?vt-test=animated" | grep -o 'runtime.js?ver=[0-9.]*' | head -1)" | tee -a mesures-ci/environnement.txt
+          done
+          { nproc; free -m | head -2; node --version; npx playwright --version; } | tee -a mesures-ci/environnement.txt
+      - name: Campagne
+        run: node dev/campagne-mesures.mjs --reference http://127.0.0.1:9412 --candidate http://127.0.0.1:9410 --sortie mesures-ci
+      - name: Arrêt des serveurs et navigateurs
+        if: always()
+        run: |
+          pkill -f "dev/server.mjs" || true
+          pkill -f "cli.js server" || true
+          pkill -f "chrome" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mesures-0.4.4-0.4.5
+          path: mesures-ci/
