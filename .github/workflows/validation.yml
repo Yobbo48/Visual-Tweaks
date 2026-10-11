@@ -1,6 +1,6 @@
 # Validation de Visual Tweaks : suite complète, séquentielle, sur Chromium,
 # WebKit et Firefox, avec la version de WordPress lue en production.
-# Rien n'est déployé : la production n'est que lue (2 requêtes, sans JavaScript,
+# Rien n'est déployé : la production n'est que lue (2 pages, redirections comprises, sans JavaScript,
 # donc sans envoi Analytics). Le thème réel n'est pas dans le dépôt : les suites
 # qui l'exigent sont consignées « non exécutées ».
 name: Validation
@@ -40,8 +40,8 @@ jobs:
         run: |
           set +e
           UA="Mozilla/5.0 (validation Visual Tweaks; lecture unique)"
-          curl -sS -m 20 -A "$UA" -o feed.xml -w "flux HTTP %{http_code}\n" https://www.lenergiedesrunes.com/feed/
-          curl -sS -m 20 -A "$UA" -o home.html -w "accueil HTTP %{http_code}\n" https://www.lenergiedesrunes.com/
+          curl -sSL --max-redirs 3 -m 20 -A "$UA" -o feed.xml -w "flux HTTP %{http_code} %{url_effective}\n" https://www.lenergiedesrunes.com/feed/
+          curl -sSL --max-redirs 3 -m 20 -A "$UA" -o home.html -w "accueil HTTP %{http_code} %{url_effective}\n" https://www.lenergiedesrunes.com/
           gen=$(grep -o '<generator>[^<]*</generator>' feed.xml | head -1)
           meta=$(grep -oE 'content="WordPress [0-9.]+"' home.html | head -1)
           vers=$(grep -oE 'wp-includes/[A-Za-z0-9/._-]+[?]ver=[0-9.]+' home.html | sed 's/.*ver=//' | sort | uniq -c | sort -rn | head -5 | tr '\n' ' ')
