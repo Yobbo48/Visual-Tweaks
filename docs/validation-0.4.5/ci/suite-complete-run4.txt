@@ -1,0 +1,393 @@
+WordPress servi : <generator>https://wordpress.org/?v=7.1.3</generator>
+v24.21.0
+Version 1.62.1
+RUN dev/check.mjs  
+11 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs 
+RUN --test tests/published-styles.test.mjs tests/cache.test.mjs 
+RUN tests/stability-e2e.mjs  
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/width-e2e.mjs  
+PASS selection, size panel, panel toggles and all breakpoints create no override
+PASS fit/min/max-content, calc, clamp, decimal, auto and percentage theme widths never enter color/position payloads; edits survive refresh
+PASS fractional resize generates canonical width and survives REST save and refresh
+PASS explicit widths normalize px, decimals, %, rem, em, vw, vh, zero and auto; blank removes the override
+PASS PHP and JavaScript validators agree; arbitrary CSS, overprecision, NaN, numbers and structured widths remain refused
+PASS mobile width is explicit, undo/redo work and the exception persists after reload
+PASS public rendering preserves theme fit-content and reapplies saved color
+PASS recovering a legacy failed resize repairs existing width precision and saves user intent
+PASS invalid legacy width is reported before REST, retained in the draft, and cleared only by user action
+RUN tests/save-e2e.mjs  
+PASS content-only save survives refresh
+PASS save status, REST storage and editor refresh match the visual draft
+PASS exit and reenter reload the saved revision with no recovery prompt
+PASS anonymous public rendering applies the persisted overrides without editor UI
+PASS failed request is visible with settings hidden, preserves local draft, and can be retried
+PASS edits made while saving remain dirty and persist on the next save
+PASS 409 conflict stays visible and preserves an exportable draft without overwriting WordPress
+RUN tests/foundations-e2e.mjs  
+PASS keyboard arrows move 1px, Shift moves 10px; a sequence has one undo/redo step
+PASS visible directional buttons and step size work; field editing never nudges
+PASS inline text caret shortcuts never move the text element
+PASS image zoom changes rendered pixels, preserves its frame and survives refresh
+PASS Assets inventories img/picture/background/SVG and selects a covered image
+PASS SVG paths select the root icon, preserving its internal DOM
+PASS picture replacement uses WordPress media and keeps the frame and original sources recoverable
+PASS background focal point and direct crop gesture adjust image position without moving its zone
+PASS background replacement persists as a media ID while preserving the block structure and dimensions
+PASS background zoom, overlay, shadow and replacement survive save and refresh
+PASS tablet and mobile asset exceptions persist independently and reapply after refresh
+PASS Alt-click exposes overlapping elements and selects the background behind the overlay
+PASS lightweight Structure selects an existing text without rebuilding the DOM
+PASS custom shadow fields generate only strictly validated values
+PASS public visitors receive saved image/background overrides and no editor or permanent inline override
+PASS no uncaught browser errors
+RUN tests/e2e.mjs  
+PASS select, immediate Y adjustment, preservation of theme transform/translate
+PASS undo and redo
+PASS mobile iframe triggers actual media queries and saves independent overrides
+PASS persisted adjustments after WordPress reload
+PASS direct drag uses one undo step
+PASS unsaved draft recovers after reload
+PASS WordPress media picker replacement and object-position persist
+PASS non-destructive leaf text override
+PASS strict validation and stale-save conflict preserve stored data
+PASS missing REST nonce denied
+PASS concurrent first saves admit exactly one writer
+PASS public saved rendering, no editor, no inline styles, isolated page, denied anonymous API
+PASS subscriber cannot activate editor
+PASS changed fingerprint skips override
+PASS element reset restores exact original theme CSS after reload
+PASS reset does not reintroduce old element properties
+PASS whole-page reset persists atomically
+PASS complete disable removes editor and override runtime
+PASS no uncaught browser errors
+RUN tests/ux-e2e.mjs  
+PASS direct text editing keeps caret, applies quick typography/color, groups undo and redo
+PASS inline text, font, italic, size and color survive refresh
+PASS Escape cancels only the current inline transaction
+PASS literal HTML stays text across REST save and reload
+PASS personal and recent colors remain available without external assets
+PASS resize rotated image with ratio locked and one undo step
+PASS drag the selected image directly without absolute positioning
+PASS visual image cropping by dragging in its actual frame
+PASS image size and appearance persist
+PASS tablet/mobile quick sizing and visible exceptions persist independently
+PASS contextual alignment for the existing grid container
+PASS contextual spacing for the existing flex container
+PASS existing link editing is safe and executable schemes are refused server-side
+PASS common actions remain available with the detailed panel hidden
+PASS theme elements cannot be deleted and browser has no uncaught errors
+RUN tests/ergonomics-e2e.mjs  chromium
+PASS Double-click starts inline text editing even when properties opening changes canvas fit
+PASS Structure ↔ canvas: one selected row, parents open, scroll stable, selection visible
+PASS Properties close on deselection; navigation remains independent
+PASS Structure includes children of background containers
+PASS Assets discovers img/picture, resolved variables, every CSS layer, SVG and pseudo backgrounds; groups occurrences with safe thumbnails
+PASS Hidden/covered assets select their actual occurrence and synchronize properties/tree
+PASS Finding/selecting/revealing elements does not turn theme values into overrides
+PASS Real horizontal geometry: normal image, inline button, flex row and flex column center/left/right
+PASS Grid visibly aligns left/center/right within its cell; flex cross-axis and grid vertical center visibly
+PASS Reset Alignment preserves a standalone zero spacing override and does not classify it as an alignment
+PASS Text and container content align separately, respecting flex axes
+PASS Inline text alignment reports its missing block context, including typography controls, and creates no silent override
+PASS Unsupported commands produce visible feedback without changing layout
+PASS Alignment and local movement remain separate; group resets delete only their overrides
+PASS Spacing previews positive individual/negative linked margins, zero padding and relevant gap; undo/redo restores complete batches
+PASS WordPress REST saves strict semantic properties; spacing desktop/tablet/mobile survives refresh, rejected commands never enter document
+PASS Spacing group reset removes only mobile overrides and recovers tablet inheritance; undo restores mobile intent
+PASS Button reset restores theme display and intrinsic width by removing controlled alignment overrides
+PASS Navigation is fully collapsible; both panels preserve the 1440px logical viewport
+PASS Anonymous frontend applies saved spacing/alignment/reset state without editor interface
+PASS No uncaught browser errors
+RUN tests/viewport-e2e.mjs  chromium
+PASS chromium: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display
+PASS chromium: outline, corner handles and diagnostic boxes match the zoomed asset
+PASS chromium: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width
+PASS chromium: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them
+PASS chromium: anonymous real page at 1440px matches logical editor placement and layout
+PASS chromium: UI move handle and direct iframe drag use the same logical coordinate system under zoom
+PASS chromium: corner resize preserves ratio and logical size with undo/redo and persisted refresh
+PASS chromium: focal crop does not move or resize the asset when zoomed
+PASS chromium: tablet/mobile use true viewports and persist explicit responsive exceptions
+PASS chromium: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions
+PASS chromium: existing parent rotation remains intact during scaled drag and reset
+RUN tests/speed-e2e.mjs  chromium
+PASS Navigation et sélection répétées : aucun nouveau scan Structure/Assets ni override
+PASS Responsive : Structure conserve son index et ses lignes sans reconstruction
+PASS Drag : feuille temporaire ciblée, zéro rendu complet/state/REST pendant le geste, une mutation finale annulable
+PASS Petites retouches CSS : règles ciblées, aucun rendu complet répétitif, pixels logiques et undo conservés
+PASS MutationObserver : asset ajouté/découvert/sélectionné puis retiré, sans nouveau scan global des assets
+RUN tests/polish-e2e.mjs  chromium
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles
+SKIP tests/real-theme-e2e.mjs  chromium (thème réel absent)
+RUN tests/comfort-e2e.mjs  chromium
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé
+PASS Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier
+PASS Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo
+PASS Indicateurs par écran et héritage explicite : ouvrir/changer d’écran ne crée aucun override
+PASS Responsive Guard en lecture seule : overflow réel, déplacement hérité, petite cible, texte coupé et collision nouvelle ; state/viewport/sélection intacts
+PASS Correction mobile : proposition, aperçu non persistant, annulation/Échap/ignorer, application explicite, Review/Undo/Redo/save/refresh et rendu public
+PASS Fond multicouche : remplacement média de la seule couche choisie, gradient/autres images/position/size/repeat conservés, Undo/save/refresh/public et validation stricte
+PASS Mesure à la demande : pixels logiques sans override ; timings propriété/Structure/Assets mesurés, aucun audit automatique à chaque retouche
+PASS Texte : contenu HTML traité littéralement, Undo restaure le texte simple ; structure imbriquée et listeners conservés, DIV non élargi sans contrat sûr
+RUN tests/stability-e2e.mjs  webkit
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/ergonomics-e2e.mjs  webkit
+PASS Double-click starts inline text editing even when properties opening changes canvas fit
+PASS Structure ↔ canvas: one selected row, parents open, scroll stable, selection visible
+PASS Properties close on deselection; navigation remains independent
+PASS Structure includes children of background containers
+PASS Assets discovers img/picture, resolved variables, every CSS layer, SVG and pseudo backgrounds; groups occurrences with safe thumbnails
+PASS Hidden/covered assets select their actual occurrence and synchronize properties/tree
+PASS Finding/selecting/revealing elements does not turn theme values into overrides
+PASS Real horizontal geometry: normal image, inline button, flex row and flex column center/left/right
+PASS Grid visibly aligns left/center/right within its cell; flex cross-axis and grid vertical center visibly
+PASS Reset Alignment preserves a standalone zero spacing override and does not classify it as an alignment
+PASS Text and container content align separately, respecting flex axes
+PASS Inline text alignment reports its missing block context, including typography controls, and creates no silent override
+PASS Unsupported commands produce visible feedback without changing layout
+PASS Alignment and local movement remain separate; group resets delete only their overrides
+PASS Spacing previews positive individual/negative linked margins, zero padding and relevant gap; undo/redo restores complete batches
+PASS WordPress REST saves strict semantic properties; spacing desktop/tablet/mobile survives refresh, rejected commands never enter document
+PASS Spacing group reset removes only mobile overrides and recovers tablet inheritance; undo restores mobile intent
+PASS Button reset restores theme display and intrinsic width by removing controlled alignment overrides
+PASS Navigation is fully collapsible; both panels preserve the 1440px logical viewport
+PASS Anonymous frontend applies saved spacing/alignment/reset state without editor interface
+PASS No uncaught browser errors
+RUN tests/viewport-e2e.mjs  webkit
+PASS webkit: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display
+PASS webkit: outline, corner handles and diagnostic boxes match the zoomed asset
+PASS webkit: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width
+PASS webkit: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them
+PASS webkit: anonymous real page at 1440px matches logical editor placement and layout
+PASS webkit: UI move handle and direct iframe drag use the same logical coordinate system under zoom
+PASS webkit: corner resize preserves ratio and logical size with undo/redo and persisted refresh
+PASS webkit: focal crop does not move or resize the asset when zoomed
+PASS webkit: tablet/mobile use true viewports and persist explicit responsive exceptions
+PASS webkit: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions
+PASS webkit: existing parent rotation remains intact during scaled drag and reset
+RUN tests/speed-e2e.mjs  webkit
+PASS Navigation et sélection répétées : aucun nouveau scan Structure/Assets ni override
+PASS Responsive : Structure conserve son index et ses lignes sans reconstruction
+PASS Drag : feuille temporaire ciblée, zéro rendu complet/state/REST pendant le geste, une mutation finale annulable
+PASS Petites retouches CSS : règles ciblées, aucun rendu complet répétitif, pixels logiques et undo conservés
+PASS MutationObserver : asset ajouté/découvert/sélectionné puis retiré, sans nouveau scan global des assets
+RUN tests/polish-e2e.mjs  webkit
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles
+SKIP tests/real-theme-e2e.mjs  webkit (thème réel absent)
+RUN tests/comfort-e2e.mjs  webkit
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé
+PASS Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier
+PASS Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo
+PASS Indicateurs par écran et héritage explicite : ouvrir/changer d’écran ne crée aucun override
+PASS Responsive Guard en lecture seule : overflow réel, déplacement hérité, petite cible, texte coupé et collision nouvelle ; state/viewport/sélection intacts
+PASS Correction mobile : proposition, aperçu non persistant, annulation/Échap/ignorer, application explicite, Review/Undo/Redo/save/refresh et rendu public
+PASS Fond multicouche : remplacement média de la seule couche choisie, gradient/autres images/position/size/repeat conservés, Undo/save/refresh/public et validation stricte
+PASS Mesure à la demande : pixels logiques sans override ; timings propriété/Structure/Assets mesurés, aucun audit automatique à chaque retouche
+PASS Texte : contenu HTML traité littéralement, Undo restaure le texte simple ; structure imbriquée et listeners conservés, DIV non élargi sans contrat sûr
+RUN tests/stability-e2e.mjs  firefox
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/ergonomics-e2e.mjs  firefox
+PASS Double-click starts inline text editing even when properties opening changes canvas fit
+PASS Structure ↔ canvas: one selected row, parents open, scroll stable, selection visible
+PASS Properties close on deselection; navigation remains independent
+PASS Structure includes children of background containers
+PASS Assets discovers img/picture, resolved variables, every CSS layer, SVG and pseudo backgrounds; groups occurrences with safe thumbnails
+PASS Hidden/covered assets select their actual occurrence and synchronize properties/tree
+PASS Finding/selecting/revealing elements does not turn theme values into overrides
+PASS Real horizontal geometry: normal image, inline button, flex row and flex column center/left/right
+PASS Grid visibly aligns left/center/right within its cell; flex cross-axis and grid vertical center visibly
+PASS Reset Alignment preserves a standalone zero spacing override and does not classify it as an alignment
+PASS Text and container content align separately, respecting flex axes
+PASS Inline text alignment reports its missing block context, including typography controls, and creates no silent override
+PASS Unsupported commands produce visible feedback without changing layout
+PASS Alignment and local movement remain separate; group resets delete only their overrides
+PASS Spacing previews positive individual/negative linked margins, zero padding and relevant gap; undo/redo restores complete batches
+PASS WordPress REST saves strict semantic properties; spacing desktop/tablet/mobile survives refresh, rejected commands never enter document
+PASS Spacing group reset removes only mobile overrides and recovers tablet inheritance; undo restores mobile intent
+PASS Button reset restores theme display and intrinsic width by removing controlled alignment overrides
+PASS Navigation is fully collapsible; both panels preserve the 1440px logical viewport
+PASS Anonymous frontend applies saved spacing/alignment/reset state without editor interface
+PASS No uncaught browser errors
+RUN tests/viewport-e2e.mjs  firefox
+PASS firefox: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display
+PASS firefox: outline, corner handles and diagnostic boxes match the zoomed asset
+PASS firefox: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width
+PASS firefox: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them
+PASS firefox: anonymous real page at 1440px matches logical editor placement and layout
+PASS firefox: UI move handle and direct iframe drag use the same logical coordinate system under zoom
+PASS firefox: corner resize preserves ratio and logical size with undo/redo and persisted refresh
+PASS firefox: focal crop does not move or resize the asset when zoomed
+PASS firefox: tablet/mobile use true viewports and persist explicit responsive exceptions
+PASS firefox: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions
+PASS firefox: existing parent rotation remains intact during scaled drag and reset
+RUN tests/speed-e2e.mjs  firefox
+PASS Navigation et sélection répétées : aucun nouveau scan Structure/Assets ni override
+PASS Responsive : Structure conserve son index et ses lignes sans reconstruction
+PASS Drag : feuille temporaire ciblée, zéro rendu complet/state/REST pendant le geste, une mutation finale annulable
+PASS Petites retouches CSS : règles ciblées, aucun rendu complet répétitif, pixels logiques et undo conservés
+PASS MutationObserver : asset ajouté/découvert/sélectionné puis retiré, sans nouveau scan global des assets
+RUN tests/polish-e2e.mjs  firefox
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles
+SKIP tests/real-theme-e2e.mjs  firefox (thème réel absent)
+RUN tests/comfort-e2e.mjs  firefox
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé
+PASS Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier
+PASS Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo
+PASS Indicateurs par écran et héritage explicite : ouvrir/changer d’écran ne crée aucun override
+PASS Responsive Guard en lecture seule : overflow réel, déplacement hérité, petite cible, texte coupé et collision nouvelle ; state/viewport/sélection intacts
+PASS Correction mobile : proposition, aperçu non persistant, annulation/Échap/ignorer, application explicite, Review/Undo/Redo/save/refresh et rendu public
+PASS Fond multicouche : remplacement média de la seule couche choisie, gradient/autres images/position/size/repeat conservés, Undo/save/refresh/public et validation stricte
+PASS Mesure à la demande : pixels logiques sans override ; timings propriété/Structure/Assets mesurés, aucun audit automatique à chaque retouche
+PASS Texte : contenu HTML traité littéralement, Undo restaure le texte simple ; structure imbriquée et listeners conservés, DIV non élargi sans contrat sûr
+SKIP dev/cross-browser.mjs --comfort-real-theme  (thème réel absent)
+SKIP tests/guard-visibility-e2e.mjs  chromium (thème réel absent)
+SKIP tests/stabilisation-e2e.mjs  chromium (thème réel absent)
+SKIP tests/guard-visibility-e2e.mjs  webkit (thème réel absent)
+SKIP tests/stabilisation-e2e.mjs  webkit (thème réel absent)
+SKIP tests/guard-visibility-e2e.mjs  firefox (thème réel absent)
+SKIP tests/stabilisation-e2e.mjs  firefox (thème réel absent)
+RUN tests/cache-public-e2e.mjs  
+PASS Public sans overrides : zéro ressource Visual Tweaks et aucune configuration REST/nonce
+PASS Public retouché : quatre modules du runtime, aucun éditeur/Guard/Review/Guides, aucun nonce
+PASS Cache navigateur ordinaire : nouvelle sauvegarde visible après refresh public, sans purge spécifique
+PASS Cache HTTP HTML contrôlé : ancien override reproduit après save ; purge du cache restitue la dernière valeur
+RUN tests/guard-navigation-e2e.mjs  chromium
+PASS Limite 1500 : couverture expliquée et nombre total visible, sans faux Voir/problème ni mutation du draft
+PASS Vraie alerte : Voir sélectionne la bonne cible, synchronise Structure et ouvre ses propriétés sans modifier le draft
+PASS Smoke : sélectionner → modifier → draft → Undo → modifier → audit → sauvegarder → refresh → quitter/revenir
+RUN tests/guard-navigation-e2e.mjs  webkit
+PASS Limite 1500 : couverture expliquée et nombre total visible, sans faux Voir/problème ni mutation du draft
+PASS Vraie alerte : Voir sélectionne la bonne cible, synchronise Structure et ouvre ses propriétés sans modifier le draft
+PASS Smoke : sélectionner → modifier → draft → Undo → modifier → audit → sauvegarder → refresh → quitter/revenir
+RUN tests/guard-navigation-e2e.mjs  firefox
+PASS Limite 1500 : couverture expliquée et nombre total visible, sans faux Voir/problème ni mutation du draft
+PASS Vraie alerte : Voir sélectionne la bonne cible, synchronise Structure et ouvre ses propriétés sans modifier le draft
+PASS Smoke : sélectionner → modifier → draft → Undo → modifier → audit → sauvegarder → refresh → quitter/revenir
+RUN tests/conservation-e2e.mjs  chromium
+PASS chromium: changement de page immédiat : brouillon conservé et restauré, puis enregistré (3px), retour arrière cohérent, départ protégé
+PASS chromium: départ pendant une sauvegarde : révision envoyée conservée (2px), retouche suivante restaurée puis enregistrée sans conflit (3px)
+PASS chromium: HTTP 502 illisible et coupure réseau : message clair, brouillon conservé, jamais « Enregistré » ; jeton expiré renouvelé puis requête rejouée (4px)
+PASS chromium: réponse perdue après enregistrement : propre envoi reconnu (pas de faux conflit), retouche suivante enregistrée (3px)
+PASS chromium: deux onglets : autre onglet signalé, conflit refusé sans écraser (1px), remplacement explicite après export de la version enregistrée (5px)
+PASS chromium: publication : état du cache rapporté (LiteSpeed absent), message sans fausse promesse
+PASS chromium: aucune erreur JavaScript de Visual Tweaks
+RUN tests/fidelite-e2e.mjs  chromium
+PASS chromium: cible ambiguë signalée dans l'éditeur, retouche conservée dans les données
+PASS chromium: desktop 1440px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (5px -22px) sans double application
+PASS chromium: tablet 820px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (2px -18px) sans double application
+PASS chromium: mobile 390px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (10px -13px) sans double application
+PASS chromium: retrait de deux retouches : retour exact au style du thème, au premier affichage comme après le runtime
+PASS chromium: aucune erreur JavaScript de Visual Tweaks
+RUN tests/conservation-e2e.mjs  webkit
+PASS webkit: changement de page immédiat : brouillon conservé et restauré, puis enregistré (3px), retour arrière cohérent, départ protégé
+PASS webkit: départ pendant une sauvegarde : révision envoyée conservée (2px), retouche suivante restaurée puis enregistrée sans conflit (3px)
+PASS webkit: HTTP 502 illisible et coupure réseau : message clair, brouillon conservé, jamais « Enregistré » ; jeton expiré renouvelé puis requête rejouée (4px)
+PASS webkit: réponse perdue après enregistrement : propre envoi reconnu (pas de faux conflit), retouche suivante enregistrée (3px)
+PASS webkit: deux onglets : autre onglet signalé, conflit refusé sans écraser (1px), remplacement explicite après export de la version enregistrée (5px)
+PASS webkit: publication : état du cache rapporté (LiteSpeed absent), message sans fausse promesse
+PASS webkit: aucune erreur JavaScript de Visual Tweaks
+RUN tests/fidelite-e2e.mjs  webkit
+PASS webkit: cible ambiguë signalée dans l'éditeur, retouche conservée dans les données
+PASS webkit: desktop 1440px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (5px -22px) sans double application
+PASS webkit: tablet 820px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (2px -18px) sans double application
+PASS webkit: mobile 390px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (10px -13px) sans double application
+PASS webkit: retrait de deux retouches : retour exact au style du thème, au premier affichage comme après le runtime
+PASS webkit: aucune erreur JavaScript de Visual Tweaks
+RUN tests/conservation-e2e.mjs  firefox
+PASS firefox: changement de page immédiat : brouillon conservé et restauré, puis enregistré (3px), retour arrière cohérent, départ protégé
+PASS firefox: départ pendant une sauvegarde : révision envoyée conservée (2px), retouche suivante restaurée puis enregistrée sans conflit (3px)
+PASS firefox: HTTP 502 illisible et coupure réseau : message clair, brouillon conservé, jamais « Enregistré » ; jeton expiré renouvelé puis requête rejouée (4px)
+PASS firefox: réponse perdue après enregistrement : propre envoi reconnu (pas de faux conflit), retouche suivante enregistrée (3px)
+PASS firefox: deux onglets : autre onglet signalé, conflit refusé sans écraser (1px), remplacement explicite après export de la version enregistrée (5px)
+PASS firefox: publication : état du cache rapporté (LiteSpeed absent), message sans fausse promesse
+PASS firefox: aucune erreur JavaScript de Visual Tweaks
+RUN tests/fidelite-e2e.mjs  firefox
+PASS firefox: cible ambiguë signalée dans l'éditeur, retouche conservée dans les données
+PASS firefox: desktop 1440px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (5px -22px) sans double application
+PASS firefox: tablet 820px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (2px -18px) sans double application
+PASS firefox: mobile 390px : éditeur = publié (froid et chaud) pour 7 cibles × 28 propriétés ; premier affichage = publié hors écarts nommés ; translation du thème composée (10px -13px) sans double application
+PASS firefox: retrait de deux retouches : retour exact au style du thème, au premier affichage comme après le runtime
+PASS firefox: aucune erreur JavaScript de Visual Tweaks
+RUN tests/ressources-e2e.mjs  chromium
+PASS chromium: Document hôte : ni gabarit ni script du thème, médiathèque disponible ; le thème tourne dans l'aperçu avec le runtime
+PASS chromium: Navigation : l'animation continue ne bloque plus les mises à jour (asset ajouté visible) et ne reconstruit pas Assets sans changement
+PASS chromium: Structure : seule la branche modifiée est reconstruite, dans l'ordre du DOM ; un retrait est reflété
+PASS chromium: Onglet ou panneau masqué : aucune mise à jour pendant l'absence, tout est rattrapé au retour
+PASS chromium: Édition allégée : boucle du thème ralentie, animations infinies en pause, retouches inchangées, test responsive fonctionnel, préférence conservée, retour exact au rendu animé
+RUN tests/allege-e2e.mjs  chromium
+PASS chromium: 4 bascules : boucle 60/s → ≤ 6/s → une seule boucle à pleine cadence (passages/images 1) ; animations infinies et vidéo en pause puis relancées ; aucune trace laissée
+PASS chromium: Mode allégé : animation d'entrée et révélations (animation et transition) terminées, en-tête suit le défilement : rien n'est figé
+PASS chromium: Mode allégé : sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré
+PASS chromium: Navigation entre pages : préférence conservée, retirée partout une fois désactivée
+PASS chromium: Onglet masqué puis réaffiché : mode conservé, puis rendu animé rétabli sans boucle doublée
+PASS chromium: Données enregistrées inchangées ; visiteur : 4 modules publics seulement, ni règle ni attribut du mode allégé, animations normales ; 24 éléments × 14 styles identiques entre éditeur, éditeur allégé et public
+RUN tests/ressources-e2e.mjs  webkit
+PASS webkit: Document hôte : ni gabarit ni script du thème, médiathèque disponible ; le thème tourne dans l'aperçu avec le runtime
+PASS webkit: Navigation : l'animation continue ne bloque plus les mises à jour (asset ajouté visible) et ne reconstruit pas Assets sans changement
+PASS webkit: Structure : seule la branche modifiée est reconstruite, dans l'ordre du DOM ; un retrait est reflété
+PASS webkit: Onglet ou panneau masqué : aucune mise à jour pendant l'absence, tout est rattrapé au retour
+PASS webkit: Édition allégée : boucle du thème ralentie, animations infinies en pause, retouches inchangées, test responsive fonctionnel, préférence conservée, retour exact au rendu animé
+RUN tests/allege-e2e.mjs  webkit
+PASS webkit: 4 bascules : boucle 62/s → ≤ 6/s → une seule boucle à pleine cadence (passages/images 1) ; animations infinies en pause puis relancées ; aucune trace laissée
+PASS webkit: Mode allégé : animation d'entrée et révélations (animation et transition) terminées, en-tête suit le défilement : rien n'est figé
+PASS webkit: Mode allégé : sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré
+PASS webkit: Navigation entre pages : préférence conservée, retirée partout une fois désactivée
+PASS webkit: Onglet masqué puis réaffiché : mode conservé, puis rendu animé rétabli sans boucle doublée
+PASS webkit: Données enregistrées inchangées ; visiteur : 4 modules publics seulement, ni règle ni attribut du mode allégé, animations normales ; 24 éléments × 14 styles identiques entre éditeur, éditeur allégé et public
+NOTE webkit : vidéo WebM non lue par ce moteur (contrôle vidéo non applicable)
+RUN tests/ressources-e2e.mjs  firefox
+PASS firefox: Document hôte : ni gabarit ni script du thème, médiathèque disponible ; le thème tourne dans l'aperçu avec le runtime
+PASS firefox: Navigation : l'animation continue ne bloque plus les mises à jour (asset ajouté visible) et ne reconstruit pas Assets sans changement
+PASS firefox: Structure : seule la branche modifiée est reconstruite, dans l'ordre du DOM ; un retrait est reflété
+PASS firefox: Onglet ou panneau masqué : aucune mise à jour pendant l'absence, tout est rattrapé au retour
+PASS firefox: Édition allégée : boucle du thème ralentie, animations infinies en pause, retouches inchangées, test responsive fonctionnel, préférence conservée, retour exact au rendu animé
+RUN tests/allege-e2e.mjs  firefox
+PASS firefox: 4 bascules : boucle 61/s → ≤ 6/s → une seule boucle à pleine cadence (passages/images 1) ; animations infinies et vidéo en pause puis relancées ; aucune trace laissée
+PASS firefox: Mode allégé : animation d'entrée et révélations (animation et transition) terminées, en-tête suit le défilement : rien n'est figé
+PASS firefox: Mode allégé : sélection, contour exact, déplacement à la souris et au clavier, annulation jusqu'à l'état enregistré
+PASS firefox: Navigation entre pages : préférence conservée, retirée partout une fois désactivée
+PASS firefox: Onglet masqué puis réaffiché : mode conservé, puis rendu animé rétabli sans boucle doublée
+PASS firefox: Données enregistrées inchangées ; visiteur : 4 modules publics seulement, ni règle ni attribut du mode allégé, animations normales ; 24 éléments × 14 styles identiques entre éditeur, éditeur allégé et public
+RÉSUMÉ 42 réussies, 0 en échec, 10 non exécutées
