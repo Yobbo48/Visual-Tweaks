@@ -3,6 +3,9 @@ namespace VisualTweaks;
 defined('ABSPATH') || exit;
 
 final class Plugin {
+    /** Scripts du document hôte de l'éditeur : médiathèque et éditeur (0.4.5). */
+    private static array $editor_scripts = [];
+
     public static function boot(): void {
         add_action('admin_menu', [self::class, 'settings_menu']);
         add_action('rest_api_init', [self::class, 'routes']);
@@ -11,6 +14,7 @@ final class Plugin {
         // Fin du <head>, comme la feuille du runtime : même ordre de cascade (0.4.4).
         add_action('wp_head', [self::class, 'published_styles'], 1000);
         add_action('template_redirect', [self::class, 'private_preview']);
+        add_filter('template_include', [self::class, 'editor_document'], PHP_INT_MAX);
         add_filter('show_admin_bar', [self::class, 'preview_admin_bar'], PHP_INT_MAX);
         add_filter('script_loader_tag', [self::class, 'module'], 10, 3);
     }
@@ -34,6 +38,15 @@ final class Plugin {
         }
     }
 
+    /**
+     * L'éditeur (`vt-edit`) s'ouvre dans son propre document : le thème ne
+     * tourne que dans l'aperçu (`vt-frame`), plus en double derrière l'interface.
+     */
+    public static function editor_document($template) {
+        return self::editing() ? VT_DIR . 'includes/editor-host.php' : $template;
+    }
+    public static function editor_scripts(): array { return self::$editor_scripts; }
+
     public static function toolbar($bar): void {
         if (is_admin() || !self::allowed() || isset($_GET['vt-frame'])) return;
         $bar->add_node(['id' => 'visual-tweaks', 'title' => 'Édition visuelle', 'href' => add_query_arg('vt-edit', '1'), 'meta' => ['title' => 'Activer Visual Tweaks']]);
@@ -49,11 +62,22 @@ final class Plugin {
         $config = ['schemaVersion' => 1, 'page' => $page, 'revision' => $data['revision'], 'elements' => Schema::hydrate($data['elements']), 'breakpoints' => Schema::BREAKPOINTS];
         if ($editing) {
             $config['editor'] = ['api' => rest_url('visual-tweaks/v1/page'), 'nonce' => wp_create_nonce('wp_rest'), 'home' => home_url('/'), 'userId' => get_current_user_id(), 'siteStyle' => SiteStyle::get(), 'styleApi' => rest_url('visual-tweaks/v1/site-style'), 'desktopWidth' => max(320, min(3840, (int) get_option('vt_desktop_width', 1440))), 'nonceUrl' => admin_url('admin-ajax.php?action=rest-nonce')];
+            $queued = wp_scripts()->queue;
             wp_enqueue_media();
+            // Scripts de la médiathèque, même si le thème l'a déjà enfilée (appel unique).
+            $media = array_diff(wp_scripts()->queue, $queued);
+            foreach (['media-editor', 'media-audiovideo', 'mce-view', 'image-edit'] as $handle) {
+                if (wp_script_is($handle, 'enqueued')) $media[] = $handle;
+            }
+            self::$editor_scripts = array_values(array_unique($media));
+            // Le runtime ne sert que dans l'aperçu : le document hôte n'a pas de page à retoucher.
+            wp_enqueue_script('vt-editor', VT_URL . 'assets/editor.js', [], VT_VERSION, true);
+            wp_add_inline_script('vt-editor', 'window.VisualTweaksConfig = ' . wp_json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . ';', 'before');
+            self::$editor_scripts[] = 'vt-editor';
+            return;
         }
         wp_enqueue_script('vt-runtime', VT_URL . 'assets/runtime.js', [], VT_VERSION, true);
         wp_add_inline_script('vt-runtime', 'window.VisualTweaksConfig = ' . wp_json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . ';', 'before');
-        if ($editing) wp_enqueue_script('vt-editor', VT_URL . 'assets/editor.js', ['vt-runtime'], VT_VERSION, true);
     }
 
     /**

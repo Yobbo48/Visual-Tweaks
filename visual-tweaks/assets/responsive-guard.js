@@ -1,12 +1,14 @@
-import { editable } from "./selection.js?ver=0.4.4";
-import { labelFor } from "./assets.js?ver=0.4.4";
-import { effectiveProperties } from "./styles.js?ver=0.4.4";
+import { editable } from "./selection.js?ver=0.4.5";
+import { labelFor } from "./assets.js?ver=0.4.5";
+import { effectiveProperties } from "./styles.js?ver=0.4.5";
 
 const screens = { desktop: "Desktop", tablet: "Tablette", mobile: "Mobile" };
+// Native frames even in light editing mode (light-mode.js), which slows the theme's.
 const frameTick = (win) =>
-  new Promise((resolve) =>
-    win.requestAnimationFrame(() => win.requestAnimationFrame(resolve)),
-  );
+  new Promise((resolve) => {
+    const raf = win.__vtRequestAnimationFrame || win.requestAnimationFrame;
+    raf(() => raf(resolve));
+  });
 const px = (value) =>
   /^-?[\d.]+px$|^0$/.test(value || "") ? parseFloat(value) : 0;
 export function intersection(a, b) {

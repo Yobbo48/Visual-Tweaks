@@ -1,5 +1,5 @@
-import { fontValue, fontLabel } from "./appearance-controls.js?ver=0.4.4";
-import { validValue } from "./validation.js?ver=0.4.4";
+import { fontValue, fontLabel } from "./appearance-controls.js?ver=0.4.5";
+import { validValue } from "./validation.js?ver=0.4.5";
 export const colorRoles = {
   primary: "Principale",
   secondary: "Secondaire",

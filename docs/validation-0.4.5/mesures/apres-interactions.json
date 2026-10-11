@@ -1,0 +1,89 @@
+{
+  "scenario": "interactions",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T07:27:01.312Z",
+  "mesure": {
+    "dureeS": 15,
+    "crans": 38,
+    "cpu": {
+      "moyennePct": 65.5,
+      "rendererPct": 50,
+      "gpuPct": 12.5,
+      "navigateurPct": 2.9,
+      "picPct": 125,
+      "picRendererPct": 81
+    },
+    "filPrincipal": {
+      "occupePct": 26.4,
+      "scriptMsParS": 33.8,
+      "recalculsStyleParS": 151.7,
+      "recalculsStyleMsParS": 36,
+      "misesEnPageParS": 25.4,
+      "misesEnPageMsParS": 8.6
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 2828.3,
+        "thème": 347.8,
+        "inactif": 11277.4,
+        "autre": 72.4,
+        "éditeur": 295.6,
+        "sonde de mesure": 138.5,
+        "runtime public": 36.2,
+        "WordPress": 2,
+        "ramasse-miettes": 9
+      },
+      "fonctions": [
+        "  202.3 ms  thème · getBoundingClientRect :0",
+        "   87.2 ms  thème · (anonyme) animated.js:23",
+        "   66.4 ms  éditeur · getBoundingClientRect :0",
+        "   27.5 ms  runtime public · backgroundSource selection.js:49",
+        "   27.4 ms  éditeur · getPropertyValue :0",
+        "   26.3 ms  thème · addEventListener.passive animated.js:35",
+        "   21.0 ms  thème · tick animated.js:19",
+        "   13.7 ms  éditeur · updateOutline editor.js:664",
+        "   11.4 ms  éditeur · replaceChildren :0",
+        "   10.8 ms  éditeur · createElement :0",
+        "   10.2 ms  thème · setProperty :0",
+        "    9.8 ms  éditeur · getClientRects :0"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {
+          "editeur": 3.3
+        },
+        "timers": {
+          "editeur": 3.7
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": {
+        "raf": {
+          "theme": 59.6
+        },
+        "timers": {
+          "theme": 0.6
+        },
+        "mutations": {
+          "editeur": 60.7
+        },
+        "records": {
+          "editeur": 360.8
+        },
+        "longTasks": 0
+      }
+    },
+    "memoire": {
+      "tasJSMo": 5.6,
+      "noeuds": 2878,
+      "ecouteurs": 596,
+      "documents": 9,
+      "cadres": 9
+    }
+  },
+  "erreurs": []
+}

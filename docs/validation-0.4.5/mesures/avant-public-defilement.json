@@ -1,0 +1,67 @@
+{
+  "scenario": "public-defilement",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T07:04:12.196Z",
+  "mesure": {
+    "dureeS": 15.1,
+    "crans": 113,
+    "cpu": {
+      "moyennePct": 57.2,
+      "rendererPct": 39.3,
+      "gpuPct": 15.9,
+      "navigateurPct": 2,
+      "picPct": 95,
+      "picRendererPct": 55
+    },
+    "filPrincipal": {
+      "occupePct": 12.8,
+      "scriptMsParS": 17.1,
+      "recalculsStyleParS": 120.3,
+      "recalculsStyleMsParS": 28.8,
+      "misesEnPageParS": 4.9,
+      "misesEnPageMsParS": 0.9
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 1538.8,
+        "thème": 318.8,
+        "inactif": 13145.1,
+        "autre": 4.8,
+        "ramasse-miettes": 6.1,
+        "sonde de mesure": 117.9
+      },
+      "fonctions": [
+        "  190.5 ms  thème · getBoundingClientRect :0",
+        "   60.0 ms  thème · (anonyme) animated.js:23",
+        "   45.2 ms  thème · addEventListener.passive animated.js:35",
+        "   13.0 ms  thème · setProperty :0",
+        "    8.9 ms  thème · tick animated.js:19",
+        "    0.7 ms  thème · IntersectionObserver.threshold animated.js:39",
+        "    0.6 ms  thème · append :0"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {
+          "theme": 59.8
+        },
+        "timers": {
+          "theme": 0.6
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": null
+    },
+    "memoire": {
+      "tasJSMo": 1.48,
+      "noeuds": 191,
+      "ecouteurs": 16,
+      "documents": 2,
+      "cadres": 2
+    }
+  },
+  "erreurs": []
+}

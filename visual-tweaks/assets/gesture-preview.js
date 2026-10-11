@@ -1,4 +1,4 @@
-import { declarations } from "./styles.js?ver=0.4.4";
+import { declarations } from "./styles.js?ver=0.4.5";
 
 // Editor-only transient CSS: the public runtime never loads this gesture controller.
 export class GesturePreview {

@@ -1,0 +1,89 @@
+{
+  "scenario": "masque",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T07:06:39.215Z",
+  "visibilite": "visible",
+  "mesure": {
+    "dureeS": 12,
+    "crans": 0,
+    "cpu": {
+      "moyennePct": 19.6,
+      "rendererPct": 17.2,
+      "gpuPct": 0.9,
+      "navigateurPct": 1.5,
+      "picPct": 50,
+      "picRendererPct": 39
+    },
+    "filPrincipal": {
+      "occupePct": 3.6,
+      "scriptMsParS": 5.2,
+      "recalculsStyleParS": 6.5,
+      "recalculsStyleMsParS": 3.1,
+      "misesEnPageParS": 2.1,
+      "misesEnPageMsParS": 1.2
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 75.9,
+        "inactif": 11818.9,
+        "sonde de mesure": 4.6,
+        "runtime public": 5,
+        "éditeur": 88.7,
+        "thème": 9.5,
+        "autre": 1
+      },
+      "fonctions": [
+        "   43.1 ms  éditeur · show navigation.js:122",
+        "    6.9 ms  éditeur · createElement :0",
+        "    6.6 ms  éditeur · paintTree navigation.js:315",
+        "    5.2 ms  thème · getBoundingClientRect :0",
+        "    5.0 ms  éditeur · getClientRects :0",
+        "    4.5 ms  éditeur · readVisibility navigation.js:339",
+        "    4.4 ms  éditeur · replaceChildren :0",
+        "    3.8 ms  éditeur · append :0",
+        "    3.4 ms  éditeur · sync navigation.js:354",
+        "    3.2 ms  runtime public · backgroundSource selection.js:49",
+        "    3.1 ms  éditeur · el navigation.js:138",
+        "    2.6 ms  éditeur · build navigation.js:144"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {
+          "theme": 1
+        },
+        "timers": {
+          "editeur": 1.5,
+          "theme": 0.6
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": {
+        "raf": {
+          "theme": 1
+        },
+        "timers": {
+          "theme": 0.6
+        },
+        "mutations": {
+          "editeur": 1.6
+        },
+        "records": {
+          "editeur": 7.2
+        },
+        "longTasks": 0
+      }
+    },
+    "memoire": {
+      "tasJSMo": 5.25,
+      "noeuds": 3143,
+      "ecouteurs": 638,
+      "documents": 10,
+      "cadres": 10
+    }
+  },
+  "erreurs": []
+}

@@ -1,4 +1,4 @@
-import { canEditText } from "./selection.js?ver=0.4.4";
+import { canEditText } from "./selection.js?ver=0.4.5";
 const unavailable =
   "Ce type de bloc ne peut pas être aligné ainsi avec sa disposition actuelle.";
 const fail = (reason = unavailable) => ({ error: reason });

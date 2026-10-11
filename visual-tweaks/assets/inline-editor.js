@@ -1,4 +1,4 @@
-import { canEditText } from "./selection.js?ver=0.4.4";
+import { canEditText } from "./selection.js?ver=0.4.5";
 
 // Keep editing plain text: pastes and line breaks never introduce HTML nodes.
 export class InlineEditor {

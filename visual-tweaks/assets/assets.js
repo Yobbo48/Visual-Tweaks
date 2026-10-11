@@ -1,11 +1,11 @@
-import { backgroundLayers } from "./background-layers.js?ver=0.4.4";
+import { backgroundLayers } from "./background-layers.js?ver=0.4.5";
 import {
   editable,
   selectionTarget,
   backgroundSource,
   canEditText,
   stableClasses,
-} from "./selection.js?ver=0.4.4";
+} from "./selection.js?ver=0.4.5";
 export function assetInfo(node) {
   if (!node) return null;
   if (node.localName === "img")
@@ -184,7 +184,14 @@ export function groupAssets(list) {
   }
   return [...groups.values()];
 }
-export function structureInventory(doc) {
+// `root`, `rootItem`, `depth`: inventory of one branch only (0.4.5), the
+// navigation rebuilding just what changed.
+export function structureInventory(
+  doc,
+  root = doc.body,
+  rootItem = null,
+  depth = 0,
+) {
   const list = [],
     seen = new Set();
   function visit(parent, parentItem = null, depth = 0) {
@@ -227,7 +234,7 @@ export function structureInventory(doc) {
         visit(node, item, depth + 1);
     }
   }
-  visit(doc.body);
+  visit(root, rootItem, depth);
   return list;
 }
 

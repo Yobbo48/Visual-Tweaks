@@ -1,4 +1,4 @@
-import { backgroundLayers } from "./background-layers.js?ver=0.4.4";
+import { backgroundLayers } from "./background-layers.js?ver=0.4.5";
 const safeName = /^[a-zA-Z_][a-zA-Z0-9_-]*$/;
 const unstableClass = /^(?:is-|has-|active$|focus$|hover$|selected$|vt-)/;
 const forbidden =

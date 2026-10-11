@@ -1,5 +1,5 @@
-import { BREAKPOINTS, declarations } from "./styles.js?ver=0.4.4";
-import { resolve } from "./selection.js?ver=0.4.4";
+import { BREAKPOINTS, declarations } from "./styles.js?ver=0.4.5";
+import { resolve } from "./selection.js?ver=0.4.5";
 
 // Patch only existing, ordinary CSS rules. New targets, content, image zoom and
 // structural resets retain the full renderer as the authoritative fallback.

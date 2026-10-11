@@ -1,0 +1,122 @@
+{
+  "scenario": "navigations",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T07:27:47.023Z",
+  "memoireApresOuverture": {
+    "tasJSMo": 3.77,
+    "noeuds": 1402,
+    "ecouteurs": 374,
+    "documents": 8,
+    "cadres": 8
+  },
+  "memoireParNavigation": [
+    {
+      "tasJSMo": 4.87,
+      "noeuds": 2581,
+      "ecouteurs": 576,
+      "documents": 8,
+      "cadres": 8
+    },
+    {
+      "tasJSMo": 4.95,
+      "noeuds": 2585,
+      "ecouteurs": 576,
+      "documents": 8,
+      "cadres": 8
+    },
+    {
+      "tasJSMo": 4.93,
+      "noeuds": 2581,
+      "ecouteurs": 576,
+      "documents": 8,
+      "cadres": 8
+    },
+    {
+      "tasJSMo": 5,
+      "noeuds": 2585,
+      "ecouteurs": 576,
+      "documents": 8,
+      "cadres": 8
+    }
+  ],
+  "mesure": {
+    "dureeS": 10,
+    "crans": 0,
+    "cpu": {
+      "moyennePct": 73.4,
+      "rendererPct": 52.4,
+      "gpuPct": 20.5,
+      "navigateurPct": 0.5,
+      "picPct": 88.8,
+      "picRendererPct": 66.9
+    },
+    "filPrincipal": {
+      "occupePct": 23.3,
+      "scriptMsParS": 22.2,
+      "recalculsStyleParS": 121.3,
+      "recalculsStyleMsParS": 28.6,
+      "misesEnPageParS": 0.9,
+      "misesEnPageMsParS": 0.2
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 1857.2,
+        "thème": 202.5,
+        "sonde de mesure": 114.3,
+        "inactif": 7782.1,
+        "éditeur": 13.1,
+        "ramasse-miettes": 41.3,
+        "runtime public": 0.7
+      },
+      "fonctions": [
+        "  122.2 ms  thème · getBoundingClientRect :0",
+        "   57.5 ms  thème · (anonyme) animated.js:23",
+        "   13.2 ms  thème · tick animated.js:19",
+        "    8.0 ms  thème · setProperty :0",
+        "    7.8 ms  éditeur · (anonyme) navigation.js:74",
+        "    1.4 ms  thème · (anonyme) animated.js:52",
+        "    1.3 ms  éditeur · updateMutations navigation.js:149",
+        "    1.3 ms  éditeur · visible navigation.js:130",
+        "    0.7 ms  éditeur · schedule navigation.js:123",
+        "    0.7 ms  éditeur · toggle :0",
+        "    0.7 ms  runtime public · backgroundSource selection.js:49",
+        "    0.7 ms  éditeur · append :0"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {},
+        "timers": {
+          "editeur": 3.8
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": {
+        "raf": {
+          "theme": 60.4
+        },
+        "timers": {
+          "theme": 0.7
+        },
+        "mutations": {
+          "editeur": 61.1
+        },
+        "records": {
+          "editeur": 363.6
+        },
+        "longTasks": 0
+      }
+    },
+    "memoire": {
+      "tasJSMo": 5.04,
+      "noeuds": 2585,
+      "ecouteurs": 576,
+      "documents": 8,
+      "cadres": 8
+    }
+  },
+  "erreurs": []
+}

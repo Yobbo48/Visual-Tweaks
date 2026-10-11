@@ -1,10 +1,31 @@
-import { selectionTarget } from "./selection.js?ver=0.4.4";
+import { selectionTarget } from "./selection.js?ver=0.4.5";
 import {
   assetInventory,
   groupAssets,
   structureInventory,
   svgThumbnail,
-} from "./assets.js?ver=0.4.4";
+} from "./assets.js?ver=0.4.5";
+
+// What the Assets view shows for one node: it is rebuilt only when this changes.
+function assetSignature(list) {
+  return list
+    .map((a) =>
+      [
+        a.kind,
+        a.src,
+        a.pseudo || "",
+        a.layer ?? "",
+        a.name,
+        a.type,
+        a.area,
+        a.width,
+        a.height,
+        a.replaceable,
+        a.layers?.map((layer) => layer.src || layer.raw).join(",") || "",
+      ].join("|"),
+    )
+    .join("\n");
+}
 
 // The DOM node supplied by the editor is the only selection; navigation keeps only view state.
 export class Navigation {
@@ -28,40 +49,54 @@ export class Navigation {
     this.visibility = new WeakMap();
     this.thumbnails = new WeakMap();
     this.assetIndex = null;
-    this.metrics = { structureBuilds: 0, assetScans: 0, assetUpdates: 0 };
+    this.metrics = {
+      structureBuilds: 0,
+      structureBranches: 0,
+      assetScans: 0,
+      assetUpdates: 0,
+      viewRebuilds: 0,
+    };
   }
   observe(doc) {
     this.observer?.disconnect();
     clearTimeout(this.pending);
+    this.pending = null;
+    this.observed = doc;
     this.assetIndex = null;
     this.thumbnails = new WeakMap();
     this.visibility = new WeakMap();
     this.expanded.clear();
+    // 0.4.5 : attributs modifiés (nœud seul), nœuds ajoutés ou retirés (sous-arbre)
+    // et parents dont les enfants ont changé (branche de Structure).
     this.changed = new Set();
-    this.structural = false;
+    this.moved = new Set();
+    this.branches = new Set();
     this.observer = new doc.defaultView.MutationObserver((records) => {
-      const changed = new Set();
-      let structural = false;
+      let relevant = false;
       for (const record of records) {
         if (record.type === "childList") {
-          for (const node of [...record.addedNodes, ...record.removedNodes])
-            if (node.nodeType === 1) {
-              structural = true;
-              this.visibility.delete(record.target);
-              changed.add(node);
-            }
+          let elements = false;
+          for (const list of [record.addedNodes, record.removedNodes])
+            for (const node of list)
+              if (node.nodeType === 1) {
+                elements = true;
+                this.moved.add(node);
+              }
+          if (elements) {
+            this.branches.add(record.target);
+            relevant = true;
+          }
           // Plain text overrides only update their existing label, not the tree.
           const row = this.rows.get(record.target);
           if (row && !record.target.children.length)
             row.row.querySelector("small").textContent =
               record.target.textContent.trim().slice(0, 50);
-        } else changed.add(record.target);
+        } else {
+          this.changed.add(record.target);
+          relevant = true;
+        }
       }
-      if (!changed.size) return;
-      for (const node of changed) this.changed.add(node);
-      this.structural ||= structural;
-      clearTimeout(this.pending);
-      this.pending = setTimeout(() => this.updateMutations(doc), 200);
+      if (relevant) this.schedule();
     });
     this.observer.observe(doc.body, {
       subtree: true,
@@ -80,36 +115,138 @@ export class Navigation {
       ],
     });
   }
+  // 0.4.5 : délai fixe compté depuis la première mutation. En 0.4.4, chaque
+  // mutation repoussait la mise à jour : une animation continue du thème la
+  // bloquait indéfiniment, une animation intermittente la relançait sans fin.
+  // Rien n'est traité tant que la navigation est masquée (panneau fermé,
+  // onglet en arrière-plan) : les changements attendent resume().
+  schedule() {
+    if (this.pending || !this.visible()) return;
+    this.pending = setTimeout(() => {
+      this.pending = null;
+      if (this.visible()) this.updateMutations(this.observed);
+    }, 250);
+  }
+  visible() {
+    const doc = this.observed;
+    return (
+      !!doc &&
+      document.visibilityState !== "hidden" &&
+      doc.visibilityState !== "hidden" &&
+      !this.root.closest("[hidden]")
+    );
+  }
+  // La navigation redevient visible : ce qui a changé entre-temps est traité en une fois.
+  resume() {
+    clearTimeout(this.pending);
+    this.pending = null;
+    if (
+      this.visible() &&
+      (this.changed?.size || this.moved?.size || this.branches?.size)
+    )
+      this.updateMutations(this.observed);
+  }
   updateMutations(doc) {
     if (this.getDocument() !== doc) return;
+    const changed = this.changed,
+      moved = this.moved,
+      branches = this.branches;
+    this.changed = new Set();
+    this.moved = new Set();
+    this.branches = new Set();
+    // Visibility is read again lazily, at the next paint of the rows.
     this.visibility = new WeakMap();
-    for (const node of this.changed) {
-      this.visibility.delete(node);
-      this.thumbnails.delete(node);
-      if (this.assetIndex) {
-        const nodes = [node, ...node.querySelectorAll("*")];
-        for (const candidate of nodes) {
-          this.assetIndex.delete(candidate);
-          const target = selectionTarget(candidate);
-          if (target) this.assetIndex.delete(target);
-        }
-        if (node.isConnected) {
-          const updates = new Map();
+    let assets = false;
+    if (this.assetIndex) {
+      for (const node of new Set([...moved, ...changed])) {
+        // An added or removed node brings its whole subtree; an attribute
+        // change (class, style…) concerns the node, and its descendants only
+        // when they are few: a theme animating a large container no longer
+        // triggers a scan of the whole page.
+        const subtree =
+          moved.has(node) || node.getElementsByTagName("*").length <= 64;
+        const nodes = subtree ? [node, ...node.querySelectorAll("*")] : [node];
+        const before = new Map();
+        for (const candidate of nodes)
+          for (const target of [candidate, selectionTarget(candidate)])
+            if (target && this.assetIndex.has(target)) {
+              before.set(target, assetSignature(this.assetIndex.get(target)));
+              this.assetIndex.delete(target);
+            }
+        const updates = new Map();
+        if (node.isConnected)
           for (const asset of assetInventory(doc, nodes)) {
             if (!updates.has(asset.node)) updates.set(asset.node, []);
             updates.get(asset.node).push(asset);
           }
-          for (const [target, assets] of updates)
-            this.assetIndex.set(target, assets);
+        for (const [target, list] of updates) this.assetIndex.set(target, list);
+        // The Assets view is rebuilt only when what it lists has changed.
+        if (
+          before.size !== updates.size ||
+          [...updates].some(
+            ([target, list]) => before.get(target) !== assetSignature(list),
+          )
+        ) {
+          assets = true;
+          this.thumbnails.delete(node);
         }
         this.metrics.assetUpdates++;
       }
     }
-    if (this.structural) this.views.delete("structure");
-    this.views.delete("assets");
-    this.changed.clear();
-    this.structural = false;
-    if (!this.views.has(this.mode)) this.show(this.mode, this.selection());
+    if (assets) this.views.delete("assets");
+    if (branches.size && this.views.has("structure"))
+      this.updateBranches(doc, branches);
+    if (!this.views.has(this.mode)) {
+      this.metrics.viewRebuilds++;
+      this.show(this.mode, this.selection());
+    }
+  }
+  // Only the branches whose children changed are rebuilt; a branch inside
+  // another changed branch is covered by it.
+  updateBranches(doc, branches) {
+    const roots = new Set();
+    for (const target of branches) {
+      if (!target.isConnected) continue;
+      let node = target;
+      while (node && node !== doc.body && !this.rows.has(node))
+        node = node.parentElement;
+      if (node) roots.add(node);
+    }
+    if (roots.has(doc.body)) {
+      this.views.delete("structure");
+      return;
+    }
+    const painted = [];
+    for (const root of roots)
+      if (![...roots].some((other) => other !== root && other.contains(root)))
+        painted.push(root, ...this.rebuildBranch(doc, root));
+    if (painted.length) this.paintRows(painted, this.selection());
+  }
+  rebuildBranch(doc, node) {
+    const entry = this.rows.get(node);
+    for (const other of [...this.rows.keys()])
+      if (other !== node && (!other.isConnected || node.contains(other)))
+        this.rows.delete(other);
+    for (const other of [...this.expanded])
+      if (!other.isConnected) this.expanded.delete(other);
+    entry.item.children = [];
+    const items = structureInventory(
+      doc,
+      node,
+      entry.item,
+      entry.item.depth + 1,
+    );
+    entry.children.replaceChildren();
+    for (const item of items)
+      this.addRow(
+        item,
+        item.parent === entry.item
+          ? entry.children
+          : this.rows.get(item.parent.node).children,
+      );
+    entry.toggle.hidden = !entry.item.children.length;
+    this.metrics.structureBranches++;
+    return items.map((item) => item.node);
   }
   viewportChanged(selected) {
     this.visibility = new WeakMap();
@@ -159,36 +296,11 @@ export class Navigation {
       const tree = this.el("div", "", "structure-tree");
       tree.setAttribute("role", "tree");
       view.append(tree);
-      for (const item of items) {
-        const branch = this.el("div", "", "structure-branch");
-        const row = this.el("div", "", "structure-item");
-        row.setAttribute("role", "treeitem");
-        row.style.setProperty("--depth", item.depth);
-        row.dataset.assetId =
-          item.node.getAttribute("data-vt-id") || item.node.id || "";
-        const toggle = this.el("button", "▸", "tree-toggle");
-        toggle.setAttribute("aria-label", `Déplier ${item.label}`);
-        toggle.hidden = !item.children.length;
-        const pick = this.el("button", "", "tree-pick");
-        pick.setAttribute("aria-label", `Sélectionner ${item.label}`);
-        pick.title = item.node.localName;
-        pick.append(this.el("strong", item.type), this.el("small", item.label));
-        pick.addEventListener("click", () => this.select(item.node));
-        row.addEventListener("pointerenter", () => this.highlight(item.node));
-        row.addEventListener("pointerleave", () => this.highlight(null));
-        const children = this.el("div", "", "tree-children");
-        this.rows.set(item.node, { item, row, children, toggle });
-        toggle.addEventListener("click", () => {
-          if (this.expanded.has(item.node)) this.expanded.delete(item.node);
-          else this.expanded.add(item.node);
-          this.paintTree(this.selection());
-        });
-        row.append(toggle, pick);
-        branch.append(row, children);
-        (item.parent ? this.rows.get(item.parent.node).children : tree).append(
-          branch,
+      for (const item of items)
+        this.addRow(
+          item,
+          item.parent ? this.rows.get(item.parent.node).children : tree,
         );
-      }
     } else {
       if (!this.assetIndex) {
         this.metrics.assetScans++;
@@ -287,6 +399,34 @@ export class Navigation {
     }
     this.views.set(mode, view);
   }
+  addRow(item, container) {
+    const branch = this.el("div", "", "structure-branch");
+    const row = this.el("div", "", "structure-item");
+    row.setAttribute("role", "treeitem");
+    row.style.setProperty("--depth", item.depth);
+    row.dataset.assetId =
+      item.node.getAttribute("data-vt-id") || item.node.id || "";
+    const toggle = this.el("button", "▸", "tree-toggle");
+    toggle.setAttribute("aria-label", `Déplier ${item.label}`);
+    toggle.hidden = !item.children.length;
+    const pick = this.el("button", "", "tree-pick");
+    pick.setAttribute("aria-label", `Sélectionner ${item.label}`);
+    pick.title = item.node.localName;
+    pick.append(this.el("strong", item.type), this.el("small", item.label));
+    pick.addEventListener("click", () => this.select(item.node));
+    row.addEventListener("pointerenter", () => this.highlight(item.node));
+    row.addEventListener("pointerleave", () => this.highlight(null));
+    const children = this.el("div", "", "tree-children");
+    this.rows.set(item.node, { item, row, children, toggle });
+    toggle.addEventListener("click", () => {
+      if (this.expanded.has(item.node)) this.expanded.delete(item.node);
+      else this.expanded.add(item.node);
+      this.paintTree(this.selection());
+    });
+    row.append(toggle, pick);
+    branch.append(row, children);
+    container.append(branch);
+  }
   thumbnail(item) {
     const key = `${item.kind}:${item.src}:${item.pseudo || ""}`;
     const cached = this.thumbnails.get(item.node)?.get(key);
@@ -313,20 +453,24 @@ export class Navigation {
     return thumb;
   }
   paintTree(selected) {
+    this.paintRows(this.rows.keys(), selected);
+  }
+  paintRows(nodes, selected) {
     // Read every visibility first: interleaving these reads (page layout) with
     // row writes (editor layout) forced one layout per row.
     const hidden = new Map();
-    for (const node of this.rows.keys())
-      hidden.set(node, this.readVisibility(node));
-    for (const [node, { row, children, toggle, item }] of this.rows) {
+    for (const node of nodes)
+      if (this.rows.has(node)) hidden.set(node, this.readVisibility(node));
+    for (const [node, invisible] of hidden) {
+      const { row, children, toggle, item } = this.rows.get(node);
       const active = node === selected;
       const ancestor =
         !!selected && node !== selected && node.contains(selected);
       row.classList.toggle("is-selected", active);
       row.classList.toggle("is-ancestor", ancestor);
-      row.classList.toggle("is-invisible", hidden.get(node));
+      row.classList.toggle("is-invisible", invisible);
       row.setAttribute("aria-selected", String(active));
-      row.title = hidden.get(node) ? "Invisible sur cet écran" : item.label;
+      row.title = invisible ? "Invisible sur cet écran" : item.label;
       if (item.children.length) {
         const open = this.expanded.has(node);
         children.hidden = !open;

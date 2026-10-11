@@ -1,0 +1,85 @@
+{
+  "scenario": "repos",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T07:20:15.952Z",
+  "mesure": {
+    "dureeS": 30,
+    "crans": 0,
+    "cpu": {
+      "moyennePct": 66,
+      "rendererPct": 44.8,
+      "gpuPct": 21,
+      "navigateurPct": 0.2,
+      "picPct": 85.8,
+      "picRendererPct": 62.9
+    },
+    "filPrincipal": {
+      "occupePct": 17.6,
+      "scriptMsParS": 23.9,
+      "recalculsStyleParS": 120.1,
+      "recalculsStyleMsParS": 33.5,
+      "misesEnPageParS": 0.9,
+      "misesEnPageMsParS": 0.2
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 4020.3,
+        "thème": 764.8,
+        "inactif": 24843.7,
+        "sonde de mesure": 327.8,
+        "éditeur": 37.4,
+        "ramasse-miettes": 9,
+        "runtime public": 0.7
+      },
+      "fonctions": [
+        "  480.4 ms  thème · getBoundingClientRect :0",
+        "  213.6 ms  thème · (anonyme) animated.js:23",
+        "   36.1 ms  thème · tick animated.js:19",
+        "   32.8 ms  thème · setProperty :0",
+        "   19.7 ms  éditeur · (anonyme) navigation.js:74",
+        "    2.1 ms  éditeur · closest :0",
+        "    2.1 ms  éditeur · (anonyme) navigation.js:125",
+        "    2.0 ms  éditeur · updateBranches navigation.js:206",
+        "    1.9 ms  éditeur · append :0",
+        "    1.9 ms  éditeur · schedule navigation.js:123",
+        "    1.4 ms  éditeur · rebuildBranch navigation.js:225",
+        "    1.3 ms  éditeur · document editor.js:2380"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {},
+        "timers": {
+          "editeur": 3.8
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": {
+        "raf": {
+          "theme": 60.1
+        },
+        "timers": {
+          "theme": 0.6
+        },
+        "mutations": {
+          "editeur": 60.7
+        },
+        "records": {
+          "editeur": 361.6
+        },
+        "longTasks": 0
+      }
+    },
+    "memoire": {
+      "tasJSMo": 3.85,
+      "noeuds": 1402,
+      "ecouteurs": 374,
+      "documents": 8,
+      "cadres": 8
+    }
+  },
+  "erreurs": []
+}

@@ -1,0 +1,63 @@
+{
+  "scenario": "public",
+  "page": "/?vt-test=animated",
+  "leger": false,
+  "date": "2026-10-11T06:59:59.302Z",
+  "mesure": {
+    "dureeS": 15,
+    "cpu": {
+      "moyennePct": 67.3,
+      "rendererPct": 38.4,
+      "gpuPct": 28.7,
+      "navigateurPct": 0.3,
+      "picPct": 82.9,
+      "picRendererPct": 44
+    },
+    "filPrincipal": {
+      "occupePct": 10.2,
+      "scriptMsParS": 15.9,
+      "recalculsStyleParS": 120.1,
+      "recalculsStyleMsParS": 26.6,
+      "misesEnPageParS": 0.9,
+      "misesEnPageMsParS": 0.2
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 1258.5,
+        "inactif": 13335.8,
+        "thème": 292.2,
+        "sonde de mesure": 117.3,
+        "ramasse-miettes": 2
+      },
+      "fonctions": [
+        "  198.0 ms  thème · getBoundingClientRect :0",
+        "   66.4 ms  thème · (anonyme) animated.js:23",
+        "   17.0 ms  thème · tick animated.js:19",
+        "    9.7 ms  thème · setProperty :0",
+        "    1.1 ms  thème · append :0"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {
+          "theme": 60
+        },
+        "timers": {
+          "theme": 0.6
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": null
+    },
+    "memoire": {
+      "tasJSMo": 0.82,
+      "noeuds": 191,
+      "ecouteurs": 3,
+      "documents": 2,
+      "cadres": 2
+    }
+  },
+  "erreurs": []
+}

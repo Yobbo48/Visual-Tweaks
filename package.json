@@ -1,7 +1,7 @@
 {
   "name": "visual-tweaks-dev",
   "private": true,
-  "version": "0.4.4",
+  "version": "0.4.5",
   "type": "module",
   "engines": {
     "node": ">=24.18"
@@ -21,7 +21,9 @@
     "test:ergonomics": "node dev/cross-browser.mjs --ergonomics",
     "test:comfort": "node dev/cross-browser.mjs --comfort",
     "test:all": "node dev/validate.mjs",
-    "test:comfort-real-theme": "node dev/cross-browser.mjs --comfort-real-theme"
+    "test:comfort-real-theme": "node dev/cross-browser.mjs --comfort-real-theme",
+    "test:resources": "node tests/ressources-e2e.mjs",
+    "measure:resources": "node dev/mesure-ressources.mjs"
   },
   "devDependencies": {
     "@wp-playground/cli": "3.1.56",

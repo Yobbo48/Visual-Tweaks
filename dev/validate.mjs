@@ -46,3 +46,8 @@ for (const engine of ["chromium", "webkit", "firefox"]) {
   run("tests/conservation-e2e.mjs", [], { VT_ENGINE: engine });
   run("tests/fidelite-e2e.mjs", [], { VT_ENGINE: engine });
 }
+
+// 0.4.5 : ressources de l'éditeur (document hôte, Navigation sous animation,
+// onglet masqué, édition allégée), sur les trois moteurs.
+for (const engine of ["chromium", "webkit", "firefox"])
+  run("tests/ressources-e2e.mjs", [], { VT_ENGINE: engine });

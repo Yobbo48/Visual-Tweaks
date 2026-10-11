@@ -56,8 +56,13 @@ export class ContextualToolbar {
     this.root.hidden = true;
     this.close();
   }
-  position(rect, frameRect) {
-    const stage = this.stage.getBoundingClientRect();
+  // `geometry` (0.4.5): stage box, scroll, size and toolbar width already read
+  // by the editor before its writes; while the toolbar stays visible, placing
+  // it then forces no layout (scroll, resize). Without it, or when the toolbar
+  // appears, the boxes are measured here as before.
+  position(rect, frameRect, geometry = null) {
+    const known = !!geometry?.toolbarWidth && !this.root.hidden;
+    const stage = known ? geometry.stage : this.stage.getBoundingClientRect();
     if (
       rect.bottom < frameRect.top ||
       rect.top > frameRect.bottom ||
@@ -68,17 +73,26 @@ export class ContextualToolbar {
       return;
     }
     this.root.hidden = false;
-    const x = rect.left - stage.left + this.stage.scrollLeft;
-    const y = rect.top - stage.top + this.stage.scrollTop;
-    const width = this.root.offsetWidth || 350;
-    const minX = this.stage.scrollLeft + 12,
-      maxX = this.stage.scrollLeft + this.stage.clientWidth - width - 12;
+    const scrollLeft = known ? geometry.scrollLeft : this.stage.scrollLeft,
+      scrollTop = known ? geometry.scrollTop : this.stage.scrollTop,
+      clientWidth = known ? geometry.clientWidth : this.stage.clientWidth,
+      clientHeight = known ? geometry.clientHeight : this.stage.clientHeight;
+    const x = rect.left - stage.left + scrollLeft;
+    const y = rect.top - stage.top + scrollTop;
+    const width = (known ? geometry.toolbarWidth : this.root.offsetWidth) || 350;
+    const minX = scrollLeft + 12,
+      maxX = scrollLeft + clientWidth - width - 12;
     this.root.style.left = `${Math.max(minX, Math.min(x, maxX))}px`;
     const above = y - 52;
-    this.root.style.top = `${above >= this.stage.scrollTop + 12 ? above : Math.min(this.stage.scrollTop + this.stage.clientHeight - 52, y + rect.height + 16)}px`;
+    const top =
+      above >= scrollTop + 12
+        ? above
+        : Math.min(scrollTop + clientHeight - 52, y + rect.height + 16);
+    this.root.style.top = `${top}px`;
     this.root.classList.toggle(
       "popover-up",
-      this.root.offsetTop - this.stage.scrollTop > this.stage.clientHeight / 2,
+      (known ? Math.round(top) : this.root.offsetTop) - scrollTop >
+        clientHeight / 2,
     );
   }
 }

@@ -1,7 +1,7 @@
 import {
   replaceBackgroundLayers,
   backgroundLayers,
-} from "./background-layers.js?ver=0.4.4";
+} from "./background-layers.js?ver=0.4.5";
 export const BREAKPOINTS = { desktop: 0, tablet: 1023, mobile: 767 };
 export function declarations(properties, inherited = {}) {
   const lines = [];

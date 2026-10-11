@@ -1,4 +1,4 @@
-import { canonicalValue } from "./validation.js?ver=0.4.4";
+import { canonicalValue } from "./validation.js?ver=0.4.5";
 
 // PHP serializes empty arrays as []; these fields are maps, including in old drafts.
 export function normalizeElements(elements) {

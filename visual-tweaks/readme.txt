@@ -4,7 +4,7 @@ Tags: development, visual-editor, css
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.4.4
+Stable tag: 0.4.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,17 @@ retire tous les overrides sans supprimer les données. Désinstaller conserve le
 Voir le README.md du projet pour architecture, banc d'essai, limites et roadmap.
 
 == Changelog ==
+= 0.4.5 =
+Éditeur économe en ressources. L'éditeur s'ouvre dans son propre document (styles, médiathèque,
+éditeur) : le thème ne tourne plus en double, invisible, derrière l'interface, mais seulement dans
+l'aperçu, inchangé. Navigation : délai fixe au lieu d'un report à chaque mutation (une animation
+continue ne bloque plus les mises à jour), panneau Assets reconstruit seulement si son contenu
+change, Structure reconstruite par branche, rien n'est traité tant que la navigation est masquée
+(panneau fermé, onglet en arrière-plan). Contour : aucune lecture de géométrie sans sélection,
+barre contextuelle placée sans mise en page forcée. Édition allégée (facultative, réversible d'un
+clic) : dans l'aperçu, boucles d'animation du thème ralenties, animations infinies et vidéos en
+pause. Site public, données, historique et brouillons inchangés.
+
 = 0.4.4 =
 Éditeur plus fluide : le contour de sélection suit le défilement une fois par image, lectures de
 géométrie regroupées avant les écritures (moins de recalculs forcés), arbre de navigation peint en

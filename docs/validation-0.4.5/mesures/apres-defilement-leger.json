@@ -1,0 +1,89 @@
+{
+  "scenario": "defilement",
+  "page": "/?vt-test=animated",
+  "leger": true,
+  "date": "2026-10-11T07:26:02.020Z",
+  "mesure": {
+    "dureeS": 15.1,
+    "crans": 135,
+    "cpu": {
+      "moyennePct": 49.1,
+      "rendererPct": 33.1,
+      "gpuPct": 13.8,
+      "navigateurPct": 2.3,
+      "picPct": 105,
+      "picRendererPct": 79
+    },
+    "filPrincipal": {
+      "occupePct": 10.7,
+      "scriptMsParS": 12.7,
+      "recalculsStyleParS": 68.1,
+      "recalculsStyleMsParS": 9,
+      "misesEnPageParS": 15.6,
+      "misesEnPageMsParS": 3.7
+    },
+    "profil": {
+      "parOrigine": {
+        "rendu natif": 1101.4,
+        "inactif": 13770.2,
+        "autre": 7.5,
+        "runtime public": 4,
+        "thème": 35.4,
+        "sonde de mesure": 38.8,
+        "éditeur": 134.7,
+        "ramasse-miettes": 0.6
+      },
+      "fonctions": [
+        "   25.2 ms  éditeur · querySelector :0",
+        "   25.1 ms  éditeur · updateOutline editor.js:656",
+        "   20.1 ms  thème · addEventListener.passive animated.js:35",
+        "   16.4 ms  éditeur · getBoundingClientRect :0",
+        "   15.2 ms  éditeur · matrixFor geometry.js:31",
+        "    9.9 ms  éditeur · dimension geometry.js:4",
+        "    8.4 ms  éditeur · placeOverlay editor.js:618",
+        "    6.7 ms  thème · getBoundingClientRect :0",
+        "    4.3 ms  éditeur · visualQuad geometry.js:89",
+        "    3.8 ms  éditeur · multiply :0",
+        "    3.7 ms  thème · tick animated.js:19",
+        "    3.1 ms  éditeur · dimensionsOf geometry.js:1"
+      ]
+    },
+    "recurrentParS": {
+      "haut": {
+        "raf": {
+          "editeur": 9.7
+        },
+        "timers": {
+          "editeur": 3.8
+        },
+        "mutations": {},
+        "records": {},
+        "longTasks": 0
+      },
+      "cadre": {
+        "raf": {
+          "editeur": 3.8
+        },
+        "timers": {
+          "editeur": 3.8,
+          "theme": 0.6
+        },
+        "mutations": {
+          "editeur": 5
+        },
+        "records": {
+          "editeur": 26
+        },
+        "longTasks": 0
+      }
+    },
+    "memoire": {
+      "tasJSMo": 5.21,
+      "noeuds": 2591,
+      "ecouteurs": 577,
+      "documents": 8,
+      "cadres": 8
+    }
+  },
+  "erreurs": []
+}

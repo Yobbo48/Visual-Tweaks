@@ -1,6 +1,57 @@
-# Visual Tweaks — 0.4.4 — éditeur plus fluide, conservation et publication fiables
+# Visual Tweaks — 0.4.5 — éditeur économe en ressources
 
 Plugin WordPress autonome pour retoucher un site PHP/HTML/CSS/JavaScript depuis son rendu réel. JavaScript natif, aucun framework, aucun page builder, aucun service IA. Aucun fichier du thème n’est réécrit.
+
+## 0.4.5 — ressources consommées pendant l'édition
+
+Compte rendu, mesures brutes et validations restantes : `docs/validation-0.4.5/CONTROLE.md`. **Rien n'est déployé.**
+
+**Mesuré sur la 0.4.4** (banc animé `?vt-test=animated`, Chromium, mêmes conditions). Éditeur ouvert sans action : 97 % de CPU contre 67 % pour la page publique seule, fil principal occupé 23,7 % contre 10,2 %, deux fois plus de recalculs de style (241/s contre 120/s). Causes :
+- **Le thème tournait deux fois** : l'éditeur s'ouvrait par-dessus la page du thème, dont la copie invisible exécutait scripts, boucle d'animation et animations CSS, en plus de l'aperçu. C'était le coût dominant.
+- **Observateur de Navigation** déclenché 60 fois par seconde par les animations du thème :
+  - en continu, la mise à jour était repoussée sans fin (panneaux jamais à jour) ;
+  - par intermittence, le panneau Assets était reconstruit même sans changement ;
+  - un ajout ou un retrait dans la page reconstruisait tout l'arbre Structure.
+- **Contour** : mises en page forcées par la barre contextuelle à chaque image de défilement, recherches répétées dans le shadow DOM, mise à jour même sans sélection.
+- **Onglet ou panneau masqué** : la Navigation continuait de travailler.
+
+**Corrections**
+- `includes/editor-host.php`, `class-plugin.php` : l'éditeur a son propre document. Il contient les feuilles de style (polices), la médiathèque et l'éditeur, sans gabarit ni script du thème ni runtime. Le thème tourne normalement, et une seule fois, dans l'aperçu (`vt-frame`, inchangé).
+- `navigation.js`, `assets.js` :
+  - délai fixe au lieu d'un report à chaque mutation ;
+  - Assets reconstruit seulement si son contenu change ;
+  - Structure reconstruite par branche ;
+  - rien n'est traité tant que la navigation est masquée (panneau fermé, onglet en arrière-plan) ; tout est rattrapé au retour.
+- `editor.js`, `contextual-toolbar.js` : aucune lecture de géométrie sans sélection ni survol ; barre contextuelle placée avec la géométrie déjà lue ; calques recherchés une fois.
+- **Édition allégée** (`light-mode.js`, bouton dans la barre de l'aperçu, désactivée par défaut, choix conservé) :
+  - dans l'aperçu seulement, les boucles d'animation du thème passent à 4 images/s, les animations infinies et les vidéos sont en pause ;
+  - les apparitions et transitions ne sont pas touchées ;
+  - un second clic rend immédiatement le rendu animé réel ;
+  - le site public n'est pas concerné.
+
+**Résultats** (0.4.4 → 0.4.5)
+
+| Scénario | CPU moyen | Fil principal | Recalculs de style/s |
+|---|---|---|---|
+| Éditeur au repos, 30 s | 96,5 → 66,0 % (allégé : 22,0 %) | 23,7 → 17,6 % (allégé : 2,2 %) | 241 → 120 (allégé : 8) |
+| Défilement avec sélection | 103,6 → 66,2 % (allégé : 49,1 %) | 34,7 → 25,0 % (allégé : 10,7 %) | 259 → 145 (allégé : 68) |
+| Interactions (sélection, déplacement, écrans) | 107,4 → 65,5 % | 36,7 → 26,4 % | 271 → 152 |
+| Onglet en arrière-plan | 19,6 → 17,2 % ; script de l'éditeur 7,4 → 0,7 ms/s | | |
+
+Mémoire stable d'une ouverture à l'autre ; document hôte plus léger (−283 nœuds).
+
+**Inchangés** : le site public (HTML visiteur identique octet pour octet, runtime et modules publics identiques hors numéro de version), le format des données, la REST/CAS, l'historique, les brouillons.
+
+**Validation** (Chromium seul, WordPress 6.5.5 : wordpress.org est inaccessible depuis l'environnement de mesure) :
+- nouveau `tests/ressources-e2e.mjs` 5/5 ;
+- `conservation` 7/7, `fidelite` 6/6, `speed` 5/5, `foundations` 16/16 (médiathèque comprise).
+
+**Non réalisé** :
+- suite complète sur trois moteurs ;
+- recette et mesure sur le thème réel ;
+- performances publiques sur relais.
+
+Détail et commandes dans le compte rendu.
 
 ## 0.4.4 — fluidité de l'éditeur, conservation, publication
 
@@ -396,7 +447,9 @@ visual-tweaks/
   assets/responsive-guard.js   diagnostic dérivé, aperçu et application explicite
   assets/background-layers.js lecture des couches et remplacement URL ciblé
   assets/editor.js             orchestration, panneau, iframe, médiathèque, sauvegarde
+  assets/light-mode.js         édition allégée : animations du thème ralenties dans l’aperçu
   assets/editor.css            interface isolée par Shadow DOM
+  includes/editor-host.php     document hôte de l’éditeur (styles, médiathèque, éditeur)
 ```
 
 Les options `vt_page_<sha256>` ne sont pas autoloadées. Un document par URL relative contient `schemaVersion`, `page`, `revision`, `elements`, `updatedAt`, `updatedBy`. Les paramètres d’édition et de tracking sont retirés ; les autres paramètres sont triés et conservés, afin de distinguer par exemple `/?etude=...`. Limites : 200 cibles/page, 300 Ko/requête, 80 snapshots d’historique en mémoire.
@@ -439,7 +492,7 @@ Arrêt complet : désactiver dans **Réglages → Visual Tweaks**, désactiver l
 - Les overrides gagnent via `!important`. Un style inline du thème lui-même `!important` peut prendre le dessus. Les animations de `translate` et translations 3D ne sont pas traitées ; les transformations `transform` classiques sont conservées.
 - Les textes sont limités par l’API à 4 000 octets UTF-8 ; l’interface compte les unités de chaîne JavaScript. Un texte long accentué peut donc être refusé avant la limite affichée ; le brouillon reste conservé. Ce contrat n’est pas élargi dans cette passe.
 - Texte/images appliqués côté client : ils ne modifient pas la source PHP/WordPress, le HTML serveur, les métadonnées SEO ou les exports du thème. Un bref affichage du contenu original reste possible avant le runtime.
-- L’iframe recharge la page une seconde fois en édition et requiert une politique CSP compatible avec les frames de même origine. En mode Modifier, la navigation et les formulaires sont bloqués ; en mode Naviguer ils fonctionnent avec ouverture externe pour une autre page. Les scripts du thème s’exécutent : cette version vise les pages de développement statiques, pas les applications avec effets métier au chargement.
+- En édition, la page du thème n’est rendue que dans l’iframe (depuis la 0.4.5, le document hôte de l’éditeur ne contient ni gabarit ni script du thème) ; elle requiert une politique CSP compatible avec les frames de même origine. En mode Modifier, la navigation et les formulaires sont bloqués ; en mode Naviguer ils fonctionnent avec ouverture externe pour une autre page. Les scripts du thème s’exécutent : cette version vise les pages de développement statiques, pas les applications avec effets métier au chargement.
 - Pas de CSS libre (`calc`, `var`, gradient, `url`), pas de système typographique complet, pas de gestion globale des retouches de plusieurs pages, pas d’import JSON ni de journal durable multi-session.
 - Compatibilité vérifiée sur WordPress Playground/SQLite, Chromium/WebKit/Firefox, le fixture et une copie locale isolée du thème Kevin Legros. MySQL/MariaDB et autres thèmes/plugins nécessitent leur propre validation. Le cache navigateur et un cache HTTP local contrôlé sont testés ; les caches WordPress tiers et CDN réels restent non testés ; aucun test ni déploiement en production.
 

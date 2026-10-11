@@ -1,37 +1,37 @@
-import { ResponsiveGuard } from "./responsive-guard.js?ver=0.4.4";
-import { SmartGuides } from "./smart-guides.js?ver=0.4.4";
-import { ReviewChanges } from "./review-changes.js?ver=0.4.4";
-import { StylePatcher } from "./style-patcher.js?ver=0.4.4";
-import { GesturePreview } from "./gesture-preview.js?ver=0.4.4";
-import { SiteStyle, colorRoles, fontRoles } from "./site-style.js?ver=0.4.4";
-import { Navigation } from "./navigation.js?ver=0.4.4";
+import { ResponsiveGuard } from "./responsive-guard.js?ver=0.4.5";
+import { SmartGuides } from "./smart-guides.js?ver=0.4.5";
+import { ReviewChanges } from "./review-changes.js?ver=0.4.5";
+import { StylePatcher } from "./style-patcher.js?ver=0.4.5";
+import { GesturePreview } from "./gesture-preview.js?ver=0.4.5";
+import { SiteStyle, colorRoles, fontRoles } from "./site-style.js?ver=0.4.5";
+import { Navigation } from "./navigation.js?ver=0.4.5";
 import {
   alignElement,
   alignContent,
   groupProperties,
-} from "./alignment.js?ver=0.4.4";
+} from "./alignment.js?ver=0.4.5";
 import {
   assetInfo,
   labelFor,
   backgroundLayerModel,
-} from "./assets.js?ver=0.4.4";
-import { normalizeElements } from "./state.js?ver=0.4.4";
+} from "./assets.js?ver=0.4.5";
+import { normalizeElements } from "./state.js?ver=0.4.5";
 import {
   identify,
   editable,
   canEditText,
   selectionTarget,
-} from "./selection.js?ver=0.4.4";
-import { History } from "./history.js?ver=0.4.4";
-import { effectiveProperties, propertyOrigin } from "./styles.js?ver=0.4.4";
+} from "./selection.js?ver=0.4.5";
+import { History } from "./history.js?ver=0.4.5";
+import { effectiveProperties, propertyOrigin } from "./styles.js?ver=0.4.5";
 import {
   validValue,
   validHref,
   canonicalValue,
   invalidOverride,
-} from "./validation.js?ver=0.4.4";
-import { InlineEditor } from "./inline-editor.js?ver=0.4.4";
-import { ContextualToolbar } from "./contextual-toolbar.js?ver=0.4.4";
+} from "./validation.js?ver=0.4.5";
+import { InlineEditor } from "./inline-editor.js?ver=0.4.5";
+import { ContextualToolbar } from "./contextual-toolbar.js?ver=0.4.5";
 import {
   discoverFonts,
   fontValue,
@@ -39,7 +39,7 @@ import {
   discoverColors,
   colorControl,
   toHex,
-} from "./appearance-controls.js?ver=0.4.4";
+} from "./appearance-controls.js?ver=0.4.5";
 import {
   matrixFor,
   localDelta,
@@ -47,9 +47,10 @@ import {
   dimensionsOf,
   boxEdges,
   visualQuad,
-} from "./geometry.js?ver=0.4.4";
+} from "./geometry.js?ver=0.4.5";
 
-import { Viewport } from "./viewport.js?ver=0.4.4";
+import { Viewport } from "./viewport.js?ver=0.4.5";
+import { LightMode } from "./light-mode.js?ver=0.4.5";
 
 const config = window.VisualTweaksConfig;
 if (config?.editor) start();
@@ -65,22 +66,30 @@ function start() {
   const ui = host.attachShadow({ mode: "open" });
   const css = document.createElement("link");
   css.rel = "stylesheet";
-  css.href = new URL("./editor.css?ver=0.4.4", import.meta.url).href;
+  css.href = new URL("./editor.css?ver=0.4.5", import.meta.url).href;
   ui.append(css);
   const shell = document.createElement("div");
   shell.className = "shell";
-  shell.innerHTML = `<header><div class="brand"><b>VT</b><span>Visual Tweaks<small>Retouches de cette page</small></span></div><nav aria-label="Aperçu responsive"><button data-mode="desktop"><img alt="" src="${new URL("./icons/device-desktop.svg", import.meta.url)}">Desktop</button><button data-mode="tablet"><img alt="" src="${new URL("./icons/device-tablet.svg", import.meta.url)}">Tablette</button><button data-mode="mobile"><img alt="" src="${new URL("./icons/device-mobile.svg", import.meta.url)}">Mobile</button></nav><span class="interaction-switch" aria-label="Interaction avec le site"><button id="interaction-edit" aria-pressed="true">Modifier</button><button id="interaction-browse" aria-pressed="false">Naviguer</button></span><span id="state" role="status"></span><button id="undo" title="Cmd/Ctrl + Z">Annuler</button><button id="redo" title="Cmd/Ctrl + Shift + Z">Rétablir</button><button id="save" class="primary">Enregistrer</button><button id="toggle-navigation" aria-expanded="true">Navigation</button><button id="toggle-panel" title="Afficher ou masquer les réglages" aria-expanded="true">Réglages</button><button id="site-style">Style du site</button><button id="exit">Quitter</button></header><div id="global-error" role="alert" hidden></div><div id="recovery"></div><div class="canvas-controls"><label>Desktop <select id="desktop-width" aria-label="Viewport desktop"><option value="1280">1280 px</option><option value="1440">1440 px</option><option value="1600">1600 px</option><option value="1920">1920 px</option><option value="current">Fenêtre actuelle</option><option value="custom">Personnalisé</option></select></label><input id="logical-width" aria-label="Largeur du viewport desktop" type="number" min="320" max="3840" step="1"><output id="viewport-size"></output><button id="fit-canvas">Adapter</button><button id="actual-canvas">100 %</button><output id="zoom-label"></output><button id="test-responsive">Tester le responsive</button><button id="review-button">Modifications</button><button id="viewport-diagnostic">Comparer le rendu</button></div><pre id="canvas-diagnostic" hidden></pre><main><aside id="navigation" aria-label="Navigation de la page"><div class="navigation-tabs" role="tablist"><button id="structure-tab" role="tab" aria-selected="true">Structure</button><button id="assets-tab" role="tab">Assets</button><button id="close-navigation" aria-label="Masquer la navigation">×</button></div><div id="inventory"></div></aside><div class="stage"><div id="frame-status" role="status"><span>Activation de l’éditeur…</span><button id="retry-frame" hidden>Réessayer</button></div><div class="viewport"><div class="canvas"><iframe title="Page WordPress — aperçu réel"></iframe></div></div><div class="outline hover"><span></span></div><div class="outline selected"><span></span><button class="drag" title="Glisser pour déplacer" aria-label="Déplacer l’élément"><img alt="" src="${new URL("./icons/arrows-move.svg", import.meta.url)}"></button></div><div id="context-toolbar"></div><div id="handles" hidden></div><div class="gesture-feedback" hidden></div></div><aside id="properties" hidden aria-label="Propriétés de l’élément"><div id="panel"></div></aside></main><footer class="page-actions"><button id="reset-page">Réinitialiser la page</button><button id="export">Exporter le brouillon JSON</button><button id="discard">Revenir à la sauvegarde</button><p id="message" role="status" aria-live="polite"></p></footer>`;
+  shell.innerHTML = `<header><div class="brand"><b>VT</b><span>Visual Tweaks<small>Retouches de cette page</small></span></div><nav aria-label="Aperçu responsive"><button data-mode="desktop"><img alt="" src="${new URL("./icons/device-desktop.svg", import.meta.url)}">Desktop</button><button data-mode="tablet"><img alt="" src="${new URL("./icons/device-tablet.svg", import.meta.url)}">Tablette</button><button data-mode="mobile"><img alt="" src="${new URL("./icons/device-mobile.svg", import.meta.url)}">Mobile</button></nav><span class="interaction-switch" aria-label="Interaction avec le site"><button id="interaction-edit" aria-pressed="true">Modifier</button><button id="interaction-browse" aria-pressed="false">Naviguer</button></span><span id="state" role="status"></span><button id="undo" title="Cmd/Ctrl + Z">Annuler</button><button id="redo" title="Cmd/Ctrl + Shift + Z">Rétablir</button><button id="save" class="primary">Enregistrer</button><button id="toggle-navigation" aria-expanded="true">Navigation</button><button id="toggle-panel" title="Afficher ou masquer les réglages" aria-expanded="true">Réglages</button><button id="site-style">Style du site</button><button id="exit">Quitter</button></header><div id="global-error" role="alert" hidden></div><div id="recovery"></div><div class="canvas-controls"><label>Desktop <select id="desktop-width" aria-label="Viewport desktop"><option value="1280">1280 px</option><option value="1440">1440 px</option><option value="1600">1600 px</option><option value="1920">1920 px</option><option value="current">Fenêtre actuelle</option><option value="custom">Personnalisé</option></select></label><input id="logical-width" aria-label="Largeur du viewport desktop" type="number" min="320" max="3840" step="1"><output id="viewport-size"></output><button id="fit-canvas">Adapter</button><button id="actual-canvas">100 %</button><output id="zoom-label"></output><button id="test-responsive">Tester le responsive</button><button id="review-button">Modifications</button><button id="light-mode" aria-pressed="false" title="Édition allégée : dans l’aperçu, ralentit les boucles d’animation du thème et met en pause ses animations infinies et ses vidéos. Le site public n’est pas modifié. Cliquez à nouveau pour revoir le rendu animé réel.">Édition allégée</button><button id="viewport-diagnostic">Comparer le rendu</button></div><pre id="canvas-diagnostic" hidden></pre><main><aside id="navigation" aria-label="Navigation de la page"><div class="navigation-tabs" role="tablist"><button id="structure-tab" role="tab" aria-selected="true">Structure</button><button id="assets-tab" role="tab">Assets</button><button id="close-navigation" aria-label="Masquer la navigation">×</button></div><div id="inventory"></div></aside><div class="stage"><div id="frame-status" role="status"><span>Activation de l’éditeur…</span><button id="retry-frame" hidden>Réessayer</button></div><div class="viewport"><div class="canvas"><iframe title="Page WordPress — aperçu réel"></iframe></div></div><div class="outline hover"><span></span></div><div class="outline selected"><span></span><button class="drag" title="Glisser pour déplacer" aria-label="Déplacer l’élément"><img alt="" src="${new URL("./icons/arrows-move.svg", import.meta.url)}"></button></div><div id="context-toolbar"></div><div id="handles" hidden></div><div class="gesture-feedback" hidden></div></div><aside id="properties" hidden aria-label="Propriétés de l’élément"><div id="panel"></div></aside></main><footer class="page-actions"><button id="reset-page">Réinitialiser la page</button><button id="export">Exporter le brouillon JSON</button><button id="discard">Revenir à la sauvegarde</button><p id="message" role="status" aria-live="polite"></p></footer>`;
   ui.append(shell);
   const $ = (selector) => ui.querySelector(selector);
   const frame = $("iframe"),
     panel = $("#panel"),
     state = $("#state");
+  // Overlays, looked up once: after the Structure tree, each lookup walked it
+  // on every outline update (scroll, hover).
+  const stageBox = $(".stage"),
+    hoverBox = $(".hover"),
+    hoverLabel = $(".hover span"),
+    selectedBox = $(".selected"),
+    selectedLabel = $(".selected span"),
+    handlesBox = $("#handles");
   let viewport,
     outlineFrame = 0; // pending scheduleOutline() frame, read by updateOutline()
   viewport = new Viewport(
     frame,
     $(".canvas"),
-    $(".stage"),
+    stageBox,
     originalWindow.height,
     () => {
       $("#viewport-size").textContent =
@@ -99,7 +108,7 @@ function start() {
       if (!$("#canvas-diagnostic").hidden) showDiagnostic();
     },
   );
-  const smartGuides = new SmartGuides($(".stage"), viewport);
+  const smartGuides = new SmartGuides(stageBox, viewport);
   function showDiagnostic() {
     $("#canvas-diagnostic").textContent = JSON.stringify(
       viewport.diagnostics(selected),
@@ -180,6 +189,30 @@ function start() {
     moveStep = 1,
     selectedBackgroundLayer = null;
   const colorStorageKey = `visual-tweaks-colors:${location.origin}:${config.editor.userId}`;
+  // Édition allégée (0.4.5) : choix de l'utilisateur, conservé pour ce site.
+  const lightMode = new LightMode(),
+    lightKey = `visual-tweaks-light:${location.origin}:${config.editor.userId}`;
+  try {
+    lightMode.set(localStorage.getItem(lightKey) === "1");
+  } catch {}
+  function paintLightMode() {
+    $("#light-mode").setAttribute("aria-pressed", String(lightMode.active));
+    shell.dataset.lightMode = String(lightMode.active);
+  }
+  paintLightMode();
+  $("#light-mode").addEventListener("click", () => {
+    lightMode.set(!lightMode.active);
+    try {
+      if (lightMode.active) localStorage.setItem(lightKey, "1");
+      else localStorage.removeItem(lightKey);
+    } catch {}
+    paintLightMode();
+    message(
+      lightMode.active
+        ? "Édition allégée : dans l’aperçu, les animations du thème sont ralenties ou en pause. Le site public n’est pas modifié. Cliquez à nouveau sur « Édition allégée » pour revoir le rendu animé réel."
+        : "Rendu animé réel rétabli dans l’aperçu.",
+    );
+  });
   const siteStyle = new SiteStyle(ui, config.editor, (value) => {
     config.editor.siteStyle = value;
     siteColors = paletteColors(frame.contentDocument);
@@ -195,7 +228,7 @@ function start() {
     ];
   }
   let copiedStyle = null;
-  const contextual = new ContextualToolbar($("#context-toolbar"), $(".stage"));
+  const contextual = new ContextualToolbar($("#context-toolbar"), stageBox);
   const inline = new InlineEditor({
     runtime: () => runtime,
     onInput: (text) =>
@@ -580,12 +613,14 @@ function start() {
   // Overlay geometry: every read (frame, stage, targets) happens before any write,
   // so one call costs one layout instead of one per overlay or resize handle.
   function overlayGeometry() {
-    const stage = $(".stage");
+    const stage = stageBox;
     return {
       frame: frame.getBoundingClientRect(),
       stage: stage.getBoundingClientRect(),
       scrollLeft: stage.scrollLeft,
       scrollTop: stage.scrollTop,
+      clientWidth: stage.clientWidth,
+      clientHeight: stage.clientHeight,
     };
   }
   function placeOverlay(box, rect, geometry) {
@@ -631,19 +666,21 @@ function start() {
       cancelAnimationFrame(outlineFrame);
       outlineFrame = 0;
     }
-    if (interactionMode !== "edit") {
-      $(".hover").hidden = true;
-      $(".selected").hidden = true;
-      $("#handles").hidden = true;
+    const hoverTarget =
+      editable(hoverNode) && hoverNode !== selected && hoverNode.isConnected
+        ? hoverNode
+        : null;
+    // 0.4.5 : rien à placer (mode Naviguer, ni survol ni sélection) : aucune
+    // lecture de géométrie, donc aucune mise en page forcée.
+    if (interactionMode !== "edit" || (!hoverTarget && !selected)) {
+      hoverBox.hidden = true;
+      selectedBox.hidden = true;
+      handlesBox.hidden = true;
       contextual.hide();
       return;
     }
     // Reads.
     const geometry = overlayGeometry();
-    const hoverTarget =
-      editable(hoverNode) && hoverNode !== selected && hoverNode.isConnected
-        ? hoverNode
-        : null;
     const hoverRect = hoverTarget?.getBoundingClientRect() || null;
     const rect = selected?.getBoundingClientRect() || null;
     let quad = null;
@@ -653,25 +690,34 @@ function start() {
       } catch {}
     const dimensions = $("#dimensions");
     const size = selected && dimensions ? dimensionsOf(selected) : null;
+    // Toolbar width read before any write: placing it no longer forces layouts.
+    geometry.toolbarWidth =
+      selected && !drag && !contextual.root.hidden
+        ? contextual.root.offsetWidth
+        : 0;
     // Writes.
-    placeOverlay($(".hover"), hoverRect, geometry);
-    placeOverlay($(".selected"), selected?.isConnected ? rect : null, geometry);
+    placeOverlay(hoverBox, hoverRect, geometry);
+    placeOverlay(selectedBox, selected?.isConnected ? rect : null, geometry);
     if (!selected) {
       contextual.hide();
-      $("#handles").hidden = true;
+      handlesBox.hidden = true;
       return;
     }
     if (!drag)
-      contextual.position(viewport.rect(rect, geometry.frame), geometry.frame);
-    $(".selected").classList.toggle("cropping", cropMode);
-    if (!quad) $("#handles").hidden = true;
+      contextual.position(
+        viewport.rect(rect, geometry.frame),
+        geometry.frame,
+        geometry,
+      );
+    selectedBox.classList.toggle("cropping", cropMode);
+    if (!quad) handlesBox.hidden = true;
     else {
-      $("#handles").hidden =
+      handlesBox.hidden =
         cropMode ||
         inline.active ||
         !(selected.localName === "img" || !canEditText(selected));
       const bounds = geometry.frame;
-      for (const button of $("#handles").children) {
+      for (const button of handlesBox.children) {
         const point = viewport.point(
           quad[button.dataset.corner],
           geometry.frame,
@@ -692,7 +738,7 @@ function start() {
     clickCandidate = null;
     selectedBackgroundLayer = null;
     hoverNode = null;
-    $(".hover").hidden = true;
+    hoverBox.hidden = true;
     node = selectionTarget(node);
     inline.finish();
     cropMode = false;
@@ -722,7 +768,7 @@ function start() {
           ? "Élément sélectionné. Ses réglages sont disponibles à droite."
           : "",
       );
-      $(".selected span").textContent = labelFor(node);
+      selectedLabel.textContent = labelFor(node);
       $("#properties").hidden = false;
       renderPanel();
       // The new panel width must be reflected before a move/resize can start.
@@ -2237,7 +2283,7 @@ function start() {
     }
     renderPanel();
     if (runtime) navigation.viewportChanged(selected);
-    $(".hover").hidden = true;
+    hoverBox.hidden = true;
     requestAnimationFrame(() => {
       selected?.scrollIntoView({
         behavior: "instant",
@@ -2345,13 +2391,15 @@ function start() {
     replace: () => replaceImage(selectedBackgroundLayer),
     highlight: (node) => {
       hoverNode = node;
-      rectOverlay($(".hover"), node);
-      if (node) $(".hover span").textContent = labelFor(node);
+      rectOverlay(hoverBox, node);
+      if (node) hoverLabel.textContent = labelFor(node);
     },
   });
   function showInventory(kind) {
     inventoryMode = kind;
     $("#navigation").hidden = false;
+    // Changes of the page while the panel was closed are applied once, now.
+    navigation.resume();
     $("#toggle-navigation").setAttribute("aria-expanded", "true");
     for (const tab of ["assets", "structure"]) {
       $("#" + tab + "-tab").setAttribute("aria-selected", String(tab === kind));
@@ -2998,6 +3046,7 @@ function start() {
       navigation: { ...navigation.metrics },
       responsive: responsiveGuard.summary(),
       guides: { ...smartGuides.metrics },
+      lightMode: { active: lightMode.active, ...lightMode.metrics },
       rendering: runtime
         ? {
             ...runtime.metrics,
@@ -3069,6 +3118,7 @@ function start() {
     gesturePreview = new GesturePreview(doc);
     stylePatcher = new StylePatcher(runtime);
     navigation.observe(doc);
+    lightMode.attach(doc);
     frameController = new frame.contentWindow.AbortController();
     const capture = { capture: true, signal: frameController.signal };
     let inventoryError = null;
@@ -3081,9 +3131,9 @@ function start() {
           if (hoverNode === node) return;
           hoverNode = node;
           if (editable(node) && node !== selected) {
-            $(".hover span").textContent = labelFor(node);
-            rectOverlay($(".hover"), node);
-          } else $(".hover").hidden = true;
+            hoverLabel.textContent = labelFor(node);
+            rectOverlay(hoverBox, node);
+          } else hoverBox.hidden = true;
         },
         capture,
       );
@@ -3226,8 +3276,10 @@ function start() {
         () => {
           hoverNode = null;
           smartGuides.end();
-          $(".hover").hidden = true;
-          scheduleOutline();
+          hoverBox.hidden = true;
+          // Any scroller of the theme (carousels…) lands here: the outline only
+          // needs to follow when something is selected.
+          if (selected) scheduleOutline();
         },
         capture,
       );
@@ -3284,15 +3336,15 @@ function start() {
       frameFailure(error);
     }
   }
-  $(".stage").addEventListener("scroll", () => {
+  stageBox.addEventListener("scroll", () => {
     hoverNode = null;
-    $(".hover").hidden = true;
-    scheduleOutline();
+    hoverBox.hidden = true;
+    if (selected) scheduleOutline();
   });
   let dragSuppress = false,
     clickCandidate = null,
     hoverNode = null;
-  const handles = $("#handles");
+  const handles = handlesBox;
   for (const corner of ["nw", "ne", "se", "sw"]) {
     const button = document.createElement("button");
     button.className = `resize-handle ${corner}`;
@@ -3529,12 +3581,12 @@ function start() {
   }
   function feedback(text, event) {
     const box = $(".gesture-feedback");
-    const stage = $(".stage").getBoundingClientRect();
+    const stage = stageBox.getBoundingClientRect();
     const point = viewport.point(viewport.pointer(event));
     box.hidden = false;
     box.textContent = text;
-    box.style.left = `${Math.max($(".stage").scrollLeft + 8, Math.min($(".stage").scrollLeft + $(".stage").clientWidth - 180, point.x - stage.left + $(".stage").scrollLeft + 15))}px`;
-    box.style.top = `${point.y - stage.top + $(".stage").scrollTop + 18}px`;
+    box.style.left = `${Math.max(stageBox.scrollLeft + 8, Math.min(stageBox.scrollLeft + stageBox.clientWidth - 180, point.x - stage.left + stageBox.scrollLeft + 15))}px`;
+    box.style.top = `${point.y - stage.top + stageBox.scrollTop + 18}px`;
   }
   function cleanupGesture() {
     if (!drag) return;
@@ -3576,8 +3628,8 @@ function start() {
   $(".drag").addEventListener("pointerdown", (event) =>
     beginGesture(event, "move"),
   );
-  $(".hover").hidden = true;
-  $(".selected").hidden = true;
+  hoverBox.hidden = true;
+  selectedBox.hidden = true;
   const url = new URL(location.href);
   url.searchParams.delete("vt-edit");
   url.searchParams.set("vt-frame", "1");
@@ -3586,6 +3638,11 @@ function start() {
   renderPanel();
   status();
   css.addEventListener("load", () => setMode(mode));
+  // 0.4.5 : rien n'est traité pendant que l'onglet est masqué ; au retour, la
+  // navigation applique en une fois les changements de la page.
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") navigation.resume();
+  });
   window.addEventListener("resize", () => {
     if (drag) cancelGesture();
     viewport.height = window.innerHeight;

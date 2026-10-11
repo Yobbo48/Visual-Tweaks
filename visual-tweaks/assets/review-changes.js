@@ -1,4 +1,4 @@
-import { labelFor, areaFor } from "./assets.js?ver=0.4.4";
+import { labelFor, areaFor } from "./assets.js?ver=0.4.5";
 
 const screens = { desktop: "Desktop", tablet: "Tablette", mobile: "Mobile" };
 const names = {

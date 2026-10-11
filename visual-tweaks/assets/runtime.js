@@ -1,10 +1,10 @@
-import { replaceBackgroundLayers } from "./background-layers.js?ver=0.4.4";
+import { replaceBackgroundLayers } from "./background-layers.js?ver=0.4.5";
 import {
   resolve,
   canEditText,
   backgroundSource,
-} from "./selection.js?ver=0.4.4";
-import { generateCSS } from "./styles.js?ver=0.4.4";
+} from "./selection.js?ver=0.4.5";
+import { generateCSS } from "./styles.js?ver=0.4.5";
 
 export class Runtime {
   constructor(doc, elements) {
