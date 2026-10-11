@@ -34,9 +34,15 @@ const node = (file, list) => {
   const r = spawnSync(process.execPath, [file, ...list], { stdio: "inherit" });
   return r.status === 0;
 };
-for (const base of [REF, CAND])
-  if (!node("dev/mesure-ressources.mjs", ["preparer", "--base", base]))
-    throw new Error(`Préparation impossible : ${base}`);
+// Thème réel : --page, --autre et --cibles sont transmis aux mesures ; avec des
+// retouches de production déjà chargées, --sans-preparation n'en publie aucune.
+const FORWARD = ["page", "autre", "cibles"].flatMap((k) =>
+  option(k, null) === null ? [] : [`--${k}`, option(k)],
+);
+if (!args.includes("--sans-preparation"))
+  for (const base of [REF, CAND])
+    if (!node("dev/mesure-ressources.mjs", ["preparer", "--base", base, ...FORWARD]))
+      throw new Error(`Préparation impossible : ${base}`);
 
 const SCENARIOS = [
   ["public", 12, false],
@@ -66,6 +72,7 @@ for (const [scenario, duree, editor] of SANS_RESSOURCES ? [] : SCENARIOS) {
       "--sortie",
       file,
       ...extra,
+      ...FORWARD,
     ]);
     runs.push({ scenario, version, file, ok });
   }
@@ -88,6 +95,7 @@ for (const profil of PROFILS)
           PASSAGES,
           "--sortie",
           file,
+          ...(option("page", null) ? ["--page", option("page")] : []),
         ]);
         PUBLIC.push({ profil, cache, tour, version, file, ok });
       }

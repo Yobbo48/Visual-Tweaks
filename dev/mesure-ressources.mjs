@@ -46,6 +46,12 @@ const SCENARIO = args[0] || "repos";
 const BASE = option("base", "http://127.0.0.1:9410").replace(/\/$/, "");
 const PAGE = option("page", "/?vt-test=animated");
 const AUTRE = option("autre", "/?second=1&vt-test=animated");
+// Trois éléments à sélectionner (banc animé par défaut). Thème réel de
+// L'Énergie des Runes : --page / --autre <autre page> --cibles ".bande-lieu,img.logo__sceau,h1"
+const [CIBLE, CIBLE2, CIBLE3] = option(
+  "cibles",
+  '[data-vt-id="anim-title"],[data-vt-id="anim-cta"],[data-vt-id="anim-temoignages"]',
+).split(/,(?![^\[]*\])/);
 const DUREE = Number(option("duree", SCENARIO === "repos" ? 30 : 15));
 const SORTIE = option("sortie", null);
 const LEGER = args.includes("--leger");
@@ -348,9 +354,9 @@ try {
     await login();
     if (SCENARIO === "preparer") {
       await openEditor(PAGE);
-      await select('[data-vt-id="anim-title"]');
+      await select(CIBLE);
       for (let i = 0; i < 4; i++) await page.keyboard.press("ArrowDown");
-      await select('[data-vt-id="anim-cta"]');
+      await select(CIBLE2);
       for (let i = 0; i < 6; i++) await page.keyboard.press("ArrowRight");
       await ui("#save").click();
       await ui("#state").filter({ hasText: /^Enregistré$/ }).waitFor();
@@ -362,21 +368,21 @@ try {
       resultat.mesure = await fenetre();
     } else if (SCENARIO === "repos-selection") {
       await openEditor(PAGE);
-      await select('[data-vt-id="anim-title"]');
+      await select(CIBLE);
       await ui("#assets-tab").click();
       resultat.mesure = await fenetre();
     } else if (SCENARIO === "defilement") {
       await openEditor(PAGE);
-      await select('[data-vt-id="anim-title"]');
+      await select(CIBLE);
       resultat.mesure = await fenetre((d) => wheel(d));
     } else if (SCENARIO === "interactions") {
       await openEditor(PAGE);
       resultat.mesure = await fenetre(async (deadline) => {
         const soon = () => Math.min(deadline, Date.now() + 2500);
         await wheel(soon());
-        await select('[data-vt-id="anim-title"]');
-        await select('[data-vt-id="anim-cta"]');
-        await select('[data-vt-id="anim-temoignages"]');
+        await select(CIBLE);
+        await select(CIBLE2);
+        await select(CIBLE3);
         const handle = await ui(".outline.selected .drag").boundingBox();
         if (handle) {
           const x = handle.x + handle.width / 2,
@@ -405,13 +411,13 @@ try {
       resultat.memoireParNavigation = [];
       for (let i = 0; i < 4; i++) {
         await openEditor(i % 2 ? PAGE : AUTRE);
-        await select('[data-vt-id="anim-title"]');
+        await select(CIBLE);
         resultat.memoireParNavigation.push(await memory());
       }
       resultat.mesure = await fenetre();
     } else if (SCENARIO === "masque") {
       await openEditor(PAGE);
-      await select('[data-vt-id="anim-title"]');
+      await select(CIBLE);
       await ui("#assets-tab").click();
       const other = await context.newPage();
       await other.goto("about:blank");
@@ -424,7 +430,7 @@ try {
       // seconde fenêtre doit retrouver le niveau du repos, sans rattrapage
       // qui s'accumule.
       await openEditor(PAGE);
-      await select('[data-vt-id="anim-title"]');
+      await select(CIBLE);
       await ui("#assets-tab").click();
       const other = await context.newPage();
       await other.goto("about:blank");
