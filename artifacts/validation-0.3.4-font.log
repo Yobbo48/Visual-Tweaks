@@ -1,0 +1,45 @@
+RUN dev/check.mjs
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs
+✔ undo/redo preserve snapshots and truncate obsolete branches (1.130375ms)
+✔ new font and link values are bounded and reject executable schemes (1.013709ms)
+✔ resize follows local axes and keeps image proportions by default (0.34525ms)
+✔ site palette extracts colors without treating transparency as opaque (0.211542ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.276792ms)
+✔ responsive generation groups exceptions in at most two media queries (0.375666ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.135375ms)
+✔ asset appearance values are typed and reject CSS injection (0.338125ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.219458ms)
+✔ legacy precision is repaired only inside existing override maps (0.521792ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.15925ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.089333ms)
+✔ pointer coordinates are converted once according to their document (0.077792ms)
+✔ generic system families stay unquoted CSS keywords, real font names remain quoted (0.056ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 52.902959
+RUN dev/cross-browser.mjs --polish
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles

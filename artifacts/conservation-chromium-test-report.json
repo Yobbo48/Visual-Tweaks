@@ -1,0 +1,14 @@
+{
+  "engine": "chromium",
+  "checks": [
+    "changement de page immédiat : brouillon conservé et restauré, puis enregistré (3px), retour arrière cohérent, départ protégé",
+    "départ pendant une sauvegarde : révision envoyée conservée (2px), retouche suivante restaurée puis enregistrée sans conflit (3px)",
+    "HTTP 502 illisible et coupure réseau : message clair, brouillon conservé, jamais « Enregistré » ; jeton expiré renouvelé puis requête rejouée (4px)",
+    "réponse perdue après enregistrement : propre envoi reconnu (pas de faux conflit), retouche suivante enregistrée (3px)",
+    "deux onglets : autre onglet signalé, conflit refusé sans écraser (1px), remplacement explicite après export de la version enregistrée (5px)",
+    "publication : état du cache rapporté (LiteSpeed absent), message sans fausse promesse",
+    "aucune erreur JavaScript de Visual Tweaks"
+  ],
+  "errors": [],
+  "coreErrors": []
+}

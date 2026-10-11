@@ -1,0 +1,3 @@
+PASS Limite 1500 : couverture expliquée et nombre total visible, sans faux Voir/problème ni mutation du draft
+PASS Vraie alerte : Voir sélectionne la bonne cible, synchronise Structure et ouvre ses propriétés sans modifier le draft
+PASS Smoke : sélectionner → modifier → draft → Undo → modifier → audit → sauvegarder → refresh → quitter/revenir

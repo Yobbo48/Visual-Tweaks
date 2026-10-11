@@ -1,0 +1,246 @@
+{
+  "before": {
+    "toolbar": "<div id=\"context-toolbar\" role=\"toolbar\" aria-label=\"Actions de l’élément\" style=\"left: 67.8889px; top: 260.652px;\" class=\"\"><div class=\"context-actions\"><small class=\"context-mode\">Tous les écrans</s",
+    "frame": {
+      "x": 300,
+      "y": 212.39999389648438,
+      "width": 790,
+      "height": 548.61669921875,
+      "top": 212.39999389648438,
+      "right": 1090,
+      "bottom": 761.0166931152344,
+      "left": 300
+    },
+    "image": {
+      "x": 80,
+      "y": 526.1500244140625,
+      "width": 320,
+      "height": 490,
+      "top": 526.1500244140625,
+      "right": 400,
+      "bottom": 1016.1500244140625,
+      "left": 80
+    },
+    "frameScroll": 4660.83349609375,
+    "button": {
+      "x": 891.38330078125,
+      "y": 455.04998779296875,
+      "width": 57.53334045410156,
+      "height": 30.300003051757812,
+      "top": 455.04998779296875,
+      "right": 948.9166412353516,
+      "bottom": 485.34999084472656,
+      "left": 891.38330078125
+    },
+    "hit": "<button type=\"button\" title=\"Centrer\" data-action=\"center\">Centrer</button>",
+    "viewport": {
+      "phase": "ready",
+      "ready": true,
+      "recoveryPending": false,
+      "error": null,
+      "interactionMode": "edit",
+      "selected": "figure.pack-portrait > img",
+      "dirty": true,
+      "revision": 8,
+      "frameURL": "http://127.0.0.1:9411/?vt-test=stabilisation-firefox&vt-frame=1",
+      "runtime": true,
+      "unresolvedTargets": [],
+      "navigation": {
+        "structureBuilds": 1,
+        "assetScans": 1,
+        "assetUpdates": 2
+      },
+      "responsive": {
+        "stale": true,
+        "busy": false,
+        "audits": 0,
+        "durationMs": 0,
+        "elementsExamined": 0,
+        "screens": []
+      },
+      "guides": {
+        "candidates": 0,
+        "paints": 0
+      },
+      "rendering": {
+        "renders": 8,
+        "gesturePreviews": 0,
+        "stylePatches": 4
+      }
+    },
+    "stage": {
+      "x": 276,
+      "y": 188.39999389648438,
+      "width": 838,
+      "height": 766.2999877929688,
+      "top": 188.39999389648438,
+      "right": 1114,
+      "bottom": 954.6999816894531,
+      "left": 276
+    },
+    "scroll": [
+      0,
+      0,
+      0
+    ]
+  },
+  "after": {
+    "toolbar": "<div id=\"context-toolbar\" role=\"toolbar\" aria-label=\"Actions de l’élément\" style=\"left: 114.402px; top: 252.66px;\" class=\"\"><div class=\"context-actions\"><small class=\"context-mode\">Tous les écrans</sm",
+    "frame": {
+      "x": 300,
+      "y": 212.39999389648438,
+      "width": 790,
+      "height": 548.61669921875,
+      "top": 212.39999389648438,
+      "right": 1090,
+      "bottom": 761.0166931152344,
+      "left": 300
+    },
+    "image": {
+      "x": 164.78334045410156,
+      "y": 511.58331298828125,
+      "width": 320,
+      "height": 490,
+      "top": 511.58331298828125,
+      "right": 484.78334045410156,
+      "bottom": 1001.5833129882812,
+      "left": 164.78334045410156
+    },
+    "frameScroll": 4675.39990234375,
+    "button": {
+      "x": 937.9000244140625,
+      "y": 447.066650390625,
+      "width": 57.53334045410156,
+      "height": 30.300003051757812,
+      "top": 447.066650390625,
+      "right": 995.4333648681641,
+      "bottom": 477.3666534423828,
+      "left": 937.9000244140625
+    },
+    "hit": "<button type=\"button\" title=\"Centrer\" data-action=\"center\">Centrer</button>",
+    "viewport": {
+      "phase": "ready",
+      "ready": true,
+      "recoveryPending": false,
+      "error": null,
+      "interactionMode": "edit",
+      "selected": "figure.pack-portrait > img",
+      "dirty": true,
+      "revision": 8,
+      "frameURL": "http://127.0.0.1:9411/?vt-test=stabilisation-firefox&vt-frame=1",
+      "runtime": true,
+      "unresolvedTargets": [],
+      "navigation": {
+        "structureBuilds": 1,
+        "assetScans": 1,
+        "assetUpdates": 2
+      },
+      "responsive": {
+        "stale": true,
+        "busy": false,
+        "audits": 0,
+        "durationMs": 0,
+        "elementsExamined": 0,
+        "screens": []
+      },
+      "guides": {
+        "candidates": 0,
+        "paints": 0
+      },
+      "rendering": {
+        "renders": 8,
+        "gesturePreviews": 0,
+        "stylePatches": 5
+      }
+    },
+    "stage": {
+      "x": 276,
+      "y": 188.39999389648438,
+      "width": 838,
+      "height": 766.2999877929688,
+      "top": 188.39999389648438,
+      "right": 1114,
+      "bottom": 954.6999816894531,
+      "left": 276
+    },
+    "scroll": [
+      0,
+      0,
+      0
+    ]
+  },
+  "events": [
+    {
+      "type": "scroll",
+      "path": [
+        "undefined:",
+        "undefined:"
+      ],
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "scroll",
+      "path": [
+        "undefined:",
+        "undefined:"
+      ],
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "scroll",
+      "path": [
+        "undefined:",
+        "undefined:"
+      ],
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "scroll",
+      "path": [
+        "undefined:",
+        "undefined:"
+      ],
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "pointerdown",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 462,
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "pointerup",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 462,
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "click",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 462,
+      "selected": "figure.pack-portrait > img"
+    }
+  ],
+  "selected": "figure.pack-portrait > img"
+}

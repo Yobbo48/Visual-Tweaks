@@ -1,0 +1,258 @@
+{
+ "base": "https://127.0.0.1:8795",
+ "profil": "desktop",
+ "cache": "chaud",
+ "date": "2026-10-10T23:47:04.883Z",
+ "pages": {
+  "accueil": [
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "chaud",
+    "fcp": 156,
+    "lcp": [
+     900,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 357,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 35,
+     "loaf": 1,
+     "loafBloc": 1,
+     "loafStyle": 6,
+     "force": 35,
+     "longues": 0
+    },
+    "entree": {
+     "trames": 89,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 17,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 179,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 17,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1788,
+    "defilement": {
+     "trames": 255,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 101,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 65,
+     "cache": 0
+    },
+    "loafs": [
+     {
+      "t": 54,
+      "d": 56,
+      "bloc": 1,
+      "style": 6,
+      "rendu": 9,
+      "scripts": [
+       {
+        "src": "main.js",
+        "fn": "",
+        "inv": "https://127.0.0.1:8795/wp-content/themes/lenergiedesrunes/js",
+        "type": "classic-script",
+        "d": 38,
+        "force": 35
+       }
+      ]
+     }
+    ],
+    "longues": [],
+    "parScript": {
+     "main.js https://127.0.0.1:8795/wp-content/themes/lenergiedesrunes/js": {
+      "d": 38,
+      "force": 35,
+      "n": 1
+     }
+    },
+    "decalages": []
+   },
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "chaud",
+    "fcp": 156,
+    "lcp": [
+     896,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 357,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 50,
+     "manque": 51,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 6,
+     "force": 38,
+     "longues": 0
+    },
+    "entree": {
+     "trames": 90,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 17,
+     "manque": 0,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 180,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 17,
+     "manque": 1,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1790,
+    "defilement": {
+     "trames": 252,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 151,
+     "loaf": 2,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 66,
+     "cache": 0
+    },
+    "loafs": [],
+    "longues": [],
+    "parScript": {
+     "main.js https://127.0.0.1:8795/wp-content/themes/lenergiedesrunes/js": {
+      "d": 38,
+      "force": 35,
+      "n": 1
+     },
+     "main.js tick": {
+      "d": 6,
+      "force": 3,
+      "n": 1
+     }
+    },
+    "decalages": []
+   },
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "chaud",
+    "fcp": 156,
+    "lcp": [
+     900,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 357,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 50,
+     "manque": 52,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 6,
+     "force": 34,
+     "longues": 0
+    },
+    "entree": {
+     "trames": 90,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 17,
+     "manque": 0,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 180,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 17,
+     "manque": 1,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1758,
+    "defilement": {
+     "trames": 253,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 134,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 66,
+     "cache": 0
+    },
+    "loafs": [],
+    "longues": [],
+    "parScript": {
+     "main.js https://127.0.0.1:8795/wp-content/themes/lenergiedesrunes/js": {
+      "d": 38,
+      "force": 34,
+      "n": 1
+     }
+    },
+    "decalages": []
+   }
+  ]
+ }
+}

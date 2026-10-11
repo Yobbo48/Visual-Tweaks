@@ -1,0 +1,86 @@
+RUN dev/check.mjs  
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs 
+✔ undo/redo preserve snapshots and truncate obsolete branches (0.878208ms)
+✔ new font and link values are bounded and reject executable schemes (1.089667ms)
+✔ resize follows local axes and keeps image proportions by default (0.522709ms)
+✔ site palette extracts colors without treating transparency as opaque (0.2635ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.342459ms)
+✔ responsive generation groups exceptions in at most two media queries (0.414375ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.140083ms)
+✔ asset appearance values are typed and reject CSS injection (0.351916ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.641584ms)
+✔ legacy precision is repaired only inside existing override maps (0.577917ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.162917ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.108375ms)
+✔ pointer coordinates are converted once according to their document (0.077166ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56.320583
+RUN tests/stability-e2e.mjs  
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/width-e2e.mjs  
+PASS selection, size panel, panel toggles and all breakpoints create no override
+PASS fit/min/max-content, calc, clamp, decimal, auto and percentage theme widths never enter color/position payloads; edits survive refresh
+PASS fractional resize generates canonical width and survives REST save and refresh
+PASS explicit widths normalize px, decimals, %, rem, em, vw, vh, zero and auto; blank removes the override
+PASS PHP and JavaScript validators agree; arbitrary CSS, overprecision, NaN, numbers and structured widths remain refused
+PASS mobile width is explicit, undo/redo work and the exception persists after reload
+PASS public rendering preserves theme fit-content and reapplies saved color
+PASS recovering a legacy failed resize repairs existing width precision and saves user intent
+PASS invalid legacy width is reported before REST, retained in the draft, and cleared only by user action
+RUN tests/save-e2e.mjs  
+PASS content-only save survives refresh
+PASS save status, REST storage and editor refresh match the visual draft
+PASS exit and reenter reload the saved revision with no recovery prompt
+PASS anonymous public rendering applies the persisted overrides without editor UI
+PASS failed request is visible with settings hidden, preserves local draft, and can be retried
+PASS edits made while saving remain dirty and persist on the next save
+PASS 409 conflict stays visible and preserves an exportable draft without overwriting WordPress
+RUN tests/foundations-e2e.mjs  
+PASS keyboard arrows move 1px, Shift moves 10px; a sequence has one undo/redo step
+PASS visible directional buttons and step size work; field editing never nudges
+PASS inline text caret shortcuts never move the text element
+PASS image zoom changes rendered pixels, preserves its frame and survives refresh
+PASS Assets inventories img/picture/background/SVG and selects a covered image
+PASS SVG paths select the root icon, preserving its internal DOM
+PASS picture replacement uses WordPress media and keeps the frame and original sources recoverable
+PASS background focal point and direct crop gesture adjust image position without moving its zone
+PASS background replacement persists as a media ID while preserving the block structure and dimensions
+PASS background zoom, overlay, shadow and replacement survive save and refresh
+PASS tablet and mobile asset exceptions persist independently and reapply after refresh
+PASS Alt-click exposes overlapping elements and selects the background behind the overlay
+PASS lightweight Structure selects an existing text without rebuilding the DOM
+PASS custom shadow fields generate only strictly validated values
+PASS public visitors receive saved image/background overrides and no editor or permanent inline override
+PASS no uncaught browser errors
+RUN tests/e2e.mjs  
+Browser errors: []
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForURL: Timeout 30000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+============================================================
+    at login (/Users/kevin/Documents/ChatGPT/Visual Tweaks/tests/e2e.mjs:41:12)
+    at async file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/e2e.mjs:92:3 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.21.0

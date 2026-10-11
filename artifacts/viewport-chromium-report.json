@@ -1,0 +1,132 @@
+{
+  "engine": "chromium",
+  "version": "156.0.8078.4",
+  "checks": [
+    "chromium: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display",
+    "chromium: outline, corner handles and diagnostic boxes match the zoomed asset",
+    "chromium: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width",
+    "chromium: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them",
+    "chromium: anonymous real page at 1440px matches logical editor placement and layout",
+    "chromium: UI move handle and direct iframe drag use the same logical coordinate system under zoom",
+    "chromium: corner resize preserves ratio and logical size with undo/redo and persisted refresh",
+    "chromium: focal crop does not move or resize the asset when zoomed",
+    "chromium: tablet/mobile use true viewports and persist explicit responsive exceptions",
+    "chromium: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions",
+    "chromium: existing parent rotation remains intact during scaled drag and reset"
+  ],
+  "pointerGestures": {
+    "handleDelta": {
+      "x": 29.9999629153481,
+      "y": 14.99998145767405,
+      "native": {
+        "down": {
+          "x": 683.015625,
+          "y": 388.578125,
+          "inFrame": false
+        },
+        "last": {
+          "x": 699.4739379882812,
+          "y": 396.8072814941406,
+          "inFrame": false
+        },
+        "zoom": 0.5486111111111112
+      }
+    },
+    "directDelta": {
+      "x": 20,
+      "y": 10,
+      "native": {
+        "down": {
+          "x": 530.003173828125,
+          "y": 268.8038024902344,
+          "inFrame": true
+        },
+        "last": {
+          "x": 550.003173828125,
+          "y": 278.8038024902344,
+          "inFrame": true
+        },
+        "zoom": 0.5486111111111112
+      }
+    }
+  },
+  "baseline": {
+    "width": 400,
+    "height": 200,
+    "x": 290,
+    "y": 153.796875,
+    "marginLeft": "100px",
+    "translate": "none",
+    "transform": "none"
+  },
+  "editorBox": {
+    "width": 400,
+    "height": 200,
+    "x": 300,
+    "y": 153.796875,
+    "marginLeft": "100px",
+    "translate": "10px",
+    "transform": "none"
+  },
+  "publicBox": {
+    "width": 400,
+    "height": 200,
+    "x": 300,
+    "y": 153.796875,
+    "marginLeft": "100px",
+    "translate": "10px",
+    "transform": "none"
+  },
+  "diagnostics": {
+    "logicalViewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "innerWidth": 1440,
+    "clientWidth": 1440,
+    "innerHeight": 1000,
+    "zoom": 0.5486111111111112,
+    "display": "fit",
+    "availableCanvas": {
+      "width": 838,
+      "height": 809
+    },
+    "adminBar": false,
+    "mediaQueries": [
+      {
+        "query": "(min-resolution: 192dpi)",
+        "active": false
+      },
+      {
+        "query": "screen and (max-width: 600px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 1023px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 767px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 1200px)",
+        "active": false
+      }
+    ],
+    "logicalBox": {
+      "x": 290,
+      "y": 153.796875,
+      "width": 400,
+      "height": 200
+    },
+    "displayedBox": {
+      "left": 459.09722222222223,
+      "top": 253.87467447916669,
+      "width": 219.44444444444446,
+      "height": 109.72222222222223,
+      "right": 678.5416666666667,
+      "bottom": 363.5968967013889
+    }
+  }
+}

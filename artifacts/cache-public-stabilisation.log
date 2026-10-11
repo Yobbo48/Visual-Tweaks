@@ -1,0 +1,4 @@
+PASS Public sans overrides : zéro ressource Visual Tweaks et aucune configuration REST/nonce
+PASS Public retouché : quatre modules du runtime, aucun éditeur/Guard/Review/Guides, aucun nonce
+PASS Cache navigateur ordinaire : nouvelle sauvegarde visible après refresh public, sans purge spécifique
+PASS Cache HTTP HTML contrôlé : ancien override reproduit après save ; purge du cache restitue la dernière valeur

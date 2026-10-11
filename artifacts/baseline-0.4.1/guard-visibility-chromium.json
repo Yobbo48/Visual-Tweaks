@@ -1,0 +1,108 @@
+{
+  "engine": "chromium",
+  "checks": [
+    "Responsive Guard : sous-arbre invisible exclu, petite cible visible conservée, titre multiligne et décoration sans faux problème"
+  ],
+  "findings": [
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "visible-small-button",
+      "kind": "touch",
+      "screen": "desktop"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "",
+      "kind": "touch",
+      "screen": "mobile"
+    },
+    {
+      "id": "visible-small-button",
+      "kind": "touch",
+      "screen": "mobile"
+    }
+  ]
+}

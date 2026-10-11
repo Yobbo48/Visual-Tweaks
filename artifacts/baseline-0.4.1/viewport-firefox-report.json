@@ -1,0 +1,132 @@
+{
+  "engine": "firefox",
+  "version": "153.0",
+  "checks": [
+    "firefox: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display",
+    "firefox: outline, corner handles and diagnostic boxes match the zoomed asset",
+    "firefox: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width",
+    "firefox: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them",
+    "firefox: anonymous real page at 1440px matches logical editor placement and layout",
+    "firefox: UI move handle and direct iframe drag use the same logical coordinate system under zoom",
+    "firefox: corner resize preserves ratio and logical size with undo/redo and persisted refresh",
+    "firefox: focal crop does not move or resize the asset when zoomed",
+    "firefox: tablet/mobile use true viewports and persist explicit responsive exceptions",
+    "firefox: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions",
+    "firefox: existing parent rotation remains intact during scaled drag and reset"
+  ],
+  "pointerGestures": {
+    "handleDelta": {
+      "x": 29.164556962025316,
+      "y": 14.582278481012658,
+      "native": {
+        "down": {
+          "x": 683,
+          "y": 388,
+          "inFrame": false
+        },
+        "last": {
+          "x": 699,
+          "y": 396,
+          "inFrame": false
+        },
+        "zoom": 0.5486111111111112
+      }
+    },
+    "directDelta": {
+      "x": 20.06671142578125,
+      "y": 10.933319091796875,
+      "native": {
+        "down": {
+          "x": 528.5999755859375,
+          "y": 267.2166748046875,
+          "inFrame": true
+        },
+        "last": {
+          "x": 548.6666870117188,
+          "y": 278.1499938964844,
+          "inFrame": true
+        },
+        "zoom": 0.5486111111111112
+      }
+    }
+  },
+  "baseline": {
+    "width": 400,
+    "height": 200,
+    "x": 290,
+    "y": 153.8000030517578,
+    "marginLeft": "100px",
+    "translate": "none",
+    "transform": "none"
+  },
+  "editorBox": {
+    "width": 400,
+    "height": 200,
+    "x": 300,
+    "y": 153.8000030517578,
+    "marginLeft": "100px",
+    "translate": "10px",
+    "transform": "none"
+  },
+  "publicBox": {
+    "width": 400,
+    "height": 200,
+    "x": 300,
+    "y": 153.8000030517578,
+    "marginLeft": "100px",
+    "translate": "10px",
+    "transform": "none"
+  },
+  "diagnostics": {
+    "logicalViewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "innerWidth": 1440,
+    "clientWidth": 1440,
+    "innerHeight": 1000,
+    "zoom": 0.5486111111111112,
+    "display": "fit",
+    "availableCanvas": {
+      "width": 838,
+      "height": 809
+    },
+    "adminBar": false,
+    "mediaQueries": [
+      {
+        "query": "(min-resolution: 192dpi)",
+        "active": false
+      },
+      {
+        "query": "screen and (max-width: 600px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 1023px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 767px)",
+        "active": false
+      },
+      {
+        "query": "(max-width: 1200px)",
+        "active": false
+      }
+    ],
+    "logicalBox": {
+      "x": 290,
+      "y": 153.8000030517578,
+      "width": 400,
+      "height": 200
+    },
+    "displayedBox": {
+      "left": 459.09722222222223,
+      "top": 253.87639056311713,
+      "width": 219.44444444444446,
+      "height": 109.72222222222223,
+      "right": 678.5416666666667,
+      "bottom": 363.59861278533936
+    }
+  }
+}

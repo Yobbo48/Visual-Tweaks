@@ -1,0 +1,23 @@
+{
+  "versionOnly": [
+    "visual-tweaks/assets/runtime.js",
+    "visual-tweaks/assets/gesture-preview.js",
+    "visual-tweaks/assets/alignment.js",
+    "visual-tweaks/assets/review-changes.js",
+    "visual-tweaks/assets/navigation.js",
+    "visual-tweaks/assets/selection.js",
+    "visual-tweaks/assets/site-style.js",
+    "visual-tweaks/assets/state.js",
+    "visual-tweaks/assets/inline-editor.js",
+    "visual-tweaks/assets/styles.js",
+    "visual-tweaks/assets/style-patcher.js",
+    "visual-tweaks/assets/assets.js"
+  ],
+  "otherChanges": [
+    "visual-tweaks/visual-tweaks.php",
+    "visual-tweaks/readme.txt",
+    "visual-tweaks/assets/editor.js",
+    "visual-tweaks/assets/responsive-guard.js"
+  ],
+  "coreArchitecturalReplacements": 0
+}

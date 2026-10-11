@@ -1,0 +1,38 @@
+RUN dev/check.mjs
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs
+✔ undo/redo preserve snapshots and truncate obsolete branches (0.907208ms)
+✔ new font and link values are bounded and reject executable schemes (0.959584ms)
+✔ resize follows local axes and keeps image proportions by default (0.414875ms)
+✔ site palette extracts colors without treating transparency as opaque (0.23125ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.323333ms)
+✔ responsive generation groups exceptions in at most two media queries (0.40925ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.157583ms)
+✔ asset appearance values are typed and reject CSS injection (0.438ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.258709ms)
+✔ legacy precision is repaired only inside existing override maps (0.570334ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.171667ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.103791ms)
+✔ pointer coordinates are converted once according to their document (0.081708ms)
+✔ generic system families stay unquoted CSS keywords, real font names remain quoted (0.060125ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 57.863833
+RUN tests/stability-e2e.mjs
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/comfort-e2e.mjs
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé

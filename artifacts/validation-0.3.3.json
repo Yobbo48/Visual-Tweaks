@@ -1,0 +1,116 @@
+{
+  "pluginVersion": "0.3.3",
+  "validatedAt": "2026-10-08T22:52:00.697156+00:00",
+  "syntax": {
+    "phpFiles": 7,
+    "javascript": "passed"
+  },
+  "unitTests": 13,
+  "browserChecks": 174,
+  "suites": {
+    "width-test-report.json": 9,
+    "save-test-report.json": 7,
+    "foundations-test-report.json": 16,
+    "test-report.json": 19,
+    "ux-test-report.json": 15,
+    "viewport-chromium-report.json": 11,
+    "viewport-webkit-report.json": 11,
+    "viewport-firefox-report.json": 11,
+    "ergonomics-chromium-report.json": 21,
+    "ergonomics-webkit-report.json": 21,
+    "ergonomics-firefox-report.json": 21,
+    "real-theme-chromium-report.json": 4,
+    "real-theme-webkit-report.json": 4,
+    "real-theme-firefox-report.json": 4
+  },
+  "browsers": [
+    "Chromium",
+    "WebKit",
+    "Firefox"
+  ],
+  "environments": [
+    "WordPress local 9410, fixture",
+    "WordPress local 9411, isolated Kevin Legros theme copy"
+  ],
+  "originalThemeFilesUnchanged": 191,
+  "productionDeployed": false,
+  "geometryEditorMinusPublicCSSPixels": {
+    "viewport-chromium-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0,
+      "height": 0
+    },
+    "viewport-webkit-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0,
+      "height": 0
+    },
+    "viewport-firefox-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0,
+      "height": 0
+    },
+    "real-theme-chromium-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0.0,
+      "height": 0.0
+    },
+    "real-theme-webkit-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0.0,
+      "height": 0.0
+    },
+    "real-theme-firefox-report.json": {
+      "x": 0,
+      "y": 0.0,
+      "width": 0.0,
+      "height": 0.0
+    }
+  },
+  "sourceSHA256": {
+    "visual-tweaks/visual-tweaks.php": "115a218b940921dc4d2f94c9429078558ea2f6f41b7053934461914ca58dacf7",
+    "visual-tweaks/LICENSE": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+    "visual-tweaks/readme.txt": "bd1dc555ceffa2f4f90e04c649700f1dbadc411e3eedfa6ce867757386bb686f",
+    "visual-tweaks/includes/class-schema.php": "7e5211a9d4d2e86f2484956781a01e94510530aa3ef89e457b0131fc5fcfedde",
+    "visual-tweaks/includes/class-plugin.php": "0eb643c2d42ca2007c157a1a7db2b6e6b8fb4f276d80aaa1e2e22099c4f6eb5b",
+    "visual-tweaks/includes/class-store.php": "6aab9a121a635ca908fdc3efb2bfaf43d137093c64d5ddc36b7761ba84bac985",
+    "visual-tweaks/assets/runtime.js": "fdf7bfffa01ff5d492ac2f36aa3400b7f8b1e06b4be528b51e2695fbdaac1c7f",
+    "visual-tweaks/assets/appearance-controls.js": "fe4455da8343f34c3e6a0da424810dca8694deb190eba48aa9662d3aaadc30dd",
+    "visual-tweaks/assets/editor.css": "a661c2350b254fadeeefafd8b93f045a87ea75427275406bc61b544a3f721456",
+    "visual-tweaks/assets/alignment.js": "3b8c0c7cf66e1c42924f5d2211d6a25977423e441a5d93a8f8ee30bd9110108d",
+    "visual-tweaks/assets/contextual-toolbar.js": "f12d4297e6208b998a63507516d615012d542b6ad5d7dcd9a8b66973279fdc10",
+    "visual-tweaks/assets/editor.js": "59509faf8c97e9e91c531dcdfd8aeae5a69483058947152c50615412196a01b9",
+    "visual-tweaks/assets/navigation.js": "86db1ef5d87609d7962c3076c905d2704456f5af0986be5a39a10478faff75e9",
+    "visual-tweaks/assets/selection.js": "f9b1781ce30f310b8c020005fc82c272d4e4f747981562f3fb20524a624baad6",
+    "visual-tweaks/assets/validation.js": "1392cbade19c090b278ad9f4e13108e2e0e20f9878ea5c95c22782f0d51d3e80",
+    "visual-tweaks/assets/history.js": "8cae8e9d1795f42d5f4f0551ba981a33fe1bcccb03244ad220aea2ca6d4743c7",
+    "visual-tweaks/assets/state.js": "cc6a96b28ed82ed8b2b139290faec676996233ce9eaaafd94993ef0dd02c9845",
+    "visual-tweaks/assets/viewport.js": "9205305f10f15689ad52b7437d504252b01d9eb5cb715346c7ec9d5eca1e9b4a",
+    "visual-tweaks/assets/inline-editor.js": "0581215762805e3cf8bbbb45261e9c181a01eb762056272fbc948a14b1f80ad5",
+    "visual-tweaks/assets/styles.js": "a0e190cf3e842280639504f1533dc82f6a85a46230efd4098d82c0c94ebc2a4a",
+    "visual-tweaks/assets/geometry.js": "9fd85b5f99430aad5535b7bc11fca7177eecf7b5211986cd01c8df60f3ecb829",
+    "visual-tweaks/assets/assets.js": "f606e21346657e05d5bb97fbe9ac7ff256f009400e19dfcdc1c9388aaf41c54a",
+    "visual-tweaks/assets/icons/device-desktop.svg": "a18c2a33a20de14bacbff9df97b7896006fb166379da84eb12c304abbd803286",
+    "visual-tweaks/assets/icons/arrows-move.svg": "45b5a5c95a430f7512b9b20d48a3fed70571f4cb31069da74000c94550c7ec4c",
+    "visual-tweaks/assets/icons/adjustments-horizontal.svg": "c07711c7f515e7707b97e32d9a18fed49bb200f1fcf0d1a987422f44e8ec8479",
+    "visual-tweaks/assets/icons/crop.svg": "2b29d40e99536b5f53c785a3caac370c5ae688eac971fc4455d75a64f6a7b9ba",
+    "visual-tweaks/assets/icons/LICENSE": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db",
+    "visual-tweaks/assets/icons/typography.svg": "ccf0ac7285d7f0e5bddd9a740752f5702365563cdb6146f4f263389ff80bef5e",
+    "visual-tweaks/assets/icons/palette.svg": "0b462801eadbeeb017eb323aee44880c13336ea8b4ac2182afac81d79d58d45e",
+    "visual-tweaks/assets/icons/device-tablet.svg": "aa8a85e350d1b1d69a0211f3789cc72fc2f75f92e6299e6fc579ab219ae58d72",
+    "visual-tweaks/assets/icons/device-mobile.svg": "a8157b4a51e1e85f5e082ff649787273f63cd6cab58c37b97c15a5adc80c585a",
+    "visual-tweaks/assets/icons/pencil.svg": "61c3c827745d917f5fb153bd052209210f190af5f446284326421e5421cdbb25",
+    "visual-tweaks/assets/icons/photo.svg": "9aa0bd44bef46e1b80445220ea04499ca145fb3339005e13f1da1b17ad8ac159"
+  },
+  "package": {
+    "file": "artifacts/visual-tweaks-0.3.3.zip",
+    "files": 33,
+    "sha256": "3c851a8f2a1c11c2510a36b49911ecb28480d61339c5e7d648f253ed0d3cd0ca",
+    "allPackagedFilesMatchSource": true
+  }
+}

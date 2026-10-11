@@ -1,0 +1,16 @@
+{
+  "version": "0.3.3",
+  "reported_online_messages": [
+    "Ce texte contient des éléments imbriqués ou un brouillon attend votre décision.",
+    "Récupérez le brouillon local ou revenez à la sauvegarde avant de retoucher."
+  ],
+  "confirmed_cause": "recoveryPending blocks modify/setProperties/startInline/beginGesture/nudge until explicit recovery, while status reports Enregistré and nudge/drag return silently.",
+  "additional_reproduction": {
+    "runtime_initialization_delay_ms": 600,
+    "message": "Le runtime de la page est indisponible. Vérifiez que le thème appelle wp_footer().",
+    "runtimePresent": true,
+    "propertiesOpen": false,
+    "state": "Enregistré"
+  },
+  "production_access": "Not inspected or modified; cause identified from exact messages supplied by user and corresponding guards."
+}

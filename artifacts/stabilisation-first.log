@@ -1,0 +1,21 @@
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(await portrait.locator('img').count())
+
+    at file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/stabilisation-e2e.mjs:121:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

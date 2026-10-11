@@ -1,0 +1,191 @@
+{
+  "testedAt": "2026-10-09T09:32:15.280Z",
+  "checks": [
+    "selection, size panel, panel toggles and all breakpoints create no override",
+    "fit/min/max-content, calc, clamp, decimal, auto and percentage theme widths never enter color/position payloads; edits survive refresh",
+    "fractional resize generates canonical width and survives REST save and refresh",
+    "explicit widths normalize px, decimals, %, rem, em, vw, vh, zero and auto; blank removes the override",
+    "PHP and JavaScript validators agree; arbitrary CSS, overprecision, NaN, numbers and structured widths remain refused",
+    "mobile width is explicit, undo/redo work and the exception persists after reload",
+    "public rendering preserves theme fit-content and reapplies saved color",
+    "recovering a legacy failed resize repairs existing width precision and saves user intent",
+    "invalid legacy width is reported before REST, retained in the draft, and cleared only by user action"
+  ],
+  "diagnostics": [
+    {
+      "element": "width-case-0",
+      "measured": {
+        "theme": "fit-content",
+        "computed": "152.234px",
+        "rect": 161.609375,
+        "offset": 162
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-1",
+      "measured": {
+        "theme": "max-content",
+        "computed": "152.234px",
+        "rect": 161.609375,
+        "offset": 162
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-2",
+      "measured": {
+        "theme": "min-content",
+        "computed": "67.0938px",
+        "rect": 76.46875,
+        "offset": 76
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-3",
+      "measured": {
+        "theme": "calc(127.3px)",
+        "computed": "127.297px",
+        "rect": 136.671875,
+        "offset": 137
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-4",
+      "measured": {
+        "theme": "clamp(120px, 30vw, 170px)",
+        "computed": "170px",
+        "rect": 179.375,
+        "offset": 179
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-5",
+      "measured": {
+        "theme": "127.123px",
+        "computed": "127.109px",
+        "rect": 136.484375,
+        "offset": 136
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-6",
+      "measured": {
+        "theme": "auto",
+        "computed": "970.625px",
+        "rect": 980,
+        "offset": 980
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "element": "width-case-7",
+      "measured": {
+        "theme": "57%",
+        "computed": "558.594px",
+        "rect": 567.96875,
+        "offset": 568
+      },
+      "width": "absent",
+      "provenance": "theme only; no user width edit"
+    },
+    {
+      "width": "167.6px",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit resize, canonicalized",
+      "http": 200
+    },
+    {
+      "input": "127",
+      "width": "127px",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "127.125",
+      "width": "127.125px",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "127.123456789px",
+      "width": "127.1235px",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "57.5%",
+      "width": "57.5%",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "12.25rem",
+      "width": "12.25rem",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "8em",
+      "width": "8em",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "20vw",
+      "width": "20vw",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "20vh",
+      "width": "20vh",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "0",
+      "width": "0",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    },
+    {
+      "input": "auto",
+      "width": "auto",
+      "type": "string",
+      "breakpoint": "desktop",
+      "provenance": "explicit width field",
+      "http": 200
+    }
+  ]
+}

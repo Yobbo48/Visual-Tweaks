@@ -1,0 +1,20 @@
+{
+  "testedAt": "2026-10-10T23:59:13.091Z",
+  "checks": [
+    "direct text editing keeps caret, applies quick typography/color, groups undo and redo",
+    "inline text, font, italic, size and color survive refresh",
+    "Escape cancels only the current inline transaction",
+    "literal HTML stays text across REST save and reload",
+    "personal and recent colors remain available without external assets",
+    "resize rotated image with ratio locked and one undo step",
+    "drag the selected image directly without absolute positioning",
+    "visual image cropping by dragging in its actual frame",
+    "image size and appearance persist",
+    "tablet/mobile quick sizing and visible exceptions persist independently",
+    "contextual alignment for the existing grid container",
+    "contextual spacing for the existing flex container",
+    "existing link editing is safe and executable schemes are refused server-side",
+    "common actions remain available with the detailed panel hidden",
+    "theme elements cannot be deleted and browser has no uncaught errors"
+  ]
+}

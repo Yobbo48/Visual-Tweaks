@@ -1,0 +1,12 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "login": false,
+  "steps": [
+    {"step": "defineWpConfigConsts", "consts": {"WP_ENVIRONMENT_TYPE":"local","AUTOMATIC_UPDATER_DISABLED":true}},
+    {"step": "activatePlugin", "pluginPath":"visual-tweaks/visual-tweaks.php"},
+    {"step": "activateTheme", "themeFolderName":"vt-fixture"},
+    {"step": "setSiteOptions", "options":{"blogname":"Visual Tweaks — banc d’essai","blog_public":"0","home":"http://127.0.0.1:9410","siteurl":"http://127.0.0.1:9410"}},
+    {"step": "runPHP", "code":"<?php require '/wordpress/wp-load.php'; update_option('vt_enabled', true, false); if (!get_user_by('login', 'vt-admin')) { $id=wp_create_user('vt-admin','vt-local-only-9410','vt-admin@example.test'); $user=new WP_User($id); $user->set_role('administrator'); } if (!get_user_by('login', 'vt-subscriber')) { wp_create_user('vt-subscriber','vt-local-only-9410','vt-subscriber@example.test'); } require '/wordpress/wp-content/themes/vt-fixture/seed.php';"}
+  ]
+}

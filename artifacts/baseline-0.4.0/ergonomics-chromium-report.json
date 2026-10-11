@@ -1,0 +1,27 @@
+{
+  "testedAt": "2026-10-09T09:33:53.394Z",
+  "engine": "chromium",
+  "checks": [
+    "Double-click starts inline text editing even when properties opening changes canvas fit",
+    "Structure ↔ canvas: one selected row, parents open, scroll stable, selection visible",
+    "Properties close on deselection; navigation remains independent",
+    "Structure includes children of background containers",
+    "Assets discovers img/picture, resolved variables, every CSS layer, SVG and pseudo backgrounds; groups occurrences with safe thumbnails",
+    "Hidden/covered assets select their actual occurrence and synchronize properties/tree",
+    "Finding/selecting/revealing elements does not turn theme values into overrides",
+    "Real horizontal geometry: normal image, inline button, flex row and flex column center/left/right",
+    "Grid visibly aligns left/center/right within its cell; flex cross-axis and grid vertical center visibly",
+    "Reset Alignment preserves a standalone zero spacing override and does not classify it as an alignment",
+    "Text and container content align separately, respecting flex axes",
+    "Inline text alignment reports its missing block context, including typography controls, and creates no silent override",
+    "Unsupported commands produce visible feedback without changing layout",
+    "Alignment and local movement remain separate; group resets delete only their overrides",
+    "Spacing previews positive individual/negative linked margins, zero padding and relevant gap; undo/redo restores complete batches",
+    "WordPress REST saves strict semantic properties; spacing desktop/tablet/mobile survives refresh, rejected commands never enter document",
+    "Spacing group reset removes only mobile overrides and recovers tablet inheritance; undo restores mobile intent",
+    "Button reset restores theme display and intrinsic width by removing controlled alignment overrides",
+    "Navigation is fully collapsible; both panels preserve the 1440px logical viewport",
+    "Anonymous frontend applies saved spacing/alignment/reset state without editor interface",
+    "No uncaught browser errors"
+  ]
+}

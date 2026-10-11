@@ -1,0 +1,4 @@
+accueil                    1440  hauteur 6102/6102  pixels differents 0  
+accueil                     820  hauteur 6962/6962  pixels differents 0  
+accueil                     390  hauteur 7696/7696  pixels differents 0  
+accueil                     360  hauteur 7943/7943  pixels differents 0  

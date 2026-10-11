@@ -1,0 +1,32 @@
+{
+  "name": "visual-tweaks-dev",
+  "private": true,
+  "version": "0.4.4",
+  "type": "module",
+  "engines": {
+    "node": ">=24.18"
+  },
+  "scripts": {
+    "dev": "node dev/server.mjs",
+    "check": "node dev/check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "node tests/stability-e2e.mjs && node tests/width-e2e.mjs && node tests/save-e2e.mjs && node tests/foundations-e2e.mjs && node tests/e2e.mjs && node tests/ux-e2e.mjs",
+    "package": "node dev/package.mjs",
+    "test:stability": "node dev/cross-browser.mjs --stability",
+    "test:speed": "node dev/cross-browser.mjs --speed",
+    "test:polish": "node dev/cross-browser.mjs --polish",
+    "test:viewport": "node dev/cross-browser.mjs",
+    "test:real-theme": "node dev/cross-browser.mjs --real-theme",
+    "dev:real-theme": "node dev/real-theme-server.mjs",
+    "test:ergonomics": "node dev/cross-browser.mjs --ergonomics",
+    "test:comfort": "node dev/cross-browser.mjs --comfort",
+    "test:all": "node dev/validate.mjs",
+    "test:comfort-real-theme": "node dev/cross-browser.mjs --comfort-real-theme"
+  },
+  "devDependencies": {
+    "@wp-playground/cli": "3.1.56",
+    "@php-wasm/node": "3.1.56",
+    "@php-wasm/universal": "3.1.56",
+    "playwright": "1.62.1"
+  }
+}

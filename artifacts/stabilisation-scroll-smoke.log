@@ -1,0 +1,8 @@
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré

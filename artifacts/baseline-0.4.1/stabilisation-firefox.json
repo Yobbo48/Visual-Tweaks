@@ -1,0 +1,300 @@
+{
+  "engine": "firefox",
+  "checks": [
+    "Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue",
+    "Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement",
+    "Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents",
+    "Assets : miniature réelle, occurrence sélectionnée dans canvas/Structure ; taille puis reset exact",
+    "Thème réel : poignée sous canvas zoomé, taille logique réduite, proportions et Undo exacts ; centrage visible après taille",
+    "Médiathèque : remplacement image sans reconstruire le bloc, Undo/Redo fidèles",
+    "Desktop/Tablette/Mobile : exceptions explicites, audit sans mutation ; recommandations du thème inventoriées individuellement",
+    "Naviguer conserve le draft ; save → refresh → quitter → revenir recharge la même sauvegarde",
+    "Rendu public anonyme identique : texte, image et géométrie logique à 1440 px",
+    "Recovery invalide : décision explicite, message clair et largeur refusée conservée ; suppression explicite restitue exactement la sauvegarde"
+  ],
+  "errors": [],
+  "classification": [
+    {
+      "kind": "touch",
+      "text": "Voir un projet réalisé",
+      "label": null,
+      "width": 163.16665649414062,
+      "height": 21,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Voir cette approche sur L’Énergie des Runes",
+      "label": null,
+      "width": 331.8999938964844,
+      "height": 21,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Découvrir le projet",
+      "label": null,
+      "width": 158.7833251953125,
+      "height": 22.5,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Parlons de votre projet",
+      "label": null,
+      "width": 186.85000610351562,
+      "height": 22.5,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Accueil",
+      "label": null,
+      "width": 40.649993896484375,
+      "height": 18,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Sites internet",
+      "label": null,
+      "width": 73.41667175292969,
+      "height": 18,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Projet réalisé",
+      "label": null,
+      "width": 71.66665649414062,
+      "height": 18,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "À propos",
+      "label": null,
+      "width": 49.850006103515625,
+      "height": 18,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    },
+    {
+      "kind": "touch",
+      "text": "Contact",
+      "label": null,
+      "width": 44.66667175292969,
+      "height": 18,
+      "hiddenAncestor": false,
+      "classification": "pertinente : zone mesurée sous 24 px, recommandation non bloquante"
+    }
+  ],
+  "recommendations": [
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "desktop",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "tablet",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    },
+    {
+      "screen": "mobile",
+      "kind": "touch",
+      "text": "Attention — BoutonLa zone cliquable est petite. Vérifiez qu’elle reste facile à utiliser.VoirIgnorer"
+    }
+  ],
+  "saved": {
+    "schemaVersion": 1,
+    "page": "/?vt-test=stabilisation-firefox",
+    "revision": 22,
+    "elements": [
+      {
+        "id": "vt-eac03160-9675-4325-bf78-93f8f2e7b838",
+        "selector": "p.hero-intro",
+        "strategy": "class",
+        "fingerprint": {
+          "tag": "p",
+          "classes": [
+            "hero-intro"
+          ],
+          "text": "Des sites sur mesure pour les indépendants. Un contenu clair, un design cohérent, une présence professionnelle."
+        },
+        "changes": {
+          "desktop": {
+            "translateX": "10px",
+            "translateY": "0px"
+          },
+          "mobile": {
+            "translateX": "9px",
+            "translateY": "0px"
+          }
+        },
+        "content": {
+          "text": "Retouche locale validée — contenu simple."
+        }
+      },
+      {
+        "id": "vt-ba60b848-9488-46d7-8ace-a1962b3c4981",
+        "selector": "figure.pack-portrait > img",
+        "strategy": "hierarchy",
+        "fingerprint": {
+          "tag": "img",
+          "classes": [],
+          "src": "/wp-content/themes/kevin-legros/assets/images/pack-2026/kevin-portrait-800.webp"
+        },
+        "changes": {},
+        "content": {
+          "attachmentId": 6,
+          "image": {
+            "src": "http://127.0.0.1:9411/wp-content/uploads/2026/10/vt-stabilisation-replacement.png",
+            "alt": ""
+          }
+        }
+      }
+    ],
+    "updatedAt": "2026-10-09T12:37:47+00:00",
+    "updatedBy": 2
+  },
+  "editorBox": {
+    "x": 90,
+    "y": 404.8999938964844,
+    "width": 503.29998779296875,
+    "height": 26.100006103515625
+  },
+  "publicBox": {
+    "x": 90,
+    "y": 404.8999938964844,
+    "width": 503.29998779296875,
+    "height": 26.100006103515625
+  }
+}

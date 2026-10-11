@@ -1,0 +1,14 @@
+{
+  "http": 200,
+  "sentChanges": {
+    "desktop": {
+      "font-size": "42px"
+    }
+  },
+  "storedChanges": {
+    "desktop": {
+      "font-size": "42px"
+    }
+  },
+  "revision": 149
+}

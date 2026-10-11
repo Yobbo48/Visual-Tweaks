@@ -1,0 +1,9 @@
+{
+  "totalDomElements": 1743,
+  "notice": "Information — PageAnalyse limitée aux 1 500 premiers éléments ; des éléments plus bas restent à vérifier.VoirIgnorer",
+  "heading": "Desktop — 1 point(s) à vérifier",
+  "seeButtons": 1,
+  "selectedBefore": "[data-vt-id=\"hero-title\"]",
+  "selectedAfter": "[data-vt-id=\"hero-title\"]",
+  "dialogOpenAfter": false
+}

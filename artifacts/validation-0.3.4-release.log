@@ -1,0 +1,6 @@
+PASS Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides
+PASS Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo
+PASS Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique
+PASS Rendu public : aucun module d’interface, de palette ou de geste chargé
+PASS Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés
+PASS Outlines remain attached to the selected node after navigation/properties toggles

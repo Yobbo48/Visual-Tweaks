@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: False positive: interactive child of an opacity:0 ancestor
+
+2 !== 0
+
+    at file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/guard-visibility-e2e.mjs:98:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

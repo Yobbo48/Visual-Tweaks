@@ -1,0 +1,26 @@
+{
+  "testedAt": "2026-10-10T23:58:52.255Z",
+  "wordpress": "7.1.3",
+  "php": "PHP/8.5.10",
+  "checks": [
+    "select, immediate Y adjustment, preservation of theme transform/translate",
+    "undo and redo",
+    "mobile iframe triggers actual media queries and saves independent overrides",
+    "persisted adjustments after WordPress reload",
+    "direct drag uses one undo step",
+    "unsaved draft recovers after reload",
+    "WordPress media picker replacement and object-position persist",
+    "non-destructive leaf text override",
+    "strict validation and stale-save conflict preserve stored data",
+    "missing REST nonce denied",
+    "concurrent first saves admit exactly one writer",
+    "public saved rendering, no editor, no inline styles, isolated page, denied anonymous API",
+    "subscriber cannot activate editor",
+    "changed fingerprint skips override",
+    "element reset restores exact original theme CSS after reload",
+    "reset does not reintroduce old element properties",
+    "whole-page reset persists atomically",
+    "complete disable removes editor and override runtime",
+    "no uncaught browser errors"
+  ]
+}

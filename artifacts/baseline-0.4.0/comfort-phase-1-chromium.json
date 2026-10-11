@@ -1,0 +1,9 @@
+{
+  "engine": "chromium",
+  "phase": 1,
+  "checks": [
+    "Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir",
+    "Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé"
+  ],
+  "errors": []
+}

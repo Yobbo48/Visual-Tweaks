@@ -1,0 +1,42 @@
+RUN dev/check.mjs
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs
+✔ undo/redo preserve snapshots and truncate obsolete branches (1.164375ms)
+✔ new font and link values are bounded and reject executable schemes (1.026584ms)
+✔ resize follows local axes and keeps image proportions by default (1.614792ms)
+✔ site palette extracts colors without treating transparency as opaque (0.290333ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.317709ms)
+✔ responsive generation groups exceptions in at most two media queries (0.373875ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.138125ms)
+✔ asset appearance values are typed and reject CSS injection (0.340625ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.229041ms)
+✔ legacy precision is repaired only inside existing override maps (0.555625ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.154834ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.088375ms)
+✔ pointer coordinates are converted once according to their document (0.071458ms)
+✔ generic system families stay unquoted CSS keywords, real font names remain quoted (0.053333ms)
+✔ smart guides use logical thresholds and choose the nearest alignment (0.077167ms)
+✔ responsive origin reflects only actual overrides, never theme values (0.064041ms)
+✔ responsive overlap uses actual positive intersection, never adjacent boxes (0.04875ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56.993166
+RUN tests/stability-e2e.mjs
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 30000ms exceeded.
+    at ready (/Users/kevin/Documents/ChatGPT/Visual Tweaks/tests/stability-e2e.mjs:33:8)
+    at /Users/kevin/Documents/ChatGPT/Visual Tweaks/tests/stability-e2e.mjs:141:9 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.21.0

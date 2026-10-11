@@ -1,0 +1,95 @@
+
+== sélection : 133 Layout/UpdateLayoutTree dont 112 forcés par JS (9.6 ms)
+    12 ×    1.2 ms  UpdateLayoutTree tick                   main.js:286  ← 
+    12 ×    1.4 ms  Layout           tick                   main.js:286  ← 
+     5 ×    0.9 ms  UpdateLayoutTree control                editor.js:768  ← renderPanel ← choose
+     4 ×    0.2 ms  Layout           control                editor.js:768  ← renderPanel ← choose
+     4 ×    0.1 ms  UpdateLayoutTree point                  viewport.js:101  ← updateOutline ← renderPanel
+     4 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:577  ← renderPanel ← choose
+     3 ×    0.2 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← ?
+     3 ×    0.2 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← ?
+     3 ×    0.1 ms  UpdateLayoutTree point                  viewport.js:101  ← updateOutline ← ?
+     3 ×    0.1 ms  Layout           point                  viewport.js:101  ← updateOutline ← ?
+     2 ×    0.3 ms  UpdateLayoutTree backgroundSource       selection.js:53  ← assetInfo ← labelFor
+     2 ×    0.1 ms  Layout           backgroundSource       selection.js:53  ← assetInfo ← labelFor
+     2 ×    0.1 ms  Layout           point                  viewport.js:101  ← updateOutline ← renderPanel
+     2 ×    0.1 ms  Layout           updateOutline          editor.js:577  ← renderPanel ← choose
+
+== changement d'écran (mobile) : 162 Layout/UpdateLayoutTree dont 133 forcés par JS (25.1 ms)
+    15 ×    0.2 ms  UpdateLayoutTree paintVisibility        navigation.js:343  ← paintTree ← viewportChanged
+    15 ×    0.8 ms  Layout           paintVisibility        navigation.js:343  ← paintTree ← viewportChanged
+    13 ×    1.4 ms  UpdateLayoutTree tick                   main.js:286  ← 
+    11 ×    1.5 ms  Layout           tick                   main.js:286  ← 
+     5 ×    0.7 ms  UpdateLayoutTree control                editor.js:768  ← renderPanel ← setMode
+     4 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:577  ← ? ← layout
+     4 ×    0.2 ms  Layout           control                editor.js:768  ← renderPanel ← setMode
+     3 ×    4.4 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← ?
+     3 ×    0.1 ms  UpdateLayoutTree point                  viewport.js:101  ← updateOutline ← ?
+     2 ×   12.5 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← ?
+     2 ×    0.1 ms  Layout           updateOutline          editor.js:577  ← ? ← layout
+     2 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:576  ← ? ← layout
+     2 ×    0.1 ms  Layout           updateOutline          editor.js:576  ← ? ← layout
+     2 ×    0.0 ms  UpdateLayoutTree updateOutline          editor.js:576  ← renderPanel ← setMode
+
+== changement d'écran (desktop) : 151 Layout/UpdateLayoutTree dont 122 forcés par JS (22.8 ms)
+    15 ×    0.2 ms  UpdateLayoutTree paintVisibility        navigation.js:343  ← paintTree ← viewportChanged
+    15 ×    0.7 ms  Layout           paintVisibility        navigation.js:343  ← paintTree ← viewportChanged
+     9 ×    1.2 ms  UpdateLayoutTree tick                   main.js:286  ← 
+     8 ×    1.1 ms  Layout           tick                   main.js:286  ← 
+     5 ×    0.7 ms  UpdateLayoutTree control                editor.js:768  ← renderPanel ← setMode
+     4 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:577  ← ? ← layout
+     4 ×    0.1 ms  Layout           updateOutline          editor.js:577  ← ? ← layout
+     4 ×    0.2 ms  Layout           control                editor.js:768  ← renderPanel ← setMode
+     3 ×    3.6 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← ?
+     3 ×    0.1 ms  UpdateLayoutTree point                  viewport.js:101  ← updateOutline ← ?
+     3 ×    0.1 ms  Layout           point                  viewport.js:101  ← updateOutline ← ?
+     2 ×   11.9 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← ?
+     2 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:576  ← ? ← layout
+     2 ×    0.1 ms  Layout           updateOutline          editor.js:576  ← ? ← layout
+
+== défilement avec sélection (20 crans) : 500 Layout/UpdateLayoutTree dont 466 forcés par JS (40.2 ms)
+    76 ×    1.4 ms  UpdateLayoutTree updateOutline          editor.js:576  ← ?
+    60 ×    0.9 ms  UpdateLayoutTree point                  viewport.js:101  ← updateOutline ← ?
+    56 ×   11.7 ms  UpdateLayoutTree tick                   main.js:286  ← 
+    55 ×    6.3 ms  Layout           tick                   main.js:286  ← 
+    40 ×    5.6 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← ?
+    29 ×    1.9 ms  UpdateLayoutTree (anonyme)              main.js:757  ← 
+    23 ×    3.7 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← ?
+    20 ×    0.4 ms  UpdateLayoutTree boxEdges               geometry.js:17  ← dimensionsOf ← updateOutline
+    18 ×    0.4 ms  UpdateLayoutTree rectOverlay            editor.js:534  ← updateOutline ← ?
+    17 ×    0.5 ms  UpdateLayoutTree matrixFor              geometry.js:41  ← visualQuad ← updateOutline
+    11 ×    3.9 ms  UpdateLayoutTree (anonyme)              main.js:80  ← 
+    11 ×    0.9 ms  Layout           (anonyme)              main.js:80  ← 
+     9 ×    0.4 ms  UpdateLayoutTree (anonyme)              main.js:657  ← 
+     8 ×    0.4 ms  Layout           updateOutline          editor.js:576  ← ?
+
+== déplacement clavier (6) : 138 Layout/UpdateLayoutTree dont 137 forcés par JS (7.7 ms)
+    24 ×    0.5 ms  UpdateLayoutTree updateOutline          editor.js:577  ← preview ← modify
+    18 ×    0.4 ms  Layout           updateOutline          editor.js:577  ← preview ← modify
+    12 ×    1.8 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← preview
+    12 ×    0.3 ms  UpdateLayoutTree updateOutline          editor.js:576  ← preview ← modify
+    12 ×    0.4 ms  Layout           updateOutline          editor.js:576  ← preview ← modify
+     6 ×    0.7 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← preview
+     6 ×    0.1 ms  UpdateLayoutTree rectOverlay            editor.js:535  ← updateOutline ← preview
+     6 ×    0.2 ms  Layout           rectOverlay            editor.js:535  ← updateOutline ← preview
+     6 ×    0.1 ms  UpdateLayoutTree updateOutline          editor.js:557  ← preview ← modify
+     6 ×    0.2 ms  Layout           updateOutline          editor.js:557  ← preview ← modify
+     6 ×    0.1 ms  UpdateLayoutTree position               contextual-toolbar.js:79  ← updateOutline ← preview
+     6 ×    0.1 ms  Layout           position               contextual-toolbar.js:79  ← updateOutline ← preview
+     6 ×    0.1 ms  UpdateLayoutTree paintVisibility        navigation.js:343  ← sync ← syncQuick
+     6 ×    0.2 ms  Layout           paintVisibility        navigation.js:343  ← sync ← syncQuick
+
+== onglet Assets puis Structure : 74 Layout/UpdateLayoutTree dont 42 forcés par JS (11.2 ms)
+    14 ×    3.9 ms  UpdateLayoutTree tick                   main.js:286  ← 
+     8 ×    1.2 ms  Layout           tick                   main.js:286  ← 
+     2 ×    0.1 ms  UpdateLayoutTree expectHitTarget        :7504  ← 
+     2 ×    0.1 ms  UpdateLayoutTree show                   navigation.js:124  ← showInventory ← ?
+     2 ×    0.0 ms  UpdateLayoutTree backgroundSource       selection.js:53  ← assetInfo ← assetInventory
+     2 ×    1.7 ms  UpdateLayoutTree show                   navigation.js:128  ← showInventory ← ?
+     2 ×    3.6 ms  Layout           show                   navigation.js:128  ← showInventory ← ?
+     2 ×    0.1 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← ?
+     2 ×    0.2 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← ?
+     2 ×    0.0 ms  UpdateLayoutTree rectOverlay            editor.js:522  ← updateOutline ← showInventory
+     2 ×    0.1 ms  Layout           rectOverlay            editor.js:522  ← updateOutline ← showInventory
+     1 ×    0.0 ms  UpdateLayoutTree sync                   navigation.js:376  ← show ← showInventory
+     1 ×    0.1 ms  Layout           sync                   navigation.js:376  ← show ← showInventory

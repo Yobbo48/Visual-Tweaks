@@ -1,0 +1,17 @@
+{
+  "engine": "chromium",
+  "phase": 9,
+  "checks": [
+    "Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir",
+    "Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé",
+    "Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier",
+    "Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo",
+    "Indicateurs par écran et héritage explicite : ouvrir/changer d’écran ne crée aucun override",
+    "Responsive Guard en lecture seule : overflow réel, déplacement hérité, petite cible, texte coupé et collision nouvelle ; state/viewport/sélection intacts",
+    "Correction mobile : proposition, aperçu non persistant, annulation/Échap/ignorer, application explicite, Review/Undo/Redo/save/refresh et rendu public",
+    "Fond multicouche : remplacement média de la seule couche choisie, gradient/autres images/position/size/repeat conservés, Undo/save/refresh/public et validation stricte",
+    "Mesure à la demande : pixels logiques sans override ; timings propriété/Structure/Assets mesurés, aucun audit automatique à chaque retouche",
+    "Texte : contenu HTML traité littéralement, Undo restaure le texte simple ; structure imbriquée et listeners conservés, DIV non élargi sans contrat sûr"
+  ],
+  "errors": []
+}

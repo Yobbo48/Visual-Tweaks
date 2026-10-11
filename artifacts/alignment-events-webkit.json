@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "type": "pointerdown",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 461,
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "pointerup",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 461,
+      "selected": "figure.pack-portrait > img"
+    },
+    {
+      "type": "click",
+      "label": "",
+      "tag": "div",
+      "path": [
+        "button:center",
+        "div:",
+        "div:"
+      ],
+      "x": 920,
+      "y": 461,
+      "selected": "figure.pack-portrait > img"
+    }
+  ],
+  "selected": "figure.pack-portrait > img"
+}

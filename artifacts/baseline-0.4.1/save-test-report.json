@@ -1,0 +1,12 @@
+{
+  "testedAt": "2026-10-09T12:29:41.603Z",
+  "checks": [
+    "content-only save survives refresh",
+    "save status, REST storage and editor refresh match the visual draft",
+    "exit and reenter reload the saved revision with no recovery prompt",
+    "anonymous public rendering applies the persisted overrides without editor UI",
+    "failed request is visible with settings hidden, preserves local draft, and can be retried",
+    "edits made while saving remain dirty and persist on the next save",
+    "409 conflict stays visible and preserves an exportable draft without overwriting WordPress"
+  ]
+}

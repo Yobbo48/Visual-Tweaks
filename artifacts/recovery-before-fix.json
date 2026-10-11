@@ -1,0 +1,120 @@
+{
+  "environment": "Isolated WordPress local with original 0.3.3 JS/CSS served from release archive, current backward-compatible backend; no production access or page save",
+  "before": {
+    "state": "Modifications non enregistrées",
+    "message": "",
+    "draft": {
+      "schemaVersion": 1,
+      "page": "/?vt-test=recovery-before-1791534488969",
+      "revision": 0,
+      "elements": [
+        {
+          "id": "hero-title",
+          "selector": "[data-vt-id=\"hero-title\"]",
+          "strategy": "data",
+          "fingerprint": {
+            "tag": "h1",
+            "classes": [],
+            "anchor": "hero-title",
+            "text": "Un détail change tout."
+          },
+          "changes": {
+            "desktop": {
+              "translateX": "1px",
+              "translateY": "0px"
+            }
+          }
+        }
+      ]
+    },
+    "translate": "1px"
+  },
+  "afterReload": {
+    "state": "Enregistré",
+    "message": "",
+    "draft": {
+      "schemaVersion": 1,
+      "page": "/?vt-test=recovery-before-1791534488969",
+      "revision": 0,
+      "elements": [
+        {
+          "id": "hero-title",
+          "selector": "[data-vt-id=\"hero-title\"]",
+          "strategy": "data",
+          "fingerprint": {
+            "tag": "h1",
+            "classes": [],
+            "anchor": "hero-title",
+            "text": "Un détail change tout."
+          },
+          "changes": {
+            "desktop": {
+              "translateX": "1px",
+              "translateY": "0px"
+            }
+          }
+        }
+      ]
+    },
+    "translate": "none"
+  },
+  "textBlocked": {
+    "state": "Enregistré",
+    "message": "Ce texte contient des éléments imbriqués ou un brouillon attend votre décision.",
+    "draft": {
+      "schemaVersion": 1,
+      "page": "/?vt-test=recovery-before-1791534488969",
+      "revision": 0,
+      "elements": [
+        {
+          "id": "hero-title",
+          "selector": "[data-vt-id=\"hero-title\"]",
+          "strategy": "data",
+          "fingerprint": {
+            "tag": "h1",
+            "classes": [],
+            "anchor": "hero-title",
+            "text": "Un détail change tout."
+          },
+          "changes": {
+            "desktop": {
+              "translateX": "1px",
+              "translateY": "0px"
+            }
+          }
+        }
+      ]
+    },
+    "translate": "none"
+  },
+  "moveBlocked": {
+    "state": "Enregistré",
+    "message": "Récupérez le brouillon local ou revenez à la sauvegarde avant de retoucher.",
+    "draft": {
+      "schemaVersion": 1,
+      "page": "/?vt-test=recovery-before-1791534488969",
+      "revision": 0,
+      "elements": [
+        {
+          "id": "hero-title",
+          "selector": "[data-vt-id=\"hero-title\"]",
+          "strategy": "data",
+          "fingerprint": {
+            "tag": "h1",
+            "classes": [],
+            "anchor": "hero-title",
+            "text": "Un détail change tout."
+          },
+          "changes": {
+            "desktop": {
+              "translateX": "1px",
+              "translateY": "0px"
+            }
+          }
+        }
+      ]
+    },
+    "translate": "none"
+  },
+  "errors": []
+}

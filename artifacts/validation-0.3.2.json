@@ -1,0 +1,84 @@
+{
+  "version": "0.3.2",
+  "testedAt": "2026-10-08T16:56:25.341605+00:00",
+  "browserChecks": 108,
+  "unitTests": 13,
+  "syntax": "7 PHP files and JS modules passed",
+  "reports": {
+    "width-test-report.json": 9,
+    "save-test-report.json": 7,
+    "foundations-test-report.json": 16,
+    "test-report.json": 19,
+    "ux-test-report.json": 15,
+    "viewport-chromium-report.json": 11,
+    "viewport-webkit-report.json": 11,
+    "viewport-firefox-report.json": 11,
+    "real-theme-chromium-report.json": 3,
+    "real-theme-webkit-report.json": 3,
+    "real-theme-firefox-report.json": 3
+  },
+  "referenceComparisons": [
+    {
+      "engine": "chromium",
+      "version": "156.0.8078.4",
+      "editorPublicDeltaCSSpx": {
+        "x": 0,
+        "y": 0.0,
+        "width": 0,
+        "height": 0
+      },
+      "logicalViewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "zoom": 0.7333333333333333
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "editorPublicDeltaCSSpx": {
+        "x": 0,
+        "y": 0.0,
+        "width": 0,
+        "height": 0
+      },
+      "logicalViewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "zoom": 0.7333333333333333
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "editorPublicDeltaCSSpx": {
+        "x": 0,
+        "y": 0.0,
+        "width": 0,
+        "height": 0
+      },
+      "logicalViewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "zoom": 0.7333333333333333
+    }
+  ],
+  "realThemeComparisons": [
+    {
+      "engine": "chromium",
+      "maxEditorPublicDifferenceCSSpx": 0
+    },
+    {
+      "engine": "webkit",
+      "maxEditorPublicDifferenceCSSpx": 0
+    },
+    {
+      "engine": "firefox",
+      "maxEditorPublicDifferenceCSSpx": 0
+    }
+  ],
+  "realTheme": "Isolated copy of Kevin Legros; original 191 source files hash-verified unchanged",
+  "productionSite": "L’Énergie des Runes not deployed or tested with 0.3.2: no staging available",
+  "zipSHA256": "7df28ca1a8066661b00cbebd1458bf8c6209cf8d31317f8e5bd64851bf31135f  visual-tweaks-0.3.2.zip"
+}

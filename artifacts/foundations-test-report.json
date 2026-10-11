@@ -1,0 +1,21 @@
+{
+  "testedAt": "2026-10-10T23:58:24.070Z",
+  "checks": [
+    "keyboard arrows move 1px, Shift moves 10px; a sequence has one undo/redo step",
+    "visible directional buttons and step size work; field editing never nudges",
+    "inline text caret shortcuts never move the text element",
+    "image zoom changes rendered pixels, preserves its frame and survives refresh",
+    "Assets inventories img/picture/background/SVG and selects a covered image",
+    "SVG paths select the root icon, preserving its internal DOM",
+    "picture replacement uses WordPress media and keeps the frame and original sources recoverable",
+    "background focal point and direct crop gesture adjust image position without moving its zone",
+    "background replacement persists as a media ID while preserving the block structure and dimensions",
+    "background zoom, overlay, shadow and replacement survive save and refresh",
+    "tablet and mobile asset exceptions persist independently and reapply after refresh",
+    "Alt-click exposes overlapping elements and selects the background behind the overlay",
+    "lightweight Structure selects an existing text without rebuilding the DOM",
+    "custom shadow fields generate only strictly validated values",
+    "public visitors receive saved image/background overrides and no editor or permanent inline override",
+    "no uncaught browser errors"
+  ]
+}

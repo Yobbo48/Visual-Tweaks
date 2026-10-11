@@ -1,0 +1,20 @@
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+PASS Assets : miniature réelle, occurrence sélectionnée dans canvas/Structure ; taille puis reset exact
+PASS Médiathèque : remplacement image sans reconstruire le bloc, Undo/Redo fidèles
+PASS Desktop/Tablette/Mobile : exceptions explicites, audit sans mutation ; recommandations du thème inventoriées individuellement
+PASS Naviguer conserve le draft ; save → refresh → quitter → revenir recharge la même sauvegarde
+PASS Rendu public anonyme identique : texte, image et géométrie logique à 1440 px
+PASS Public sans overrides : zéro ressource Visual Tweaks et aucune configuration REST/nonce
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /Users/kevin/Documents/ChatGPT/Visual Tweaks/tests/cache-public-e2e.mjs:109:32 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.21.0

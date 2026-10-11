@@ -1,0 +1,52 @@
+{
+  "checks": [
+    "Public sans overrides : zéro ressource Visual Tweaks et aucune configuration REST/nonce",
+    "Public retouché : quatre modules du runtime, aucun éditeur/Guard/Review/Guides, aucun nonce",
+    "Cache navigateur ordinaire : nouvelle sauvegarde visible après refresh public, sans purge spécifique",
+    "Cache HTTP HTML contrôlé : ancien override reproduit après save ; purge du cache restitue la dernière valeur"
+  ],
+  "modules": [
+    "background-layers.js",
+    "runtime.js",
+    "selection.js",
+    "styles.js"
+  ],
+  "config": {
+    "keys": [
+      "schemaVersion",
+      "page",
+      "revision",
+      "elements",
+      "breakpoints"
+    ]
+  },
+  "publicHeaders": {
+    "connection": "keep-alive",
+    "date": "Fri, 09 Oct 2026 12:38:00 GMT",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked",
+    "content-type": "text/html; charset=UTF-8",
+    "link": "<http://127.0.0.1:9410/wp-json/>; rel=\"https://api.w.org/\"",
+    "x-powered-by": "PHP/8.5.10"
+  },
+  "previewHeaders": {
+    "x-powered-by": "PHP/8.5.10",
+    "content-type": "text/html; charset=UTF-8",
+    "expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+    "cache-control": "private, no-store, max-age=0",
+    "link": "<http://127.0.0.1:9410/wp-json/>; rel=\"https://api.w.org/\"",
+    "date": "Fri, 09 Oct 2026 12:38:05 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked"
+  },
+  "activePlugins": [
+    "visual-tweaks/visual-tweaks"
+  ],
+  "cache": {
+    "type": "in-process real HTTP proxy caching anonymous HTML on localhost:9412",
+    "staleBeforePurge": "6px 3px",
+    "freshAfterPurge": "7px 3px"
+  },
+  "mysql": "not tested"
+}

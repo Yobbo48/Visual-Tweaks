@@ -1,0 +1,286 @@
+{
+ "base": "https://127.0.0.1:8794",
+ "profil": "desktop",
+ "cache": "froid",
+ "date": "2026-10-10T23:43:11.488Z",
+ "pages": {
+  "accueil": [
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "froid",
+    "fcp": 304,
+    "lcp": [
+     964,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 346,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 151,
+     "loaf": 1,
+     "loafBloc": 26,
+     "loafStyle": 71,
+     "force": 0,
+     "longues": 1
+    },
+    "entree": {
+     "trames": 87,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 50,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 177,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 51,
+     "loaf": 0,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1750,
+    "defilement": {
+     "trames": 254,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 101,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 1110,
+     "cache": 0
+    },
+    "loafs": [
+     {
+      "t": 89,
+      "d": 157,
+      "bloc": 26,
+      "style": 71,
+      "rendu": 71,
+      "scripts": []
+     }
+    ],
+    "longues": [
+     [
+      175,
+      77
+     ]
+    ],
+    "parScript": {},
+    "decalages": [
+     [
+      332,
+      0
+     ]
+    ]
+   },
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "froid",
+    "fcp": 320,
+    "lcp": [
+     1096,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 345,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 152,
+     "loaf": 2,
+     "loafBloc": 24,
+     "loafStyle": 69,
+     "force": 0,
+     "longues": 1
+    },
+    "entree": {
+     "trames": 87,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 51,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 177,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 51,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1771,
+    "defilement": {
+     "trames": 255,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 101,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 1109,
+     "cache": 0
+    },
+    "loafs": [
+     {
+      "t": 87,
+      "d": 173,
+      "bloc": 24,
+      "style": 69,
+      "rendu": 70,
+      "scripts": []
+     }
+    ],
+    "longues": [
+     [
+      190,
+      76
+     ]
+    ],
+    "parScript": {
+     "js https://www.googletagmanager.com/gtag/js?id=GT-NS43D8PP": {
+      "d": 45,
+      "force": 0,
+      "n": 1
+     }
+    },
+    "decalages": [
+     [
+      328,
+      0
+     ]
+    ]
+   },
+   {
+    "page": "accueil",
+    "profil": "desktop",
+    "cache": "froid",
+    "fcp": 316,
+    "lcp": [
+     1100,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 345,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 83,
+     "manque": 168,
+     "loaf": 2,
+     "loafBloc": 26,
+     "loafStyle": 71,
+     "force": 0,
+     "longues": 1
+    },
+    "entree": {
+     "trames": 87,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 50,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 177,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 33,
+     "manque": 51,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "pageVue": 1745,
+    "defilement": {
+     "trames": 255,
+     "lentes": 1,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 101,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 0,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 45,
+     "ko": 1109,
+     "cache": 0
+    },
+    "loafs": [
+     {
+      "t": 88,
+      "d": 167,
+      "bloc": 26,
+      "style": 71,
+      "rendu": 71,
+      "scripts": []
+     }
+    ],
+    "longues": [
+     [
+      185,
+      77
+     ]
+    ],
+    "parScript": {
+     "js https://www.googletagmanager.com/gtag/js?id=GT-NS43D8PP": {
+      "d": 44,
+      "force": 0,
+      "n": 1
+     }
+    },
+    "decalages": [
+     [
+      324,
+      0
+     ]
+    ]
+   }
+  ]
+ }
+}

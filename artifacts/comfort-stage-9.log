@@ -1,0 +1,63 @@
+RUN dev/check.mjs
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs
+✔ undo/redo preserve snapshots and truncate obsolete branches (0.93825ms)
+✔ new font and link values are bounded and reject executable schemes (0.9855ms)
+✔ resize follows local axes and keeps image proportions by default (1.915166ms)
+✔ site palette extracts colors without treating transparency as opaque (0.300417ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.48225ms)
+✔ responsive generation groups exceptions in at most two media queries (0.413416ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.185875ms)
+✔ asset appearance values are typed and reject CSS injection (0.43625ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.262916ms)
+✔ legacy precision is repaired only inside existing override maps (0.587792ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.174583ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.102375ms)
+✔ pointer coordinates are converted once according to their document (0.075375ms)
+✔ generic system families stay unquoted CSS keywords, real font names remain quoted (0.061625ms)
+✔ smart guides use logical thresholds and choose the nearest alignment (0.081167ms)
+✔ responsive origin reflects only actual overrides, never theme values (0.060625ms)
+✔ responsive overlap uses actual positive intersection, never adjacent boxes (0.041625ms)
+✔ background layers preserve gradients, nested commas, quotes and unaffected URLs (0.310125ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.550709
+RUN tests/stability-e2e.mjs
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/comfort-e2e.mjs
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé
+PASS Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier
+PASS Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo
+PASS Indicateurs par écran et héritage explicite : ouvrir/changer d’écran ne crée aucun override
+PASS Responsive Guard en lecture seule : overflow réel, déplacement hérité, petite cible, texte coupé et collision nouvelle ; state/viewport/sélection intacts
+PASS Correction mobile : proposition, aperçu non persistant, annulation, application explicite, Review/Undo/Redo/save/refresh et rendu public
+PASS Fond multicouche : remplacement média de la seule couche choisie, gradient/autres images/position/size/repeat conservés, Undo/save/refresh/public et validation stricte
+PASS Mesure à la demande : pixels logiques sans override ; timings propriété/Structure/Assets mesurés, aucun audit automatique à chaque retouche
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#vt-editor-host [data-action="more"]')[22m
+
+    at /Users/kevin/Documents/ChatGPT/Visual Tweaks/tests/comfort-e2e.mjs:172:37 {
+  log: [ `  - waiting for locator('#vt-editor-host [data-action="more"]')` ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.21.0

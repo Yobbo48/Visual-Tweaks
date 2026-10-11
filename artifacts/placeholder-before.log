@@ -1,0 +1,27 @@
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+PASS Assets : miniature réelle, occurrence sélectionnée dans canvas/Structure ; taille puis reset exact
+PASS Thème réel : poignée sous canvas zoomé, taille logique réduite, proportions et Undo exacts ; centrage visible après taille
+PASS Médiathèque : remplacement image sans reconstruire le bloc, Undo/Redo fidèles
+PASS Desktop/Tablette/Mobile : exceptions explicites, audit sans mutation ; recommandations du thème inventoriées individuellement
+PASS Naviguer conserve le draft ; save → refresh → quitter → revenir recharge la même sauvegarde
+PASS Rendu public anonyme identique : texte, image et géométrie logique à 1440 px
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Clearing an invalid recovered width shows the current site width, not a stale override
+
+'NaNpx' !== '503.3px'
+
+    at file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/stabilisation-e2e.mjs:486:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'NaNpx',
+  expected: '503.3px',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

@@ -1,0 +1,41 @@
+PASS Responsive Guard : sous-arbre invisible exclu, petite cible visible conservée, titre multiligne et décoration sans faux problème
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+PASS Assets : miniature réelle, occurrence sélectionnée dans canvas/Structure ; taille puis reset exact
+PASS Thème réel : poignée sous canvas zoomé, taille logique réduite, proportions et Undo exacts ; centrage visible après taille
+PASS Médiathèque : remplacement image sans reconstruire le bloc, Undo/Redo fidèles
+PASS Desktop/Tablette/Mobile : exceptions explicites, audit sans mutation ; recommandations du thème inventoriées individuellement
+PASS Naviguer conserve le draft ; save → refresh → quitter → revenir recharge la même sauvegarde
+PASS Rendu public anonyme identique : texte, image et géométrie logique à 1440 px
+PASS Recovery invalide : décision explicite, message clair et largeur refusée conservée ; suppression explicite restitue exactement la sauvegarde
+PASS Responsive Guard : sous-arbre invisible exclu, petite cible visible conservée, titre multiligne et décoration sans faux problème
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+PASS Assets : miniature réelle, occurrence sélectionnée dans canvas/Structure ; taille puis reset exact
+PASS Thème réel : poignée sous canvas zoomé, taille logique réduite, proportions et Undo exacts ; centrage visible après taille
+PASS Médiathèque : remplacement image sans reconstruire le bloc, Undo/Redo fidèles
+PASS Desktop/Tablette/Mobile : exceptions explicites, audit sans mutation ; recommandations du thème inventoriées individuellement
+PASS Naviguer conserve le draft ; save → refresh → quitter → revenir recharge la même sauvegarde
+PASS Rendu public anonyme identique : texte, image et géométrie logique à 1440 px
+PASS Recovery invalide : décision explicite, message clair et largeur refusée conservée ; suppression explicite restitue exactement la sauvegarde
+PASS Responsive Guard : sous-arbre invisible exclu, petite cible visible conservée, titre multiligne et décoration sans faux problème
+PASS Thème réel : sélection, mutation utilisateur, brouillon, dirty et Undo dans une session continue
+PASS Structure reste synchronisée ; margin/padding visibles puis reset restitue le thème sans supprimer le déplacement
+PASS Texte inline, fin de saisie, Modifications → Voir et sélection globale cohérents
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Image resized then horizontally centered in its real parent
+    at file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/stabilisation-e2e.mjs:201:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

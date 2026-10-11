@@ -1,0 +1,44 @@
+
+visiteur 390 px — images où la bande ou le logo change :
+     923 ms  114 | 0px -7px | 6 | 60px | -14px
+PASS  visiteur 390 : #vt-published-styles imprimée dans <head> (3 règles)
+PASS  visiteur 390 : bande et logo à leur place dès la première image, aucun changement ensuite (1 état(s))
+PASS  visiteur 390 : translation de la bande dès la première image = 0px -7px
+PASS  visiteur 390 : runtime chargé, feuille serveur neutralisée (media="not all")
+PASS  visiteur 390 : valeurs finales non doublées (bande 0px -7px, logo 60px)
+PASS  visiteur 390 : aucune erreur JavaScript
+
+visiteur 900 px — images où la bande ou le logo change :
+     757 ms  103 | 0px -18px | 31 | 60px | -14px
+PASS  visiteur 900 : #vt-published-styles imprimée dans <head> (3 règles)
+PASS  visiteur 900 : bande et logo à leur place dès la première image, aucun changement ensuite (1 état(s))
+PASS  visiteur 900 : translation de la bande dès la première image = 0px -18px
+PASS  visiteur 900 : runtime chargé, feuille serveur neutralisée (media="not all")
+PASS  visiteur 900 : valeurs finales non doublées (bande 0px -18px, logo 60px)
+PASS  visiteur 900 : aucune erreur JavaScript
+
+visiteur 1440 px — images où la bande ou le logo change :
+     939 ms  103 | 0px -18px | 154 | 60px | -14px
+PASS  visiteur 1440 : #vt-published-styles imprimée dans <head> (3 règles)
+PASS  visiteur 1440 : bande et logo à leur place dès la première image, aucun changement ensuite (1 état(s))
+PASS  visiteur 1440 : translation de la bande dès la première image = 0px -18px
+PASS  visiteur 1440 : runtime chargé, feuille serveur neutralisée (media="not all")
+PASS  visiteur 1440 : valeurs finales non doublées (bande 0px -18px, logo 60px)
+PASS  visiteur 1440 : aucune erreur JavaScript
+PASS  redimensionnement 1440 → 390 : bande 0px -7px (attendu 0px -7px)
+
+administrateur, vue publique 1440 px — images où la bande ou le logo change :
+     599 ms  103 | 0px -18px | 154 | 60px | -14px
+PASS  administrateur, vue publique 1440 : #vt-published-styles imprimée dans <head> (3 règles)
+PASS  administrateur, vue publique 1440 : bande et logo à leur place dès la première image, aucun changement ensuite (1 état(s))
+PASS  administrateur, vue publique 1440 : translation de la bande dès la première image = 0px -18px
+PASS  administrateur, vue publique 1440 : runtime chargé, feuille serveur neutralisée (media="not all")
+PASS  administrateur, vue publique 1440 : valeurs finales non doublées (bande 0px -18px, logo 60px)
+PASS  administrateur, vue publique 1440 : aucune erreur JavaScript
+PASS  mode édition : éditeur prêt
+PASS  mode édition : aucune feuille serveur, ni dans la page ni dans le cadre (/?vt-frame=1)
+PASS  cadre de prévisualisation : runtime présent, seul maître des overrides
+PASS  sauvegarde par l API de l extension : HTTP 200, révision 23
+PASS  après sauvegarde, visiteur 1440 : nouvelle valeur dès la première image (0px -10px)
+
+Tous les contrôles passent

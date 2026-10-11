@@ -1,0 +1,13 @@
+{
+  "base034": {
+    "publicModuleSourceBytes": 15353,
+    "individualGzipBytesEstimate": 5009,
+    "modules": 3
+  },
+  "release040": {
+    "publicModuleSourceBytes": 18642,
+    "individualGzipBytesEstimate": 6097,
+    "modules": 4
+  },
+  "note": "Only public runtime module graph. Gzip is a local estimate, not measured HTTP transfer. Editor-only modules are excluded."
+}

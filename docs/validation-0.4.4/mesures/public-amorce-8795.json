@@ -1,0 +1,161 @@
+{
+ "base": "https://127.0.0.1:8795",
+ "profil": "mobile",
+ "cache": "froid",
+ "date": "2026-10-10T23:41:11.542Z",
+ "pages": {
+  "accueil": [
+   {
+    "page": "accueil",
+    "profil": "mobile",
+    "cache": "froid",
+    "fcp": 712,
+    "lcp": [
+     1032,
+     "p.lead"
+    ],
+    "cls": 0,
+    "chargement": {
+     "trames": 323,
+     "lentes": 4,
+     "tresLentes": 1,
+     "pireTrame": 133,
+     "manque": 268,
+     "loaf": 4,
+     "loafBloc": 139,
+     "loafStyle": 133,
+     "force": 12,
+     "longues": 3
+    },
+    "entree": {
+     "trames": 87,
+     "lentes": 0,
+     "tresLentes": 0,
+     "pireTrame": 17,
+     "manque": 0,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 2,
+     "force": 12,
+     "longues": 0
+    },
+    "debut": {
+     "trames": 171,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 101,
+     "loaf": 3,
+     "loafBloc": 47,
+     "loafStyle": 2,
+     "force": 12,
+     "longues": 2
+    },
+    "pageVue": 2464,
+    "defilement": {
+     "trames": 363,
+     "lentes": 2,
+     "tresLentes": 0,
+     "pireTrame": 67,
+     "manque": 117,
+     "loaf": 1,
+     "loafBloc": 0,
+     "loafStyle": 1,
+     "force": 0,
+     "longues": 0
+    },
+    "reseau": {
+     "n": 40,
+     "ko": 843,
+     "cache": 0
+    },
+    "loafs": [
+     {
+      "t": 218,
+      "d": 475,
+      "bloc": 92,
+      "style": 131,
+      "rendu": 132,
+      "scripts": []
+     },
+     {
+      "t": 2313,
+      "d": 93,
+      "bloc": 38,
+      "style": 0,
+      "rendu": 0,
+      "scripts": [
+       {
+        "src": "js",
+        "fn": "",
+        "inv": "https://www.googletagmanager.com/gtag/js?id=GT-NS43D8PP",
+        "type": "classic-script",
+        "d": 87,
+        "force": 0
+       }
+      ]
+     },
+     {
+      "t": 2407,
+      "d": 61,
+      "bloc": 9,
+      "style": 0,
+      "rendu": 0,
+      "scripts": [
+       {
+        "src": "js",
+        "fn": "",
+        "inv": "TimerHandler:setTimeout",
+        "type": "user-callback",
+        "d": 59,
+        "force": 0
+       }
+      ]
+     }
+    ],
+    "longues": [
+     [
+      562,
+      144
+     ],
+     [
+      2318,
+      87
+     ],
+     [
+      2407,
+      59
+     ]
+    ],
+    "parScript": {
+     "main.js https://127.0.0.1:8795/wp-content/themes/lenergiedesrunes/js": {
+      "d": 14,
+      "force": 3,
+      "n": 1
+     },
+     "runtime.js https://127.0.0.1:8795/wp-content/plugins/visual-tweaks/asse": {
+      "d": 8,
+      "force": 5,
+      "n": 1
+     },
+     "main.js tick": {
+      "d": 29,
+      "force": 4,
+      "n": 1
+     },
+     "js https://www.googletagmanager.com/gtag/js?id=GT-NS43D8PP": {
+      "d": 87,
+      "force": 0,
+      "n": 1
+     },
+     "js TimerHandler:setTimeout": {
+      "d": 59,
+      "force": 0,
+      "n": 1
+     }
+    },
+    "decalages": []
+   }
+  ]
+ }
+}

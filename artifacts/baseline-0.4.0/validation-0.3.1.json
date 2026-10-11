@@ -1,0 +1,30 @@
+{
+  "version": "0.3.1",
+  "browserChecks": 66,
+  "unitTests": 11,
+  "syntax": "7 PHP files and JS modules passed",
+  "reports": {
+    "width-test-report.json": {
+      "checks": 9,
+      "testedAt": "2026-10-08T15:50:58.496Z"
+    },
+    "save-test-report.json": {
+      "checks": 7,
+      "testedAt": "2026-10-08T15:51:36.345Z"
+    },
+    "foundations-test-report.json": {
+      "checks": 16,
+      "testedAt": "2026-10-08T15:51:36.067Z"
+    },
+    "test-report.json": {
+      "checks": 19,
+      "testedAt": "2026-10-08T15:52:40.990Z"
+    },
+    "ux-test-report.json": {
+      "checks": 15,
+      "testedAt": "2026-10-08T15:51:39.411Z"
+    }
+  },
+  "beforeFix": "width-before-fix.json",
+  "zipSHA256": "6b285c4a921115d798a0b02117ebbca37671f6a2f1581fcf723f002713fcedb9  visual-tweaks-0.3.1.zip"
+}

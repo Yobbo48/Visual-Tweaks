@@ -1,0 +1,146 @@
+{
+  "coldAssetsMs": 8,
+  "warmStructureMs": 3,
+  "warmAssetsMs": 2,
+  "propertyMs": 2,
+  "nextPaintMs": 10,
+  "before": {
+    "phase": "ready",
+    "ready": true,
+    "recoveryPending": false,
+    "error": null,
+    "interactionMode": "edit",
+    "selected": "[data-vt-id=\"hero-title\"]",
+    "dirty": false,
+    "revision": 4,
+    "frameURL": "http://127.0.0.1:9410/?vt-test=comfort-webkit&vt-frame=1",
+    "runtime": true,
+    "unresolvedTargets": [],
+    "navigation": {
+      "structureBuilds": 2,
+      "assetScans": 0,
+      "assetUpdates": 0
+    },
+    "responsive": {
+      "stale": true,
+      "busy": false,
+      "audits": 0,
+      "durationMs": 0,
+      "elementsExamined": 0,
+      "screens": []
+    },
+    "guides": {
+      "candidates": 0,
+      "paints": 0
+    },
+    "rendering": {
+      "renders": 3,
+      "gesturePreviews": 0,
+      "stylePatches": 0
+    }
+  },
+  "after": {
+    "phase": "ready",
+    "ready": true,
+    "recoveryPending": false,
+    "error": null,
+    "interactionMode": "edit",
+    "selected": "[data-vt-id=\"hero-title\"]",
+    "dirty": true,
+    "revision": 4,
+    "frameURL": "http://127.0.0.1:9410/?vt-test=comfort-webkit&vt-frame=1",
+    "runtime": true,
+    "unresolvedTargets": [],
+    "navigation": {
+      "structureBuilds": 2,
+      "assetScans": 1,
+      "assetUpdates": 0
+    },
+    "responsive": {
+      "stale": true,
+      "busy": false,
+      "audits": 0,
+      "durationMs": 0,
+      "elementsExamined": 0,
+      "screens": []
+    },
+    "guides": {
+      "candidates": 0,
+      "paints": 0
+    },
+    "rendering": {
+      "renders": 3,
+      "gesturePreviews": 0,
+      "stylePatches": 1
+    }
+  },
+  "drag": {
+    "interactionWallMs": 110.55304199999955,
+    "includesTestWaitMs": 80,
+    "diagnostics": {
+      "phase": "ready",
+      "ready": true,
+      "recoveryPending": false,
+      "error": null,
+      "interactionMode": "edit",
+      "selected": "[data-vt-id=\"guide-asset\"]",
+      "dirty": true,
+      "revision": 2,
+      "frameURL": "http://127.0.0.1:9410/?vt-test=comfort-webkit&vt-frame=1",
+      "runtime": true,
+      "unresolvedTargets": [],
+      "navigation": {
+        "structureBuilds": 2,
+        "assetScans": 0,
+        "assetUpdates": 0
+      },
+      "responsive": {
+        "stale": true,
+        "busy": false,
+        "audits": 0,
+        "durationMs": 0,
+        "elementsExamined": 0,
+        "screens": []
+      },
+      "guides": {
+        "candidates": 6,
+        "paints": 2
+      },
+      "rendering": {
+        "renders": 9,
+        "gesturePreviews": 2,
+        "stylePatches": 2
+      }
+    }
+  },
+  "responsiveAudit": {
+    "stale": false,
+    "busy": false,
+    "audits": 1,
+    "durationMs": 131,
+    "elementsExamined": 135,
+    "screens": [
+      {
+        "screen": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "problems": 0,
+        "warnings": 1
+      },
+      {
+        "screen": "tablet",
+        "width": 820,
+        "overflow": true,
+        "problems": 1,
+        "warnings": 1
+      },
+      {
+        "screen": "mobile",
+        "width": 390,
+        "overflow": true,
+        "problems": 4,
+        "warnings": 6
+      }
+    ]
+  }
+}

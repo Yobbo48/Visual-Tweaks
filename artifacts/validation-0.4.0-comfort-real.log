@@ -1,0 +1,9 @@
+PASS chromium: thème PHP réel, audit des trois écrans sans mutation ; sélection, draft, viewport et navigation desktop restaurés
+PASS chromium: Modifications et Naviguer sur le thème réel conservent le state ; Undo/save/refresh fonctionnent
+PASS chromium: retouche après audit et sauvegarde identique au rendu public à 1440px
+PASS webkit: thème PHP réel, audit des trois écrans sans mutation ; sélection, draft, viewport et navigation desktop restaurés
+PASS webkit: Modifications et Naviguer sur le thème réel conservent le state ; Undo/save/refresh fonctionnent
+PASS webkit: retouche après audit et sauvegarde identique au rendu public à 1440px
+PASS firefox: thème PHP réel, audit des trois écrans sans mutation ; sélection, draft, viewport et navigation desktop restaurés
+PASS firefox: Modifications et Naviguer sur le thème réel conservent le state ; Undo/save/refresh fonctionnent
+PASS firefox: retouche après audit et sauvegarde identique au rendu public à 1440px

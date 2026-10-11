@@ -1,0 +1,236 @@
+{
+  "pluginVersion": "0.4.1",
+  "baseVersion": "0.4.0",
+  "verdict": "prêt avec limites",
+  "validatedAt": "2026-10-09T12:38:31.332231+00:00",
+  "command": "npm run test:all",
+  "log": "artifacts/validation-0.4.1.log",
+  "syntax": {
+    "phpFiles": 8,
+    "javascript": "passed"
+  },
+  "unitTests": 18,
+  "browserChecks": 307,
+  "existingBrowserChecks": 270,
+  "newBrowserChecks": 37,
+  "historicalTestFilesUnchanged": 14,
+  "suites": {
+    "width-test-report.json": 9,
+    "save-test-report.json": 7,
+    "foundations-test-report.json": 16,
+    "test-report.json": 19,
+    "ux-test-report.json": 15,
+    "viewport-chromium-report.json": 11,
+    "ergonomics-chromium-report.json": 21,
+    "real-theme-chromium-report.json": 4,
+    "stability-chromium.json": 8,
+    "speed-chromium.json": 5,
+    "polish-chromium.json": 6,
+    "comfort-phase-9-chromium.json": 10,
+    "comfort-real-chromium.json": 3,
+    "viewport-webkit-report.json": 11,
+    "ergonomics-webkit-report.json": 21,
+    "real-theme-webkit-report.json": 4,
+    "stability-webkit.json": 8,
+    "speed-webkit.json": 5,
+    "polish-webkit.json": 6,
+    "comfort-phase-9-webkit.json": 10,
+    "comfort-real-webkit.json": 3,
+    "viewport-firefox-report.json": 11,
+    "ergonomics-firefox-report.json": 21,
+    "real-theme-firefox-report.json": 4,
+    "stability-firefox.json": 8,
+    "speed-firefox.json": 5,
+    "polish-firefox.json": 6,
+    "comfort-phase-9-firefox.json": 10,
+    "comfort-real-firefox.json": 3,
+    "guard-visibility-chromium.json": 1,
+    "stabilisation-chromium.json": 10,
+    "guard-visibility-webkit.json": 1,
+    "stabilisation-webkit.json": 10,
+    "guard-visibility-firefox.json": 1,
+    "stabilisation-firefox.json": 10,
+    "cache-public-stabilisation.json": 4
+  },
+  "environment": {
+    "wordpress": "7.1.3",
+    "php": "PHP/8.5.10",
+    "storage": "SQLite",
+    "browsers": {
+      "chromium": "156.0.8078.4",
+      "webkit": "26.5",
+      "firefox": "153.0"
+    },
+    "localFixture": "http://127.0.0.1:9410",
+    "isolatedRealTheme": "http://127.0.0.1:9411"
+  },
+  "checkpoint": {
+    "file": "artifacts/backups/visual-tweaks-0.4.0-before-stabilisation.tar.gz",
+    "sha256": "b2c95092adb16b71a4d5b3721084ae223a4e1e1881653c9d6516392a66284946",
+    "baseline": "artifacts/baseline-0.4.0.json"
+  },
+  "fixes": [
+    {
+      "module": "responsive-guard.js",
+      "cause": "Opacity inherited through an ancestor was not checked; invisible descendants were advised as small click targets",
+      "change": "Exclude truly transparent subtrees using a snapshot-local ancestor cache",
+      "reproduction": "artifacts/guard-visibility-before.json"
+    },
+    {
+      "module": "editor.js",
+      "cause": "Selection scrollIntoView inherited the real theme smooth scroll; toolbar still moved during click and the iframe could receive it",
+      "change": "Instant selection scrolling for listed targets and viewport switches, native browse scrolling preserved",
+      "reproduction": [
+        "artifacts/validation-0.4.1-before-scroll-fix.log",
+        "artifacts/smooth-scroll-before.log"
+      ],
+      "verification": "artifacts/selection-scroll-<engine>.json"
+    },
+    {
+      "module": "editor.js",
+      "cause": "Clearing a recovered invalid override removed it from state but left its old placeholder in the input",
+      "change": "Refresh the empty input hint from inherited or current applied CSS values without creating an override",
+      "reproduction": "artifacts/placeholder-before.log"
+    },
+    {
+      "module": "dev/fixture-theme/seed.php",
+      "scope": "test fixture only",
+      "cause": "Replacement PNG IDAT CRC was invalid, rejected by Firefox decoder",
+      "change": "Same pixel with valid CRC; replacement regression now waits for img.decode()"
+    }
+  ],
+  "sourceDelta": {
+    "versionOnly": [
+      "visual-tweaks/assets/runtime.js",
+      "visual-tweaks/assets/gesture-preview.js",
+      "visual-tweaks/assets/alignment.js",
+      "visual-tweaks/assets/review-changes.js",
+      "visual-tweaks/assets/navigation.js",
+      "visual-tweaks/assets/selection.js",
+      "visual-tweaks/assets/site-style.js",
+      "visual-tweaks/assets/state.js",
+      "visual-tweaks/assets/inline-editor.js",
+      "visual-tweaks/assets/styles.js",
+      "visual-tweaks/assets/style-patcher.js",
+      "visual-tweaks/assets/assets.js"
+    ],
+    "otherChanges": [
+      "visual-tweaks/visual-tweaks.php",
+      "visual-tweaks/readme.txt",
+      "visual-tweaks/assets/editor.js",
+      "visual-tweaks/assets/responsive-guard.js"
+    ],
+    "coreArchitecturalReplacements": 0
+  },
+  "theme": {
+    "source": "/Users/kevin/Documents/ChatGPT/Conception Site Web Kevin/wordpress/wp-content/themes/kevin-legros",
+    "filesChecked": 191,
+    "filesModified": 0
+  },
+  "public": {
+    "modules": [
+      "runtime.js",
+      "selection.js",
+      "styles.js",
+      "background-layers.js"
+    ],
+    "sourceBytesBefore": 18642,
+    "sourceBytesAfter": 18642,
+    "functionalChange": false,
+    "editorResourcesForVisitors": 0,
+    "resourcesOnPageWithoutOverrides": 0,
+    "editingNoncesExposed": false,
+    "report": "artifacts/cache-public-stabilisation.json"
+  },
+  "cache": {
+    "browser": "tested; latest saved override visible",
+    "httpProxy": "tested; cached anonymous HTML keeps old override until explicit purge",
+    "wordpressThirdPartyCache": "not installed/not tested",
+    "productionCDN": "not tested",
+    "newPurgeIntegration": false
+  },
+  "mysqlMariaDB": {
+    "tested": false,
+    "reason": "No native PHP, mysql/mariadb/mysqld, Docker/Podman or listening database service available; persistence matrix tested only on SQLite"
+  },
+  "responsiveGuard": {
+    "realTheme": "9 measured small-link recommendations per viewport; no actual overflow in this session",
+    "falsePositiveFixed": "opacity-zero ancestor",
+    "classificationReports": [
+      "artifacts/stabilisation-chromium.json",
+      "artifacts/stabilisation-webkit.json",
+      "artifacts/stabilisation-firefox.json"
+    ]
+  },
+  "performance": {
+    "generalOptimization": false,
+    "measuredPublicSizeChangeBytes": 0,
+    "noClaimedRuntimeSpeedup": true
+  },
+  "sourceHashes": {
+    "visual-tweaks/visual-tweaks.php": "ab91eed3f6ad609a5fada3a3cb6d25c1c605657f0676ae25e76b191dd3b75546",
+    "visual-tweaks/LICENSE": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+    "visual-tweaks/readme.txt": "a5e0f3815da25fed385ed21f21196d08f7a04eb021822ed3f2ec12dd931dc927",
+    "visual-tweaks/includes/class-schema.php": "17bb8dee8cd4ae89d536548ec8d61f3ad03a35583ea8841d3db3dabc32cacef7",
+    "visual-tweaks/includes/class-plugin.php": "d120285a4c7a115369a06506b3dbb9afee22286daad3f87409abe3d14bf59151",
+    "visual-tweaks/includes/class-site-style.php": "7056adca7a445e18b1131235e7a4f89feb39513657983ec88155b7dfdd3a1dfd",
+    "visual-tweaks/includes/class-store.php": "090eeab0a40d4b63f2021a4986585310c9de82f97f956ab9e21f296e9910a89e",
+    "visual-tweaks/assets/background-layers.js": "b84636ff5deb8c8f73fd31121a57e9abc45896ade525ab3032e4c120673076eb",
+    "visual-tweaks/assets/runtime.js": "cb82bc95c3887437f539abe9193be83fa48b4f422361b970620cdb494c5a0379",
+    "visual-tweaks/assets/appearance-controls.js": "138e346d05b90de06967978db0422715c6998b868f6f711a287ba33442497403",
+    "visual-tweaks/assets/gesture-preview.js": "8d8dac0aea140c2a563af2c01622c7b6f79acb50d0907e71ab126993f166b791",
+    "visual-tweaks/assets/editor.css": "a84324a7190d8cb742708e401aafe718da2b4d62a46a83225b583283c10d2d6a",
+    "visual-tweaks/assets/alignment.js": "25d4ed95a9d3a622d7317c1e1c1d1f885fa2d27a8a5fd64bbb893447126c5b9b",
+    "visual-tweaks/assets/review-changes.js": "3dbf6f49c83c4d3eb312588b0613e3a18127372d3c5a8d0024a2fe7c4846be31",
+    "visual-tweaks/assets/contextual-toolbar.js": "f12d4297e6208b998a63507516d615012d542b6ad5d7dcd9a8b66973279fdc10",
+    "visual-tweaks/assets/editor.js": "2d0bf12460de6380f4629dfeae17a6f354e433e9c81f061d84a29a9b47ecf398",
+    "visual-tweaks/assets/navigation.js": "42a45ea9fc1f1ac285553b6ffc031e70934c9f69612edd9fc4bdadf110547c5a",
+    "visual-tweaks/assets/selection.js": "f2b55fe3611290e69453d31f3b3f0abc52b8bd962415824828674b89a03cb3b2",
+    "visual-tweaks/assets/site-style.js": "6168962e837591a8a146a6e47b27b23caf82782b34d8009f2abc63bc54ec8c4e",
+    "visual-tweaks/assets/validation.js": "1392cbade19c090b278ad9f4e13108e2e0e20f9878ea5c95c22782f0d51d3e80",
+    "visual-tweaks/assets/history.js": "8cae8e9d1795f42d5f4f0551ba981a33fe1bcccb03244ad220aea2ca6d4743c7",
+    "visual-tweaks/assets/state.js": "364fc8f82f41ccc9d0da4a6deed1308f963a23d54da44a206c95fceb2aab68c4",
+    "visual-tweaks/assets/responsive-guard.js": "bb4fb3e6204047d27c6cf24f883f2fabf9f99e6cec29f919b0df33e2b730a741",
+    "visual-tweaks/assets/smart-guides.js": "eef2e7d2d9ada0db3b9804817456b75cd614635971848fb136cbdd8446d7cce5",
+    "visual-tweaks/assets/viewport.js": "9205305f10f15689ad52b7437d504252b01d9eb5cb715346c7ec9d5eca1e9b4a",
+    "visual-tweaks/assets/inline-editor.js": "0c201d510e76c4df0894fa833a8ca2dd21c1a4be44615d48f97d3802ff1de868",
+    "visual-tweaks/assets/styles.js": "e30e4352a669b3d6b607380a78821b9d1696e9c58815e5a63c5d0b72bf0aae70",
+    "visual-tweaks/assets/style-patcher.js": "93761266a4cee1589b42c2d114c362ffdd5f4a74589cdfd400db1cbb45343ff2",
+    "visual-tweaks/assets/geometry.js": "9fd85b5f99430aad5535b7bc11fca7177eecf7b5211986cd01c8df60f3ecb829",
+    "visual-tweaks/assets/assets.js": "d96145c923f635f41703549cc9fc0b83543bbcde1b487330ff809bdf5d40f1f5",
+    "visual-tweaks/assets/icons/device-desktop.svg": "a18c2a33a20de14bacbff9df97b7896006fb166379da84eb12c304abbd803286",
+    "visual-tweaks/assets/icons/arrows-move.svg": "45b5a5c95a430f7512b9b20d48a3fed70571f4cb31069da74000c94550c7ec4c",
+    "visual-tweaks/assets/icons/adjustments-horizontal.svg": "c07711c7f515e7707b97e32d9a18fed49bb200f1fcf0d1a987422f44e8ec8479",
+    "visual-tweaks/assets/icons/crop.svg": "2b29d40e99536b5f53c785a3caac370c5ae688eac971fc4455d75a64f6a7b9ba",
+    "visual-tweaks/assets/icons/LICENSE": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db",
+    "visual-tweaks/assets/icons/typography.svg": "ccf0ac7285d7f0e5bddd9a740752f5702365563cdb6146f4f263389ff80bef5e",
+    "visual-tweaks/assets/icons/palette.svg": "0b462801eadbeeb017eb323aee44880c13336ea8b4ac2182afac81d79d58d45e",
+    "visual-tweaks/assets/icons/device-tablet.svg": "aa8a85e350d1b1d69a0211f3789cc72fc2f75f92e6299e6fc579ab219ae58d72",
+    "visual-tweaks/assets/icons/device-mobile.svg": "a8157b4a51e1e85f5e082ff649787273f63cd6cab58c37b97c15a5adc80c585a",
+    "visual-tweaks/assets/icons/pencil.svg": "61c3c827745d917f5fb153bd052209210f190af5f446284326421e5421cdbb25",
+    "visual-tweaks/assets/icons/photo.svg": "9aa0bd44bef46e1b80445220ea04499ca145fb3339005e13f1da1b17ad8ac159"
+  },
+  "limits": [
+    "No production/staging session; isolated Kevin Legros theme is not a clone of L’Énergie des Runes",
+    "MySQL/MariaDB and provider caches/CDNs untested",
+    "HTML cache must be purged after saving",
+    "Simple-text API limit remains 4000 UTF-8 bytes; frontend counts JS string units",
+    "Dynamic/animated states are sampled, not exhaustively validated"
+  ],
+  "deferred": [
+    "rich text",
+    "DIV text editing",
+    "components",
+    "effects",
+    "wireframe",
+    "server rendering",
+    "multi-provider cache purge"
+  ],
+  "package": {
+    "file": "artifacts/visual-tweaks-0.4.1.zip",
+    "sha256": "2a721a5a64fe8783ad2489a07c67d1bc07980bc410b4db30c346e16ffde71df4",
+    "files": 41,
+    "bytes": 101541,
+    "matchesValidatedSource": true
+  }
+}

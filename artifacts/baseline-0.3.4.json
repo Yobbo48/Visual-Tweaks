@@ -1,0 +1,147 @@
+{
+  "pluginVersion": "0.3.4",
+  "validatedAt": "2026-10-09T08:29:28.107Z",
+  "syntax": {
+    "phpFiles": 8,
+    "javascript": "passed"
+  },
+  "unitTests": 14,
+  "browserChecks": 231,
+  "suites": {
+    "width-test-report.json": 9,
+    "save-test-report.json": 7,
+    "foundations-test-report.json": 16,
+    "test-report.json": 19,
+    "ux-test-report.json": 15,
+    "viewport-chromium-report.json": 11,
+    "ergonomics-chromium-report.json": 21,
+    "real-theme-chromium-report.json": 4,
+    "stability-chromium.json": 8,
+    "speed-chromium.json": 5,
+    "polish-chromium.json": 6,
+    "viewport-webkit-report.json": 11,
+    "ergonomics-webkit-report.json": 21,
+    "real-theme-webkit-report.json": 4,
+    "stability-webkit.json": 8,
+    "speed-webkit.json": 5,
+    "polish-webkit.json": 6,
+    "viewport-firefox-report.json": 11,
+    "ergonomics-firefox-report.json": 21,
+    "real-theme-firefox-report.json": 4,
+    "stability-firefox.json": 8,
+    "speed-firefox.json": 5,
+    "polish-firefox.json": 6
+  },
+  "environment": {
+    "wordpress": "7.1.3",
+    "php": "8.5.10",
+    "storage": "SQLite",
+    "browsers": {
+      "chromium": "156.0.8078.4",
+      "webkit": "26.5",
+      "firefox": "153.0"
+    }
+  },
+  "regressionEvidence": [
+    "artifacts/recovery-before-fix.json",
+    "artifacts/stability-before-fix.json"
+  ],
+  "testLogs": [
+    "artifacts/validation-0.3.4-complete.log",
+    "artifacts/validation-0.3.4-font.log",
+    "artifacts/validation-0.3.4-overlays.log",
+    "artifacts/validation-0.3.4-release.log"
+  ],
+  "originalTheme": {
+    "filesChecked": 191,
+    "changed": [],
+    "productionInspected": false,
+    "productionModified": false
+  },
+  "sourceHashes": {
+    "visual-tweaks/LICENSE": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+    "visual-tweaks/assets/alignment.js": "bc7ef2bc5e570434823acb79bc03cd955b4c308d68ea05fca7a483d782b357b5",
+    "visual-tweaks/assets/appearance-controls.js": "138e346d05b90de06967978db0422715c6998b868f6f711a287ba33442497403",
+    "visual-tweaks/assets/assets.js": "6fa3f48f7954677bbe8c53c187e46e966b6482257e4fa538c052a551dd5a71ca",
+    "visual-tweaks/assets/contextual-toolbar.js": "f12d4297e6208b998a63507516d615012d542b6ad5d7dcd9a8b66973279fdc10",
+    "visual-tweaks/assets/editor.css": "8446dd54faf550ece1db21879e425d8f1b021380e5a6eed9f1ba932546252570",
+    "visual-tweaks/assets/editor.js": "4b75dc52cf336b72be38f4de176597ae8c46e4d8387d292397fbf9f3d8ea7997",
+    "visual-tweaks/assets/geometry.js": "9fd85b5f99430aad5535b7bc11fca7177eecf7b5211986cd01c8df60f3ecb829",
+    "visual-tweaks/assets/gesture-preview.js": "5f172df7e125c29af6f2f026405a7f9ef58b00bd5ee27f43e70153331370634f",
+    "visual-tweaks/assets/history.js": "8cae8e9d1795f42d5f4f0551ba981a33fe1bcccb03244ad220aea2ca6d4743c7",
+    "visual-tweaks/assets/icons/LICENSE": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db",
+    "visual-tweaks/assets/icons/adjustments-horizontal.svg": "c07711c7f515e7707b97e32d9a18fed49bb200f1fcf0d1a987422f44e8ec8479",
+    "visual-tweaks/assets/icons/arrows-move.svg": "45b5a5c95a430f7512b9b20d48a3fed70571f4cb31069da74000c94550c7ec4c",
+    "visual-tweaks/assets/icons/crop.svg": "2b29d40e99536b5f53c785a3caac370c5ae688eac971fc4455d75a64f6a7b9ba",
+    "visual-tweaks/assets/icons/device-desktop.svg": "a18c2a33a20de14bacbff9df97b7896006fb166379da84eb12c304abbd803286",
+    "visual-tweaks/assets/icons/device-mobile.svg": "a8157b4a51e1e85f5e082ff649787273f63cd6cab58c37b97c15a5adc80c585a",
+    "visual-tweaks/assets/icons/device-tablet.svg": "aa8a85e350d1b1d69a0211f3789cc72fc2f75f92e6299e6fc579ab219ae58d72",
+    "visual-tweaks/assets/icons/palette.svg": "0b462801eadbeeb017eb323aee44880c13336ea8b4ac2182afac81d79d58d45e",
+    "visual-tweaks/assets/icons/pencil.svg": "61c3c827745d917f5fb153bd052209210f190af5f446284326421e5421cdbb25",
+    "visual-tweaks/assets/icons/photo.svg": "9aa0bd44bef46e1b80445220ea04499ca145fb3339005e13f1da1b17ad8ac159",
+    "visual-tweaks/assets/icons/typography.svg": "ccf0ac7285d7f0e5bddd9a740752f5702365563cdb6146f4f263389ff80bef5e",
+    "visual-tweaks/assets/inline-editor.js": "35e8765b2811bb96e97d770b05d81173bb7dab44c173ae13d7195c38b9ab7576",
+    "visual-tweaks/assets/navigation.js": "c45d51bfb4b8f3ae9eb3bdbca5b4d674eea0670035b125994c8f5a95bd24219a",
+    "visual-tweaks/assets/runtime.js": "f6f468f1c0761ad5fc2862099f5c244c8bc662761d66bbb752f99d61d4c528dc",
+    "visual-tweaks/assets/selection.js": "f9b1781ce30f310b8c020005fc82c272d4e4f747981562f3fb20524a624baad6",
+    "visual-tweaks/assets/site-style.js": "32d02b283ebec6aab897f3e770152b025c892be0bcddc2268d07c02a92737f9e",
+    "visual-tweaks/assets/state.js": "05a83e3d9f232675a2c7536747f6a293180282a7c33bf9240ae7a369790207ed",
+    "visual-tweaks/assets/style-patcher.js": "b8b5233ff20580b68dffce95910cbfe4f9e79ff693c82cbddc5685e151d08d2d",
+    "visual-tweaks/assets/styles.js": "a0e190cf3e842280639504f1533dc82f6a85a46230efd4098d82c0c94ebc2a4a",
+    "visual-tweaks/assets/validation.js": "1392cbade19c090b278ad9f4e13108e2e0e20f9878ea5c95c22782f0d51d3e80",
+    "visual-tweaks/assets/viewport.js": "9205305f10f15689ad52b7437d504252b01d9eb5cb715346c7ec9d5eca1e9b4a",
+    "visual-tweaks/includes/class-plugin.php": "d120285a4c7a115369a06506b3dbb9afee22286daad3f87409abe3d14bf59151",
+    "visual-tweaks/includes/class-schema.php": "7e5211a9d4d2e86f2484956781a01e94510530aa3ef89e457b0131fc5fcfedde",
+    "visual-tweaks/includes/class-site-style.php": "7056adca7a445e18b1131235e7a4f89feb39513657983ec88155b7dfdd3a1dfd",
+    "visual-tweaks/includes/class-store.php": "090eeab0a40d4b63f2021a4986585310c9de82f97f956ab9e21f296e9910a89e",
+    "visual-tweaks/readme.txt": "9e3acc1771de4ee31fda8da787812ee92af5655730fa69234f04599092063d5b",
+    "visual-tweaks/visual-tweaks.php": "a49d1f97d3c89bb517a57a040021882adcea79d7e4442204568139051ecbc700"
+  },
+  "package": {
+    "file": "artifacts/visual-tweaks-0.3.4.zip",
+    "files": 37,
+    "sha256": "97f6d439646bd5303871115b5f61c0a3e42cfdf2f64d669dfca653820499905b",
+    "allPackagedFilesMatchSource": true
+  },
+  "limitations": [
+    "Live reported site not inspected; no production deployment",
+    "MySQL/MariaDB and production caches unverified",
+    "Palette uses literal overrides; no dynamic token links",
+    "DOM structure changes may rebuild tree; no virtualization",
+    "Public content and styles still use current runtime; server rendering deferred"
+  ],
+  "baselineLog": "artifacts/baseline-before-0.4.log",
+  "checkpoint": "artifacts/backups/visual-tweaks-0.3.4-before-0.4.tar.gz",
+  "modulePlan": {
+    "review": [
+      "editor.js",
+      "review-changes.js"
+    ],
+    "navigate": [
+      "editor.js",
+      "editor.css"
+    ],
+    "guides": [
+      "editor.js",
+      "smart-guides.js"
+    ],
+    "responsive": [
+      "editor.js",
+      "responsive-guard.js"
+    ],
+    "backgroundLayers": [
+      "assets.js",
+      "selection.js",
+      "styles.js",
+      "runtime.js",
+      "class-schema.php"
+    ],
+    "measure": [
+      "editor.js"
+    ],
+    "richText": [
+      "README.md",
+      "tests"
+    ]
+  }
+}

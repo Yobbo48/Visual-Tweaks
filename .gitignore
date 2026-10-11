@@ -1,0 +1,5 @@
+node_modules/
+.local/
+artifacts/*.zip
+artifacts/*-failure.png
+.DS_Store

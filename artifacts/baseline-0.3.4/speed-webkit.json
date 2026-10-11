@@ -1,0 +1,11 @@
+{
+  "engine": "webkit",
+  "checks": [
+    "Navigation et sélection répétées : aucun nouveau scan Structure/Assets ni override",
+    "Responsive : Structure conserve son index et ses lignes sans reconstruction",
+    "Drag : feuille temporaire ciblée, zéro rendu complet/state/REST pendant le geste, une mutation finale annulable",
+    "Petites retouches CSS : règles ciblées, aucun rendu complet répétitif, pixels logiques et undo conservés",
+    "MutationObserver : asset ajouté/découvert/sélectionné puis retiré, sans nouveau scan global des assets"
+  ],
+  "errors": []
+}

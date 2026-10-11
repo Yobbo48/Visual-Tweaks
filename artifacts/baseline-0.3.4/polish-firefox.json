@@ -1,0 +1,12 @@
+{
+  "engine": "firefox",
+  "checks": [
+    "Palette WordPress persistante, rôles nommés, polices, presets arrondi et espaces : seules les actions créent des overrides",
+    "Copier/coller le style change uniquement les overrides de destination et reste une étape undo/redo",
+    "Style collé persiste après refresh ; panneaux refermables sans perdre sélection ni viewport logique",
+    "Rendu public : aucun module d’interface, de palette ou de geste chargé",
+    "Palette : CSS/JS arbitraire refusé, nonce/capability et conflit CAS protégés",
+    "Outlines remain attached to the selected node after navigation/properties toggles"
+  ],
+  "errors": []
+}

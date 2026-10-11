@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: A global scan limit has no target: do not offer a misleading Voir button
+
+1 !== 0
+
+    at file:///Users/kevin/Documents/ChatGPT/Visual%20Tweaks/tests/guard-navigation-e2e.mjs:162:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

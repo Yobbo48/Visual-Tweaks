@@ -1,0 +1,53 @@
+RUN dev/check.mjs
+8 fichiers PHP : syntaxe valide.
+Modules JavaScript : syntaxe valide.
+RUN --test tests/core.test.mjs
+✔ undo/redo preserve snapshots and truncate obsolete branches (1.016333ms)
+✔ new font and link values are bounded and reject executable schemes (1.019542ms)
+✔ resize follows local axes and keeps image proportions by default (0.173959ms)
+✔ site palette extracts colors without treating transparency as opaque (0.204292ms)
+✔ controls refuse CSS injection, unsupported values and negative dimensions (0.3095ms)
+✔ responsive generation groups exceptions in at most two media queries (0.392ms)
+✔ legacy empty PHP arrays become serializable setting maps (0.159708ms)
+✔ asset appearance values are typed and reject CSS injection (0.355333ms)
+✔ explicit lengths become canonical without admitting arbitrary CSS (0.219667ms)
+✔ legacy precision is repaired only inside existing override maps (0.541667ms)
+✔ resize geometry measures CSS boxes without subtracting rounded offset sizes (0.185208ms)
+✔ canvas scale fits display while keeping logical geometry independent (0.094041ms)
+✔ pointer coordinates are converted once according to their document (0.068125ms)
+✔ generic system families stay unquoted CSS keywords, real font names remain quoted (0.05525ms)
+✔ smart guides use logical thresholds and choose the nearest alignment (0.078459ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53.461708
+RUN tests/stability-e2e.mjs
+PASS Reset Position supprime les derniers overrides, reste annulable et ne laisse pas de faux brouillon vide
+PASS Initialisation normale → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Runtime tardif après load → sélection/mutation/draft/dirty/undo/save/refresh/quitter/revenir
+PASS Rechargement de l’iframe : événements réactivés une seule fois, état sauvegardé conservé
+PASS Brouillon de même révision automatiquement restauré et immédiatement éditable
+PASS Export du brouillon en attente : valeurs et ancienne révision conservées
+PASS Brouillon en attente explicitement signalé, aucun blocage silencieux, récupération puis édition
+PASS Rendu visiteur applique uniquement l’override enregistré
+RUN tests/comfort-e2e.mjs
+PASS Smoke complet : ouvrir/sélectionner/modifier/draft/undo/save/refresh/quitter/revenir
+PASS Modifications dérivées du draft : Voir synchronise Structure, reset annulable, reset page confirmé
+PASS Naviguer : interactions et liens actifs, aucune sélection/mutation, draft et sélection conservés au retour Modifier
+PASS Guides et snap en pixels CSS sous zoom, Ctrl sans conflit Alt/Cmd, aucun draft pendant le geste et une étape Undo
+RUN tests/viewport-e2e.mjs
+PASS chromium: logical 1440px keeps desktop navigation despite sidebar; public admin-bar-free geometry 400/100 is scaled only for display
+PASS chromium: outline, corner handles and diagnostic boxes match the zoomed asset
+PASS chromium: sidebar, outer resize, Fit/100%, presets and current-window mode never create overrides or reduce logical desktop width
+PASS chromium: ten arrows save 10 logical CSS pixels, undo/redo and refresh preserve them
+PASS chromium: anonymous real page at 1440px matches logical editor placement and layout
+PASS chromium: UI move handle and direct iframe drag use the same logical coordinate system under zoom
+PASS chromium: corner resize preserves ratio and logical size with undo/redo and persisted refresh
+PASS chromium: focal crop does not move or resize the asset when zoomed
+PASS chromium: tablet/mobile use true viewports and persist explicit responsive exceptions
+PASS chromium: property, breakpoint and full-element resets remove overrides and restore exact theme dimensions
+PASS chromium: existing parent rotation remains intact during scaled drag and reset

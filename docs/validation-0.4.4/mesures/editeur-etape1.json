@@ -1,0 +1,495 @@
+{
+  "base": "http://127.0.0.1:9520",
+  "date": "2026-10-10T22:40:45.340Z",
+  "cpu": 4,
+  "resume": {
+    "ouverture": {
+      "ms": 2051,
+      "n": 3
+    },
+    "selection": {
+      "ms": 141,
+      "longTasks": 0,
+      "recalcStyle": 50,
+      "layout": 24,
+      "styleMs": 14,
+      "layoutMs": 7,
+      "scriptMs": 22,
+      "n": 3
+    },
+    "selection-2": {
+      "ms": 142,
+      "longTasks": 0,
+      "recalcStyle": 39,
+      "layout": 23,
+      "styleMs": 15,
+      "layoutMs": 9,
+      "scriptMs": 19,
+      "n": 3
+    },
+    "onglet-assets": {
+      "ms": 113,
+      "longTasks": 0,
+      "recalcStyle": 17,
+      "layout": 4,
+      "styleMs": 7,
+      "layoutMs": 6,
+      "scriptMs": 28,
+      "n": 3
+    },
+    "onglet-structure": {
+      "ms": 113,
+      "longTasks": 0,
+      "recalcStyle": 22,
+      "layout": 7,
+      "styleMs": 9,
+      "layoutMs": 7,
+      "scriptMs": 24,
+      "n": 3
+    },
+    "panneau-reglages": {
+      "ms": 112,
+      "longTasks": 0,
+      "recalcStyle": 34,
+      "layout": 16,
+      "styleMs": 6,
+      "layoutMs": 5,
+      "scriptMs": 12,
+      "n": 3
+    },
+    "ecran-mobile": {
+      "ms": 247,
+      "longTasks": 1,
+      "recalcStyle": 52,
+      "layout": 34,
+      "styleMs": 35,
+      "layoutMs": 61,
+      "scriptMs": 34,
+      "n": 3
+    },
+    "ecran-tablette": {
+      "ms": 244,
+      "longTasks": 1,
+      "recalcStyle": 53,
+      "layout": 34,
+      "styleMs": 33,
+      "layoutMs": 61,
+      "scriptMs": 32,
+      "n": 3
+    },
+    "ecran-desktop": {
+      "ms": 227,
+      "longTasks": 1,
+      "recalcStyle": 54,
+      "layout": 34,
+      "styleMs": 33,
+      "layoutMs": 61,
+      "scriptMs": 34,
+      "n": 3
+    },
+    "defilement": {
+      "ms": 1088,
+      "longTasks": 0,
+      "recalcStyle": 203,
+      "layout": 62,
+      "styleMs": 54,
+      "layoutMs": 22,
+      "scriptMs": 87,
+      "n": 3
+    },
+    "deplacement-clavier": {
+      "ms": 140,
+      "longTasks": 0,
+      "recalcStyle": 59,
+      "layout": 42,
+      "styleMs": 20,
+      "layoutMs": 7,
+      "scriptMs": 28,
+      "n": 3
+    },
+    "navigation-autre-page": {
+      "ms": 1533,
+      "n": 3
+    },
+    "navigation-retour": {
+      "ms": 1918,
+      "n": 3
+    }
+  },
+  "cycles": [
+    {
+      "heapMB": 6.31,
+      "listeners": 2273,
+      "nodes": 14547,
+      "documents": 34,
+      "frames": 34,
+      "observersTop": 9,
+      "observersFrame": 8
+    },
+    {
+      "cycle": 4,
+      "heapMB": 6.44,
+      "listeners": 2248,
+      "nodes": 14219,
+      "documents": 34,
+      "frames": 34,
+      "observersTop": 9,
+      "observersFrame": 8
+    },
+    {
+      "cycle": 8,
+      "heapMB": 6.54,
+      "listeners": 2248,
+      "nodes": 14219,
+      "documents": 34,
+      "frames": 34,
+      "observersTop": 9,
+      "observersFrame": 8
+    },
+    {
+      "cycle": 12,
+      "heapMB": 6.63,
+      "listeners": 2248,
+      "nodes": 14219,
+      "documents": 34,
+      "frames": 34,
+      "observersTop": 9,
+      "observersFrame": 8
+    }
+  ],
+  "apresNavigation": {
+    "heapMB": 4.13,
+    "listeners": 1788,
+    "nodes": 7085,
+    "documents": 25,
+    "frames": 25,
+    "observersTop": 9,
+    "observersFrame": 8
+  },
+  "errors": [],
+  "brut": {
+    "ouverture": [
+      {
+        "ms": 2280
+      },
+      {
+        "ms": 2051
+      },
+      {
+        "ms": 1998
+      }
+    ],
+    "selection": [
+      {
+        "ms": 475,
+        "longTasks": 1,
+        "recalcStyle": 78,
+        "layout": 72,
+        "styleMs": 37,
+        "layoutMs": 48,
+        "scriptMs": 56
+      },
+      {
+        "ms": 138,
+        "longTasks": 0,
+        "recalcStyle": 49,
+        "layout": 23,
+        "styleMs": 14,
+        "layoutMs": 7,
+        "scriptMs": 19
+      },
+      {
+        "ms": 141,
+        "longTasks": 0,
+        "recalcStyle": 50,
+        "layout": 24,
+        "styleMs": 11,
+        "layoutMs": 7,
+        "scriptMs": 22
+      }
+    ],
+    "selection-2": [
+      {
+        "ms": 160,
+        "longTasks": 0,
+        "recalcStyle": 40,
+        "layout": 32,
+        "styleMs": 18,
+        "layoutMs": 13,
+        "scriptMs": 24
+      },
+      {
+        "ms": 142,
+        "longTasks": 0,
+        "recalcStyle": 38,
+        "layout": 23,
+        "styleMs": 15,
+        "layoutMs": 9,
+        "scriptMs": 19
+      },
+      {
+        "ms": 111,
+        "longTasks": 0,
+        "recalcStyle": 39,
+        "layout": 23,
+        "styleMs": 11,
+        "layoutMs": 6,
+        "scriptMs": 16
+      }
+    ],
+    "onglet-assets": [
+      {
+        "ms": 247,
+        "longTasks": 1,
+        "recalcStyle": 30,
+        "layout": 18,
+        "styleMs": 12,
+        "layoutMs": 24,
+        "scriptMs": 72
+      },
+      {
+        "ms": 113,
+        "longTasks": 0,
+        "recalcStyle": 17,
+        "layout": 4,
+        "styleMs": 7,
+        "layoutMs": 5,
+        "scriptMs": 28
+      },
+      {
+        "ms": 110,
+        "longTasks": 0,
+        "recalcStyle": 15,
+        "layout": 4,
+        "styleMs": 5,
+        "layoutMs": 6,
+        "scriptMs": 27
+      }
+    ],
+    "onglet-structure": [
+      {
+        "ms": 89,
+        "longTasks": 0,
+        "recalcStyle": 21,
+        "layout": 11,
+        "styleMs": 2,
+        "layoutMs": 4,
+        "scriptMs": 11
+      },
+      {
+        "ms": 148,
+        "longTasks": 0,
+        "recalcStyle": 23,
+        "layout": 7,
+        "styleMs": 10,
+        "layoutMs": 9,
+        "scriptMs": 32
+      },
+      {
+        "ms": 113,
+        "longTasks": 0,
+        "recalcStyle": 22,
+        "layout": 6,
+        "styleMs": 9,
+        "layoutMs": 7,
+        "scriptMs": 24
+      }
+    ],
+    "panneau-reglages": [
+      {
+        "ms": 110,
+        "longTasks": 0,
+        "recalcStyle": 35,
+        "layout": 19,
+        "styleMs": 7,
+        "layoutMs": 5,
+        "scriptMs": 10
+      },
+      {
+        "ms": 112,
+        "longTasks": 0,
+        "recalcStyle": 30,
+        "layout": 14,
+        "styleMs": 4,
+        "layoutMs": 2,
+        "scriptMs": 12
+      },
+      {
+        "ms": 131,
+        "longTasks": 0,
+        "recalcStyle": 34,
+        "layout": 16,
+        "styleMs": 6,
+        "layoutMs": 5,
+        "scriptMs": 13
+      }
+    ],
+    "ecran-mobile": [
+      {
+        "ms": 256,
+        "longTasks": 1,
+        "recalcStyle": 53,
+        "layout": 35,
+        "styleMs": 44,
+        "layoutMs": 61,
+        "scriptMs": 36
+      },
+      {
+        "ms": 213,
+        "longTasks": 1,
+        "recalcStyle": 50,
+        "layout": 33,
+        "styleMs": 33,
+        "layoutMs": 58,
+        "scriptMs": 33
+      },
+      {
+        "ms": 247,
+        "longTasks": 1,
+        "recalcStyle": 52,
+        "layout": 34,
+        "styleMs": 35,
+        "layoutMs": 66,
+        "scriptMs": 34
+      }
+    ],
+    "ecran-tablette": [
+      {
+        "ms": 244,
+        "longTasks": 1,
+        "recalcStyle": 53,
+        "layout": 36,
+        "styleMs": 35,
+        "layoutMs": 64,
+        "scriptMs": 33
+      },
+      {
+        "ms": 211,
+        "longTasks": 1,
+        "recalcStyle": 51,
+        "layout": 34,
+        "styleMs": 30,
+        "layoutMs": 56,
+        "scriptMs": 32
+      },
+      {
+        "ms": 247,
+        "longTasks": 1,
+        "recalcStyle": 53,
+        "layout": 34,
+        "styleMs": 33,
+        "layoutMs": 61,
+        "scriptMs": 31
+      }
+    ],
+    "ecran-desktop": [
+      {
+        "ms": 227,
+        "longTasks": 1,
+        "recalcStyle": 54,
+        "layout": 34,
+        "styleMs": 33,
+        "layoutMs": 62,
+        "scriptMs": 37
+      },
+      {
+        "ms": 224,
+        "longTasks": 1,
+        "recalcStyle": 52,
+        "layout": 34,
+        "styleMs": 31,
+        "layoutMs": 61,
+        "scriptMs": 33
+      },
+      {
+        "ms": 245,
+        "longTasks": 1,
+        "recalcStyle": 59,
+        "layout": 37,
+        "styleMs": 35,
+        "layoutMs": 61,
+        "scriptMs": 34
+      }
+    ],
+    "defilement": [
+      {
+        "ms": 1088,
+        "longTasks": 0,
+        "recalcStyle": 256,
+        "layout": 134,
+        "styleMs": 141,
+        "layoutMs": 42,
+        "scriptMs": 87
+      },
+      {
+        "ms": 1092,
+        "longTasks": 0,
+        "recalcStyle": 203,
+        "layout": 62,
+        "styleMs": 54,
+        "layoutMs": 22,
+        "scriptMs": 87
+      },
+      {
+        "ms": 1075,
+        "longTasks": 0,
+        "recalcStyle": 203,
+        "layout": 43,
+        "styleMs": 49,
+        "layoutMs": 13,
+        "scriptMs": 78
+      }
+    ],
+    "deplacement-clavier": [
+      {
+        "ms": 173,
+        "longTasks": 0,
+        "recalcStyle": 59,
+        "layout": 44,
+        "styleMs": 22,
+        "layoutMs": 10,
+        "scriptMs": 35
+      },
+      {
+        "ms": 140,
+        "longTasks": 0,
+        "recalcStyle": 59,
+        "layout": 42,
+        "styleMs": 19,
+        "layoutMs": 4,
+        "scriptMs": 28
+      },
+      {
+        "ms": 126,
+        "longTasks": 0,
+        "recalcStyle": 58,
+        "layout": 42,
+        "styleMs": 20,
+        "layoutMs": 7,
+        "scriptMs": 24
+      }
+    ],
+    "navigation-autre-page": [
+      {
+        "ms": 1827
+      },
+      {
+        "ms": 1530
+      },
+      {
+        "ms": 1533
+      }
+    ],
+    "navigation-retour": [
+      {
+        "ms": 1918
+      },
+      {
+        "ms": 1935
+      },
+      {
+        "ms": 1867
+      }
+    ]
+  }
+}

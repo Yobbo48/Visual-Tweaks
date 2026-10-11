@@ -1,0 +1,51 @@
+{
+  "engine": "firefox",
+  "checks": [
+    "firefox: thème PHP réel, audit des trois écrans sans mutation ; sélection, draft, viewport et navigation desktop restaurés",
+    "firefox: Modifications et Naviguer sur le thème réel conservent le state ; Undo/save/refresh fonctionnent",
+    "firefox: retouche après audit et sauvegarde identique au rendu public à 1440px"
+  ],
+  "errors": [],
+  "responsive": {
+    "stale": false,
+    "busy": false,
+    "audits": 1,
+    "durationMs": 196,
+    "elementsExamined": 1736,
+    "screens": [
+      {
+        "screen": "desktop",
+        "width": 1440,
+        "overflow": false,
+        "problems": 0,
+        "warnings": 9
+      },
+      {
+        "screen": "tablet",
+        "width": 820,
+        "overflow": false,
+        "problems": 0,
+        "warnings": 9
+      },
+      {
+        "screen": "mobile",
+        "width": 390,
+        "overflow": false,
+        "problems": 0,
+        "warnings": 9
+      }
+    ]
+  },
+  "editorBox": {
+    "x": 81,
+    "y": 404.8999938964844,
+    "width": 503.29998779296875,
+    "height": 52.20001220703125
+  },
+  "publicBox": {
+    "x": 81,
+    "y": 404.8999938964844,
+    "width": 503.29998779296875,
+    "height": 52.20001220703125
+  }
+}

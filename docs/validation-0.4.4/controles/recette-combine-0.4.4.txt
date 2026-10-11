@@ -1,0 +1,18 @@
+
+CSS regroupé par un optimiseur, 390 px :
+     998 ms  114 | 0px -7px | 6 | 60px | -14px
+PASS  regroupé 390 : règles servies par un fichier externe, balise d origine absente
+PASS  regroupé 390 : un seul état dès la première image (1 état(s))
+PASS  regroupé 390 : translation de la bande non doublée (0px -7px, attendu 0px -7px)
+PASS  regroupé 390 : logo non doublé (largeur 60px, translation -14px)
+PASS  regroupé 390 : aucune erreur JavaScript
+
+CSS regroupé par un optimiseur, 1440 px :
+     779 ms  103 | 0px -18px | 154 | 60px | -14px
+PASS  regroupé 1440 : règles servies par un fichier externe, balise d origine absente
+PASS  regroupé 1440 : un seul état dès la première image (1 état(s))
+PASS  regroupé 1440 : translation de la bande non doublée (0px -18px, attendu 0px -18px)
+PASS  regroupé 1440 : logo non doublé (largeur 60px, translation -14px)
+PASS  regroupé 1440 : aucune erreur JavaScript
+
+Tous les contrôles passent
